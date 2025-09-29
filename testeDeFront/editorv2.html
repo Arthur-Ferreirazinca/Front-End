@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Carrossel de Marcas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .editor-preview {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .editor {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .preview {
+            flex: 2;
+            min-width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .brand-item-editor {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            align-items: center;
+        }
+        
+        .brand-img-preview {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background: white;
+        }
+        
+        .form-control {
+            margin-bottom: 10px;
+        }
+        
+        .brands-scroller {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .brand-scroll-track {
+            display: flex;
+            animation: scroll 30s linear infinite;
+        }
+        
+        .brand-item {
+            flex: 0 0 auto;
+            width: 160px;
+            text-align: center;
+            padding: 15px;
+            margin: 0 10px;
+        }
+        
+        .brand-img {
+            height: 60px;
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            object-fit: contain;
+        }
+        
+        .brand-img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .brand-title {
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-160px * 12));
+            }
+        }
+        
+        .brands-scroller::before,
+        .brands-scroller::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+        }
+        
+        .brands-scroller::before {
+            left: 0;
+            background: linear-gradient(to right, #fff 0%, transparent 100%);
+        }
+        
+        .brands-scroller::after {
+            right: 0;
+            background: linear-gradient(to left, #fff 0%, transparent 100%);
+        }
+        
+        .btn-add {
+            margin-top: 15px;
+            width: 100%;
+        }
+        
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .btn-remove {
+            color: #dc3545;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .export-options {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .speed-control {
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Editor de Carrossel de Marcas</h1>
+            <p class="text-muted">Edite as marcas e URLs das imagens conforme necessário</p>
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> Este editor funciona apenas no navegador. Após personalizar, copie o código gerado e cole em seu site.
+            </div>
+        </div>
+        
+        <div class="editor-preview">
+            <div class="editor">
+                <h3>Editor de Marcas</h3>
+                <p class="text-muted">Adicione, remova ou edite as marcas abaixo</p>
+                
+                <div class="speed-control">
+                    <label for="animationSpeed" class="form-label">Velocidade da animação:</label>
+                    <input type="range" class="form-range" id="animationSpeed" min="10" max="60" value="30" onchange="updateSpeed(this.value)">
+                    <div class="form-text">Lenta <span id="speedValue">30</span>s rápida</div>
+                </div>
+                
+                <div id="brandsEditor">
+                    <!-- As marcas serão inseridas aqui via JavaScript -->
+                </div>
+                
+                <button class="btn btn-primary btn-add" id="addBrandBtn">
+                    <i class="fas fa-plus"></i> Adicionar Nova Marca
+                </button>
+                
+                <div class="instructions mt-4">
+                    <h5>Como encontrar URLs de imagens:</h5>
+                    <ul>
+                        <li>Pesquise por "logo [marca] svg" no Google</li>
+                        <li>Clique com o botão direito na imagem e selecione "Copiar endereço da imagem"</li>
+                        <li>Cole o URL no campo correspondente</li>
+                        <li>Certifique-se de que o URL termina com .svg, .png ou .jpg</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="preview">
+                <h3>Visualização do Carrossel</h3>
+                <p class="text-muted">Preview ao vivo das alterações</p>
+                
+                <div class="brands-scroller">
+                    <div class="brand-scroll-track" id="brandTrack">
+                        <!-- As marcas serão inseridas aqui via JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="export-options">
+                    <h4>Exportar carrossel:</h4>
+                    <textarea id="htmlCode" class="form-control" rows="6" readonly></textarea>
+                    <div class="d-flex gap-2 mt-2">
+                        <button class="btn btn-success" id="copyCodeBtn">
+                            <i class="fas fa-copy"></i> Copiar Código
+                        </button>
+                        <button class="btn btn-info" id="downloadHtmlBtn">
+                            <i class="fas fa-download"></i> Baixar HTML
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados iniciais das marcas
+        let brands = [
+            { 
+                name: "Jaguar", 
+                imageUrl: "https://cdn.worldvectorlogo.com/logos/jaguar-4.svg" 
+            },
+            { 
+                name: "Audi", 
+                imageUrl: "https://cdn.worldvectorlogo.com/logos/audi-9.svg" 
+            },
+            { 
+                name: "BMW", 
+                imageUrl: "https://cdn.worldvectorlogo.com/logos/bmw-6.svg" 
+            },
+            { 
+                name: "Lamborghini", 
+                imageUrl: "https://cdn.worldvectorlogo.com/logos/lamborghini-2.svg" 
+            },
+            { 
+                name: "Mercedes", 
+                imageUrl: "https://cdn.worldvectorlogo.com/logos/mercedes-benz-2021.svg" 
+            },
+            { 
+                name: "Tesla", 
+                imageUrl: "https://cdn.worldvectorlogo.com/logos/tesla-motors-1.svg" 
+            }
+        ];
+        
+        let animationSpeed = 30;
+        
+        // Função para renderizar o editor de marcas
+        function renderBrandsEditor() {
+            const editorContainer = document.getElementById('brandsEditor');
+            editorContainer.innerHTML = '';
+            
+            brands.forEach((brand, index) => {
+                const brandEditor = document.createElement('div');
+                brandEditor.className = 'brand-item-editor';
+                brandEditor.innerHTML = `
+                    <img src="${brand.imageUrl}" class="brand-img-preview" onerror="this.src='https://via.placeholder.com/50?text=Erro'" alt="${brand.name}">
+                    <div style="flex: 1;">
+                        <input type="text" class="form-control" value="${brand.name}" 
+                               onchange="updateBrand(${index}, 'name', this.value)" placeholder="Nome da marca">
+                        <input type="text" class="form-control" value="${brand.imageUrl}" 
+                               onchange="updateBrand(${index}, 'imageUrl', this.value)" placeholder="URL da imagem">
+                    </div>
+                    <button class="btn-remove" onclick="removeBrand(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                editorContainer.appendChild(brandEditor);
+            });
+            
+            updatePreview();
+            updateHtmlCode();
+        }
+        
+        // Função para atualizar a visualização do carrossel
+        function updatePreview() {
+            const brandTrack = document.getElementById('brandTrack');
+            brandTrack.innerHTML = '';
+            
+            // Ajustar a velocidade da animação
+            brandTrack.style.animationDuration = `${animationSpeed}s`;
+            
+            // Duplicamos as marcas para criar um efeito contínuo
+            const duplicatedBrands = [...brands, ...brands];
+            
+            duplicatedBrands.forEach(brand => {
+                const brandItem = document.createElement('div');
+                brandItem.className = 'brand-item';
+                brandItem.innerHTML = `
+                    <img src="${brand.imageUrl}" class="brand-img" onerror="this.src='https://via.placeholder.com/120x60?text=Imagem+inválida'" alt="${brand.name}">
+                    <div class="brand-title">${brand.name}</div>
+                `;
+                brandTrack.appendChild(brandItem);
+            });
+        }
+        
+        // Função para atualizar a velocidade
+        function updateSpeed(speed) {
+            animationSpeed = speed;
+            document.getElementById('speedValue').textContent = speed;
+            updatePreview();
+        }
+        
+        // Função para gerar o código HTML
+        function updateHtmlCode() {
+            const htmlCode = document.getElementById('htmlCode');
+            
+            let carouselHtml = `<!-- Carrossel de Marcas -->
+<section style="background-color: #f8f9fa; padding: 50px 0; overflow: hidden;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h3>Marcas Disponíveis</h3>
+            <p class="text-muted">Trabalhamos com as melhores marcas do mercado</p>
+        </div>
+        
+        <div style="position: relative; overflow: hidden; width: 100%;">
+            <div style="display: flex; animation: scroll ${animationSpeed}s linear infinite;">
+`;
+            
+            // Duplicamos as marcas para criar um efeito contínuo
+            const duplicatedBrands = [...brands, ...brands];
+            
+            duplicatedBrands.forEach(brand => {
+                carouselHtml += `
+                <div style="flex: 0 0 auto; width: 160px; text-align: center; padding: 15px; margin: 0 10px;">
+                    <img src="${brand.imageUrl}" alt="${brand.name}" style="height: 60px; width: auto; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s ease; object-fit: contain;">
+                    <div style="font-weight: 600; margin-top: 10px; font-size: 14px; color: #333;">${brand.name}</div>
+                </div>
+`;
+            });
+            
+            carouselHtml += `
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-160px * ${brands.length})); }
+    }
+    
+    .brand-img:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: scale(1.1);
+    }
+</style>
+`;
+            
+            htmlCode.value = carouselHtml;
+        }
+        
+        // Função para atualizar uma marca
+        function updateBrand(index, property, value) {
+            brands[index][property] = value;
+            renderBrandsEditor();
+        }
+        
+        // Função para remover uma marca
+        function removeBrand(index) {
+            brands.splice(index, 1);
+            renderBrandsEditor();
+        }
+        
+        // Função para adicionar uma nova marca
+        document.getElementById('addBrandBtn').addEventListener('click', function() {
+            brands.push({ name: 'Nova Marca', imageUrl: 'https://via.placeholder.com/120x60?text=Imagem' });
+            renderBrandsEditor();
+        });
+        
+        // Função para copiar o código
+        document.getElementById('copyCodeBtn').addEventListener('click', function() {
+            const htmlCode = document.getElementById('htmlCode');
+            htmlCode.select();
+            document.execCommand('copy');
+            alert('Código copiado para a área de transferência!');
+        });
+        
+        // Função para baixar o HTML
+        document.getElementById('downloadHtmlBtn').addEventListener('click', function() {
+            const htmlCode = document.getElementById('htmlCode').value;
+            const blob = new Blob([htmlCode], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'carrossel-marcas.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+        
+        // Inicializar o editor
+        renderBrandsEditor();
+    </script>
+</body>
+</html>

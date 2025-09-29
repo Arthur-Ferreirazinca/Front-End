@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rentcars - Aluguel de Carros</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0;
+            color: white;
+            border-radius: 0 0 30px 30px;
+        }
+        
+        .search-box {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            margin-top: 30px;
+        }
+        
+        .form-control {
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .step-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+        
+        .feature-card {
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: 100%;
+        }
+        
+        .feature-icon {
+            color: var(--secondary-color);
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .car-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .car-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .car-img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .car-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .testimonial-card {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: 100%;
+        }
+        
+        .stars {
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+        
+        .app-download {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 80px 0;
+            border-radius: 30px;
+        }
+        
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-title {
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-icons {
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Estilos para o carrossel de marcas */
+        .brands-section {
+            background-color: var(--light-bg);
+            padding: 50px 0;
+            overflow: hidden;
+        }
+        
+        .brands-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .brands-scroller {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .brand-scroll-track {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            padding: 20px 0;
+        }
+        
+        .brand-item {
+            flex: 0 0 auto;
+            width: 160px;
+            text-align: center;
+            padding: 15px;
+            margin: 0 15px;
+        }
+        
+        .brand-img {
+            height: 60px;
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            object-fit: contain;
+        }
+        
+        .brand-img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .brand-title {
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-160px * 12));
+            }
+        }
+        
+        .brands-scroller::before,
+        .brands-scroller::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+        }
+        
+        .brands-scroller::before {
+            left: 0;
+            background: linear-gradient(to right, #f8f9fa 0%, transparent 100%);
+        }
+        
+        .brands-scroller::after {
+            right: 0;
+            background: linear-gradient(to left, #f8f9fa 0%, transparent 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">RENTCARS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Veículos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Como Funciona</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contato</a>
+                    </li>
+                </ul>
+                <div class="ms-lg-3 mt-3 mt-lg-0">
+                    <button class="btn btn-outline-primary me-2">Entrar</button>
+                    <button class="btn btn-primary">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Encontre, reserve e alugue um carro facilmente</h1>
+                    <p class="lead mb-5">Obtenha um carro onde quer e quando precisar com seu dispositivo iOS ou Android.</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-light text-dark p-3 me-2 mb-2">
+                            <i class="fas fa-check-circle text-primary me-2"></i> Compra Segura
+                        </span>
+                        <span class="badge bg-light text-dark p-3 mb-2">
+                            <i class="fas fa-check-circle text-primary me-2"></i> Entrega Rápida
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="search-box">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Localização</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                    <input type="text" class="form-control" placeholder="Informe sua localização">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Data de retirada</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                        <input type="text" class="form-control" placeholder="Data de retirada">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Data de devolução</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                        <input type="text" class="form-control" placeholder="Data de devolução">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Buscar Carros</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona Section -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center mb-5">
+                    <h2 class="section-title d-inline-block mx-auto">COMO FUNCIONA</h2>
+                    <p class="lead">Alugue seguindo 3 etapas simples</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h4>Escolha a localização</h4>
+                        <p>Escolha e encontre o melhor carro para você</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h4>Data de retirada</h4>
+                        <p>Selecione a data e horário para retirar seu carro</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h4>Reserve seu carro</h4>
+                        <p>Reserve seu carro e nós entregaremos diretamente para você</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marcas Disponíveis Section com Carrossel Animado -->
+    <section class="brands-section">
+        <div class="container">
+            <div class="brands-title">
+                <h2 class="section-title d-inline-block">MARCAS DISPONÍVEIS</h2>
+                <p class="lead">Trabalhamos com as melhores marcas do mercado</p>
+            </div>
+            
+            <div class="brands-scroller">
+                <div class="brand-scroll-track">
+                    <!-- Primeiro conjunto de marcas -->
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/jaguar-4.svg" alt="Jaguar" class="brand-img">
+                        <div class="brand-title">Jaguar</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/audi-9.svg" alt="Audi" class="brand-img">
+                        <div class="brand-title">Audi</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/bmw-6.svg" alt="BMW" class="brand-img">
+                        <div class="brand-title">BMW</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/lamborghini-2.svg" alt="Lamborghini" class="brand-img">
+                        <div class="brand-title">Lamborghini</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/mercedes-benz-2021.svg" alt="Mercedes-Benz" class="brand-img">
+                        <div class="brand-title">Mercedes</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/tesla-motors-1.svg" alt="Tesla" class="brand-img">
+                        <div class="brand-title">Tesla</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/ferrari-4.svg" alt="Ferrari" class="brand-img">
+                        <div class="brand-title">Ferrari</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/porsche-1.svg" alt="Porsche" class="brand-img">
+                        <div class="brand-title">Porsche</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/land-rover-2.svg" alt="Land Rover" class="brand-img">
+                        <div class="brand-title">Land Rover</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/volkswagen-3.svg" alt="Volkswagen" class="brand-img">
+                        <div class="brand-title">Volkswagen</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/ford-6.svg" alt="Ford" class="brand-img">
+                        <div class="brand-title">Ford</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/toyota-3.svg" alt="Toyota" class="brand-img">
+                        <div class="brand-title">Toyota</div>
+                    </div>
+                    
+                    <!-- Segundo conjunto (réplica para efeito contínuo) -->
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/jaguar-4.svg" alt="Jaguar" class="brand-img">
+                        <div class="brand-title">Jaguar</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/audi-9.svg" alt="Audi" class="brand-img">
+                        <div class="brand-title">Audi</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/bmw-6.svg" alt="BMW" class="brand-img">
+                        <div class="brand-title">BMW</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/lamborghini-2.svg" alt="Lamborghini" class="brand-img">
+                        <div class="brand-title">Lamborghini</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/mercedes-benz-2021.svg" alt="Mercedes-Benz" class="brand-img">
+                        <div class="brand-title">Mercedes</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/tesla-motors-1.svg" alt="Tesla" class="brand-img">
+                        <div class="brand-title">Tesla</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/ferrari-4.svg" alt="Ferrari" class="brand-img">
+                        <div class="brand-title">Ferrari</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/porsche-1.svg" alt="Porsche" class="brand-img">
+                        <div class="brand-title">Porsche</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/land-rover-2.svg" alt="Land Rover" class="brand-img">
+                        <div class="brand-title">Land Rover</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/volkswagen-3.svg" alt="Volkswagen" class="brand-img">
+                        <div class="brand-title">Volkswagen</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/ford-6.svg" alt="Ford" class="brand-img">
+                        <div class="brand-title">Ford</div>
+                    </div>
+                    <div class="brand-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/toyota-3.svg" alt="Toyota" class="brand-img">
+                        <div class="brand-title">Toyota</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por Que Nos Escolher Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="section-title">POR QUE NOS ESCOLHER</h2>
+                    <p class="lead mb-4">Oferecemos a melhor experiência com nossas ofertas de aluguel</p>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-tag"></i>
+                                </div>
+                                <h5>Melhor preço garantido</h5>
+                                <p>Encontrou um preço menor? Reembolsamos 100% da diferença.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <h5>Motoristas experientes</h5>
+                                <p>Não tem motorista? Não se preocupe, temos motoristas experientes para você.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-car-side"></i>
+                                </div>
+                                <h5>Entrega 24 horas</h5>
+                                <p>Reserve seu carro a qualquer hora e nós entregaremos diretamente para você.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <h5>Suporte técnico 24/7</h5>
+                                <p>Tem uma dúvida? Contate o suporte Rentcars a qualquer momento.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1603712610496-72e9fbf05b15?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80" alt="Carro de Luxo" class="img-fluid rounded-3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ofertas Populares Section -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center mb-5">
+                    <h2 class="section-title d-inline-block mx-auto">OFERTAS POPULARES</h2>
+                    <p class="lead">Ofertas de aluguel de carros mais populares</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="car-card">
+                        <img src="https://images.unsplash.com/photo-1622002682329-2e0f363a5c5b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="card-img-top car-img" alt="Jaguar XE">
+                        <div class="p-3">
+                            <h5>Jaguar XE I P250</h5>
+                            <p class="text-muted mb-2"><i class="fas fa-road me-2"></i> 1.455 km</p>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span><i class="fas fa-user me-1"></i> 4 pessoas</span>
+                                <span><i class="fas fa-gas-pump me-1"></i> Automático</span>
+                                <span><i class="fas fa-snowflake me-1"></i> Ar-condicionado</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="car-price">R$ 1800 <small>/ dia</small></div>
+                                <button class="btn btn-primary">Alugar Agora <i class="fas fa-arrow-right ms-2"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="car-card">
+                        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" class="card-img-top car-img" alt="Audi B8">
+                        <div class="p-3">
+                            <h5>Audi B8</h5>
+                            <p class="text-muted mb-2"><i class="fas fa-road me-2"></i> 1.350 km</p>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span><i class="fas fa-user me-1"></i> 2 pessoas</span>
+                                <span><i class="fas fa-gas-pump me-1"></i> Automático</span>
+                                <span><i class="fas fa-snowflake me-1"></i> Ar-condicionado</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="car-price">R$ 2100 <small>/ dia</small></div>
+                                <button class="btn btn-primary">Alugar Agora <i class="fas fa-arrow-right ms-2"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="car-card">
+                        <img src="https://images.unsplash.com/photo-1549399542-7e82138d43aa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" class="card-img-top car-img" alt="BMW M3">
+                        <div class="p-3">
+                            <h5>BMW M3</h5>
+                            <p class="text-muted mb-2"><i class="fas fa-road me-2"></i> 2.006 km</p>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span><i class="fas fa-user me-1"></i> 2 pessoas</span>
+                                <span><i class="fas fa-gas-pump me-1"></i> Automático</span>
+                                <span><i class="fas fa-snowflake me-1"></i> Ar-condicionado</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="car-price">R$ 2300 <small>/ dia</small></div>
+                                <button class="btn btn-primary">Alugar Agora <i class="fas fa-arrow-right ms-2"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="car-card">
+                        <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80" class="card-img-top car-img" alt="Lamborghini Huracan">
+                        <div class="p-3">
+                            <h5>Lamborghini Huracan</h5>
+                            <p class="text-muted mb-2"><i class="fas fa-road me-2"></i> 1.250 km</p>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span><i class="fas fa-user me-1"></i> 2 pessoas</span>
+                                <span><i class="fas fa-gas-pump me-1"></i> Automático</span>
+                                <span><i class="fas fa-snowflake me-1"></i> Ar-condicionado</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="car-price">R$ 3500 <small>/ dia</small></div>
+                                <button class="btn btn-primary">Alugar Agora <i class="fas fa-arrow-right ms-2"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-primary">Ver todos os veículos <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center mb-5">
+                    <h2 class="section-title d-inline-block mx-auto">O que as pessoas dizem sobre nós?</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <p class="mb-4">"Estou usando seus serviços há um tempo. Seu serviço é ótimo, vou continuar usando."</p>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Wilson" width="50" height="50" class="rounded-circle">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">Wilson</h6>
+                                <small class="text-muted">São Paulo, Brasil</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-4">"Me sinto muito seguro ao usar os serviços da Rentcars. A equipe de suporte é muito atenciosa e o motorista sempre pontual."</p>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Carlos" width="50" height="50" class="rounded-circle">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">Carlos Silva</h6>
+                                <small class="text-muted">Rio de Janeiro, Brasil</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="mb-4">"O carro estava em perfeito estado e o serviço foi excepcional. Com certeza usarei a Rentcars novamente na minha próxima viagem!"</p>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Ana" width="50" height="50" class="rounded-circle">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">Ana Oliveira</h6>
+                                <small class="text-muted">Belo Horizonte, Brasil</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Download Section -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <div class="app-download">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-5 mb-lg-0 text-center">
+                        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Visualização do App" class="img-fluid" style="max-height: 400px;">
