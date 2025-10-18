@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bee Motors — Anunciar Veículo</title>
+  <style>
+    :root{
+      --yellow:#FFD400;
+      --yellow-dark:#e6bf00;
+      --black:#0b0b0b;
+      --white:#ffffff;
+      --gray-100:#f5f5f7;
+      --gray-300:#d9d9dd;
+      --card-shadow:0 6px 18px rgba(11,11,11,0.08);
+      --radius:12px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--gray-100);color:var(--black)}
+    header{background:linear-gradient(90deg,var(--yellow) 0%, #ffea9c 100%);padding:18px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+    .logo{width:48px;height:48px;border-radius:10px;background:var(--black);display:flex;align-items:center;justify-content:center;color:var(--yellow);font-weight:700;font-size:18px}
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{color:var(--black);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    nav a.cta{background:var(--black);color:var(--white)}
+
+    .container{max-width:900px;margin:28px auto;padding:0 20px}
+    h1{margin-bottom:8px}
+    p{margin:0 0 22px;color:#333}
+
+    form{background:var(--white);padding:28px;border-radius:16px;box-shadow:var(--card-shadow);display:flex;flex-direction:column;gap:18px}
+    label{font-weight:600;font-size:14px;margin-bottom:4px;display:block}
+    input,select,textarea{width:100%;padding:12px 14px;border:1px solid var(--gray-300);border-radius:10px;font-size:15px}
+    textarea{resize:vertical;min-height:100px}
+    button.submit{background:var(--yellow-dark);border:none;padding:14px;font-weight:700;border-radius:10px;cursor:pointer}
+
+    footer{margin-top:28px;padding:28px 0;text-align:center;color:#666}
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="index.html">
+      <div class="logo">B</div>
+      <div>
+        <div style="font-weight:800">Bee Motors</div>
+        <div style="font-size:12px;color:#222">Anuncie seu veículo</div>
+      </div>
+    </a>
+    <nav>
+      <a href="Bee.html">Início</a>
+      <a href="compra.html">Compra & Venda</a>
+      <a href="aluguel.html">Aluguel</a>
+      <a href="empresa2.html">Área da Empresa</a>
+      <a href="busca.html">Busca</a>
+      <a class="cta" href="anunciar.html">Anunciar</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Anunciar veículo</h1>
+    <p>Preencha os dados abaixo e anuncie seu carro na Bee Motors.</p>
+
+    <form id="formAnuncio">
+      <div>
+        <label for="marca">Marca</label>
+        <input type="text" id="marca" required>
+      </div>
+      <div>
+        <label for="modelo">Modelo</label>
+        <input type="text" id="modelo" required>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+        <div>
+          <label for="ano">Ano</label>
+          <input type="number" id="ano" required>
+        </div>
+        <div>
+          <label for="km">Km rodados</label>
+          <input type="number" id="km" required>
+        </div>
+        <div>
+          <label for="preco">Preço (R$)</label>
+          <input type="number" id="preco" required>
+        </div>
+      </div>
+      <div>
+        <label for="condicao">Condição</label>
+        <select id="condicao">
+          <option value="Usado">Usado</option>
+          <option value="Seminovo">Seminovo</option>
+          <option value="Zero">Zero KM</option>
+        </select>
+      </div>
+      <div>
+        <label for="foto">Fotos do veículo</label>
+        <input type="file" id="foto" accept="image/*" multiple>
+      </div>
+      <div>
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" placeholder="Adicione detalhes do seu veículo"></textarea>
+      </div>
+      <div>
+        <label for="contato">Telefone / E-mail para contato</label>
+        <input type="text" id="contato" required>
+      </div>
+      <button type="submit" class="submit">Enviar anúncio</button>
+    </form>
+
+    <footer>
+      © Bee Motors — Plataforma de anúncios de veículos. Todos os direitos reservados.
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('formAnuncio').addEventListener('submit',function(e){
+      e.preventDefault();
+      const marca=document.getElementById('marca').value;
+      const modelo=document.getElementById('modelo').value;
+      const ano=document.getElementById('ano').value;
+      const km=document.getElementById('km').value;
+      const preco=document.getElementById('preco').value;
+      const condicao=document.getElementById('condicao').value;
+      const contato=document.getElementById('contato').value;
+
+      alert(`✅ Anúncio enviado!\n\nVeículo: ${marca} ${modelo}\nAno: ${ano}\nKM: ${km}\nPreço: R$${preco}\nCondição: ${condicao}\nContato: ${contato}`);
+    });
+  </script>
+</body>
+</html>

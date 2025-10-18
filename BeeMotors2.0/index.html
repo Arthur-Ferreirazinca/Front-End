@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>BeeMotors - Início</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; background:#f9f9f9; }
+    header { background:#ffcc00; padding:15px; display:flex; justify-content:space-between; align-items:center; }
+    .logo { font-size:24px; font-weight:bold; }
+    nav a { margin:0 10px; text-decoration:none; font-weight:bold; color:#000; }
+    nav a:hover { color:#555; }
+    .filtros, .veiculos { padding:20px; }
+    .car-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+    .car-card { background:#fff; border:1px solid #ddd; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); transition:0.2s; }
+    .car-card:hover { transform:scale(1.05); }
+    .car-card img { width:100%; height:150px; object-fit:cover; }
+    .car-card h3 { margin:10px; }
+    .car-card p { margin:5px 10px; }
+    .preco { font-weight:bold; color:#ffcc00; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="logo">🐝 BeeMotors</h1>
+    <nav>
+      <a href="Bee.html">Início</a>
+      <a href="compra.html">Compra & Venda</a>
+      <a href="aluguel.html">Aluguel</a>
+      <a href="busca.html">Busca</a>
+      <a href="empresa2.html">Área da Empresa</a>
+    </nav>
+  </header>
+
+  <section class="filtros">
+    <h2>Filtrar Veículos</h2>
+    <form>
+      <select><option>Modelo</option><option>HB20</option><option>Onix</option></select>
+      <select><option>Ano</option><option>2025</option><option>2024</option></select>
+      <select><option>Versão</option><option>1.0</option><option>1.6</option></select>
+      <button type="submit">Filtrar</button>
+    </form>
+  </section>
+
+  <main class="veiculos">
+    <h2>Veículos em Destaque</h2>
+    <div class="car-grid">
+      <div class="car-card">
+        <img src="assets/hb20.jpg" alt="HB20">
+        <h3>Hyundai HB20</h3>
+        <p>Ano: 2024 | Versão: 1.0</p>
+        <p class="preco">R$ 65.000</p>
+      </div>
+      <div class="car-card">
+        <img src="assets/onix.jpg" alt="Onix">
+        <h3>Chevrolet Onix</h3>
+        <p>Ano: 2025 | Versão: 1.0 Turbo</p>
+        <p class="preco">R$ 72.000</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

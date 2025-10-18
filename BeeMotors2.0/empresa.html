@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>BeeMotors - Área da Empresa</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; background:#f9f9f9; }
+    header { background:#ffcc00; padding:15px; display:flex; justify-content:space-between; align-items:center; }
+    .logo { font-size:24px; font-weight:bold; }
+    nav a { margin:0 10px; text-decoration:none; font-weight:bold; color:#000; }
+    nav a:hover { color:#555; }
+    .empresa-form, .painel { padding:20px; }
+    form { display:flex; flex-direction:column; max-width:300px; }
+    input, button { margin:8px 0; padding:10px; }
+    button { background:#ffcc00; border:none; cursor:pointer; font-weight:bold; }
+    button:hover { background:#e6b800; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="logo">🐝 BeeMotors</h1>
+    <nav>
+      <a href="Bee.html">Início</a>
+      <a href="compra.html">Compra & Venda</a>
+      <a href="aluguel.html">Aluguel</a>
+      <a href="busca.html">Busca</a>
+      <a href="empresa2.html">Área da Empresa</a>
+      <a class="cta" href="anunciar.html">Anunciar</a>
+    </nav>
+  </header>
+
+  <section class="empresa-form">
+    <h2>Cadastro/Login da Empresa</h2>
+    <form>
+      <input type="text" placeholder="Nome da Empresa" required>
+      <input type="email" placeholder="E-mail" required>
+      <input type="password" placeholder="Senha" required>
+      <button type="submit">Entrar</button>
+    </form>
+  </section>
+
+  <main class="painel">
+    <h2>Painel da Empresa</h2>
+    <ul>
+      <li>📊 Quantidade de visualizações</li>
+      <li>🚗 Gerenciar anúncios</li>
+      <li>✏️ Editar informações</li>
+    </ul>
+  </main>
+</body>
+</html>

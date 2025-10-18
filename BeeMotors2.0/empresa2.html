@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bee Motors — Área da Empresa</title>
+  <style>
+    :root{
+      --yellow:#FFD400;
+      --yellow-dark:#e6bf00;
+      --black:#0b0b0b;
+      --white:#ffffff;
+      --gray-100:#f5f5f7;
+      --gray-300:#d9d9dd;
+      --card-shadow:0 6px 18px rgba(11,11,11,0.08);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--gray-100);color:var(--black)}
+    header{background:linear-gradient(90deg,var(--yellow) 0%, #ffea9c 100%);padding:18px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+    .logo{width:48px;height:48px;border-radius:10px;background:var(--black);display:flex;align-items:center;justify-content:center;color:var(--yellow);font-weight:700;font-size:18px}
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{color:var(--black);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    nav a.cta{background:var(--black);color:var(--white)}
+
+    .container{max-width:1000px;margin:28px auto;padding:0 20px}
+    h1{margin-bottom:12px}
+
+    .card{background:var(--white);border-radius:14px;padding:18px;box-shadow:var(--card-shadow);margin-bottom:16px}
+    .actions{display:flex;gap:8px;margin-top:10px}
+    .btn{padding:8px 10px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .btn.primary{background:var(--yellow-dark)}
+    .btn.ghost{background:transparent;border:1px solid var(--gray-300)}
+
+    form{display:flex;flex-direction:column;gap:14px;background:var(--white);padding:24px;border-radius:16px;box-shadow:var(--card-shadow)}
+    input,textarea{width:100%;padding:12px 14px;border:1px solid var(--gray-300);border-radius:10px;font-size:15px}
+    textarea{resize:vertical;min-height:80px}
+    .hidden{display:none}
+
+    footer{margin-top:28px;padding:28px 0;text-align:center;color:#666}
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="index.html">
+      <div class="logo">B</div>
+      <div>
+        <div style="font-weight:800">Bee Motors</div>
+        <div style="font-size:12px;color:#222">Área da Empresa</div>
+      </div>
+    </a>
+    <nav>
+      <a href="Bee.html">Início</a>
+      <a href="compra.html">Compra & Venda</a>
+      <a href="aluguel.html">Aluguel</a>
+      <a href="empresa2.html">Área da Empresa</a>
+      <a href="busca.html">Busca</a>
+      <a class="cta" href="anunciar.html">Anunciar</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Área da Empresa</h1>
+    <div id="loginSection">
+      <form id="loginForm">
+        <h2>Login / Cadastro</h2>
+        <input type="text" id="userName" placeholder="Nome da empresa" required>
+        <input type="email" id="userEmail" placeholder="E-mail" required>
+        <button class="btn primary" type="submit">Entrar</button>
+      </form>
+    </div>
+
+    <div id="dashboard" class="hidden">
+      <h2>Seus anúncios</h2>
+      <div id="anuncios"></div>
+    </div>
+
+    <footer>
+      © Bee Motors — Plataforma para gestão de anúncios. Todos os direitos reservados.
+    </footer>
+  </main>
+
+  <script>
+    const loginSection=document.getElementById('loginSection');
+    const dashboard=document.getElementById('dashboard');
+    const anunciosEl=document.getElementById('anuncios');
+
+    let user=null;
+
+    // Simples login/cadastro
+    document.getElementById('loginForm').addEventListener('submit',function(e){
+      e.preventDefault();
+      user={
+        name:document.getElementById('userName').value,
+        email:document.getElementById('userEmail').value
+      };
+      localStorage.setItem('beeUser',JSON.stringify(user));
+      loginSection.classList.add('hidden');
+      dashboard.classList.remove('hidden');
+      renderAnuncios();
+    });
+
+    // Recupera login anterior
+    const savedUser=localStorage.getItem('beeUser');
+    if(savedUser){
+      user=JSON.parse(savedUser);
+      loginSection.classList.add('hidden');
+      dashboard.classList.remove('hidden');
+      renderAnuncios();
+    }
+
+    // Render anúncios cadastrados no localStorage
+    function renderAnuncios(){
+      const anuncios=JSON.parse(localStorage.getItem('anuncios')||'[]');
+      anunciosEl.innerHTML='';
+      if(anuncios.length===0){
+        anunciosEl.innerHTML='<p>Você ainda não possui anúncios.</p>';
+        return;
+      }
+      anuncios.forEach((a,i)=>{
+        const card=document.createElement('div');
+        card.className='card';
+        card.innerHTML=`
+          <strong>${a.marca} ${a.modelo}</strong> — ${a.ano}<br>
+          Km: ${a.km} | Preço: R$${a.preco}<br>
+          Condição: ${a.condicao}<br>
+          Contato: ${a.contato}<br>
+          <div class="actions">
+            <button class="btn ghost" onclick="editAnuncio(${i})">Editar</button>
+            <button class="btn primary" onclick="deleteAnuncio(${i})">Excluir</button>
+          </div>
+        `;
+        anunciosEl.appendChild(card);
+      });
+    }
+
+    window.deleteAnuncio=function(i){
+      let anuncios=JSON.parse(localStorage.getItem('anuncios')||'[]');
+      anuncios.splice(i,1);
+      localStorage.setItem('anuncios',JSON.stringify(anuncios));
+      renderAnuncios();
+    }
+
+    window.editAnuncio=function(i){
+      let anuncios=JSON.parse(localStorage.getItem('anuncios')||'[]');
+      const a=anuncios[i];
+      const novoPreco=prompt("Novo preço para "+a.marca+" "+a.modelo, a.preco);
+      if(novoPreco!==null){
+        a.preco=novoPreco;
+        anuncios[i]=a;
+        localStorage.setItem('anuncios',JSON.stringify(anuncios));
+        renderAnuncios();
+      }
+    }
+  </script>
+</body>
+</html>

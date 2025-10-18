@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>BeeMotors - Busca</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; background:#f9f9f9; }
+    header { background:#ffcc00; padding:15px; display:flex; justify-content:space-between; align-items:center; }
+    .logo { font-size:24px; font-weight:bold; }
+    nav a { margin:0 10px; text-decoration:none; font-weight:bold; color:#000; }
+    nav a:hover { color:#555; }
+    .filtros, .veiculos { padding:20px; }
+    .car-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+    .car-card { background:#fff; border:1px solid #ddd; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); transition:0.2s; }
+    .car-card:hover { transform:scale(1.05); }
+    .car-card img { width:100%; height:150px; object-fit:cover; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="logo">🐝 BeeMotors</h1>
+    <nav>
+      <a href="Bee.html">Início</a>
+      <a href="compra.html">Compra & Venda</a>
+      <a href="aluguel.html">Aluguel</a>
+      <a href="busca.html">Busca</a>
+      <a href="empresa2.html">Área da Empresa</a>
+      <a class="cta" href="anunciar.html">Anunciar</a>
+    </nav>
+  </header>
+
+  <section class="filtros">
+    <h2>Busca Avançada</h2>
+    <form>
+      <input type="text" placeholder="Digite modelo, marca, versão...">
+      <select><option>Ano mínimo</option><option>2020</option><option>2021</option></select>
+      <select><option>Ano máximo</option><option>2024</option><option>2025</option></select>
+      <button type="submit">Buscar</button>
+    </form>
+  </section>
+
+  <main class="veiculos">
+    <h2>Resultados</h2>
+    <div class="car-grid"></div>
+  </main>
+</body>
+</html>
