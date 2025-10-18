@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Histórico de Simulações</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <style>
+    .card {
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .empty-history {
+      text-align: center;
+      padding: 40px;
+      color: #6c757d;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <!-- Cabeçalho -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="text-primary">
+        <i class="bi bi-clock-history"></i> Meu Histórico
+      </h1>
+      <div>
+        <a href="simulador.html" class="btn btn-outline-primary me-2">
+          <i class="bi bi-calculator"></i> Novo Cálculo
+        </a>
+        <button onclick="logout()" class="btn btn-danger">
+          <i class="bi bi-box-arrow-right"></i> Sair
+        </button>
+      </div>
+    </div>
+
+    <!-- Filtros (opcional) -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="form-label">Período</label>
+            <select id="filtroPeriodo" class="form-select">
+              <option value="all">Todos</option>
+              <option value="last-month">Últimos 30 dias</option>
+              <option value="last-year">Último ano</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Ordenar por</label>
+            <select id="filtroOrdenacao" class="form-select">
+              <option value="recentes">Mais recentes</option>
+              <option value="antigas">Mais antigas</option>
+              <option value="valor">Maior valor</option>
+            </select>
+          </div>
+          <div class="col-md-4 d-flex align-items-end">
+            <button onclick="aplicarFiltros()" class="btn btn-primary w-100">
+              <i class="bi bi-funnel"></i> Aplicar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container do Histórico -->
+    <div id="historico-container">
+      <div id="loading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Carregando...</span>
+        </div>
+        <p class="mt-2">Carregando suas simulações...</p>
+      </div>
+      <div id="historico" class="row"></div>
+    </div>
+  </div>
+
+  <!-- Modal de Edição -->
+  <div class="modal fade" id="editarModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Simulação</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formEdicao">
+            <input type="hidden" id="editar-id">
+            <div class="mb-3">
+              <label for="editar-valor" class="form-label">Valor Financiado (R$)</label>
+              <input type="number" class="form-control" id="editar-valor" required>
+            </div>
+            <div class="mb-3">
+              <label for="editar-entrada" class="form-label">Valor da Entrada (R$)</label>
+              <input type="number" class="form-control" id="editar-entrada" required>
+            </div>
+            <div class="mb-3">
+              <label for="editar-juros" class="form-label">Juros Mensal (%)</label>
+              <input type="number" class="form-control" id="editar-juros" step="0.01" required>
+            </div>
+            <div class="mb-3">
+              <label for="editar-meses" class="form-label">Quantidade de Meses</label>
+              <input type="number" class="form-control" id="editar-meses" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btnSalvarEdicao">Salvar Alterações</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Função auxiliar para calcular a parcela (mesma lógica do simulador)
+    function calcularParcela(valor, juros, meses) {
+      return (valor * juros) / (1 - Math.pow(1 + juros, -meses));
+    }
+
+    // Abre modal para edição com os dados da simulação
+    async function abrirModalEdicao(id) {
+      try {
+        const usuario_id = localStorage.getItem("usuario_id");
+        const response = await fetch(`simuladorPHP/listar_simulacoes.php?usuario_id=${usuario_id}`);
+        const simulacoes = await response.json();
+
+        const simulacao = simulacoes.find(s => s.id == id);
+
+        if (!simulacao) {
+          throw new Error("Simulação não encontrada");
+        }
+
+        // Preenche o formulário de edição
+        document.getElementById('editar-id').value = simulacao.id;
+        document.getElementById('editar-valor').value = simulacao.valor;
+        document.getElementById('editar-entrada').value = simulacao.entrada;
+        document.getElementById('editar-juros').value = simulacao.juros;
+        document.getElementById('editar-meses').value = simulacao.meses;
+
+        // Abre o modal
+        const modal = new bootstrap.Modal(document.getElementById('editarModal'));
+        modal.show();
+
+      } catch (error) {
+        console.error("Erro ao abrir modal de edição:", error);
+        alert("Erro ao carregar dados para edição: " + error.message);
+      }
+    }
+
+    // Salva as alterações da edição
+    document.getElementById('btnSalvarEdicao').addEventListener('click', async function() {
+      const btn = this;
+      const modal = bootstrap.Modal.getInstance(document.getElementById('editarModal'));
+
+      try {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Salvando...';
+
+        const usuario_id = localStorage.getItem("usuario_id");
+        const valor = parseFloat(document.getElementById('editar-valor').value);
+        const entrada = parseFloat(document.getElementById('editar-entrada').value);
+        const juros = parseFloat(document.getElementById('editar-juros').value) / 100;
+        const meses = parseInt(document.getElementById('editar-meses').value);
+
+        const valor_final = valor - entrada;
+        const parcela = calcularParcela(valor_final, juros, meses);
+        const total_pago = parcela * meses;
+
+        const dadosAtualizados = {
+          id: document.getElementById('editar-id').value,
+          usuario_id: usuario_id,
+          valor: valor,
+          entrada: entrada,
+          juros: juros * 100,
+          meses: meses,
+          valor_final: valor_final,
+          parcela: parcela,
+          total_pago: total_pago
+        };
+
+        // Envia para o servidor
+        const response = await fetch("simuladorPHP/atualizar_simulacao.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(dadosAtualizados)
+        });
+
+        const resultado = await response.json();
+
+        if (resultado.status === "ok") {
+          modal.hide();
+          await carregarHistorico();
+          alert("Simulação atualizada com sucesso!");
+        } else {
+          throw new Error(resultado.mensagem || "Erro ao atualizar");
+        }
+      } catch (error) {
+        console.error("Erro ao salvar edição:", error);
+        alert("Erro ao salvar alterações: " + error.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = 'Salvar Alterações';
+      }
+    });
+
+    // Função principal que carrega o histórico ao abrir a página
+    document.addEventListener("DOMContentLoaded", async () => {
+      const usuario_id = localStorage.getItem("usuario_id");
+      if (!usuario_id) {
+        window.location.href = "login.html";
+        return;
+      }
+      await carregarHistorico();
+    });
+
+    // Carrega as simulações do usuário do banco de dados
+    async function carregarHistorico() {
+      const usuario_id = localStorage.getItem("usuario_id");
+      const container = document.getElementById("historico");
+      const loading = document.getElementById("loading");
+
+      try {
+        loading.style.display = "block";
+        container.innerHTML = "";
+
+        const response = await fetch(`simuladorPHP/listar_simulacoes.php?usuario_id=${usuario_id}`);
+
+        if (!response.ok) {
+          throw new Error("Erro ao carregar histórico");
+        }
+
+        const historico = await response.json();
+
+        if (!historico || historico.length === 0) {
+          container.innerHTML = `
+            <div class="empty-history">
+              <i class="bi bi-journal-x" style="font-size: 3rem;"></i>
+              <h3 class="mt-3">Nenhuma simulação encontrada</h3>
+              <p class="text-muted">Você ainda não realizou simulações ou elas foram excluídas.</p>
+              <a href="simulador.html" class="btn btn-primary mt-2">
+                <i class="bi bi-plus-circle"></i> Criar Nova Simulação
+              </a>
+            </div>
+          `;
+          return;
+        }
+
+        // Renderiza cada simulação como um card
+        container.innerHTML = historico.map((simulacao, index) => `
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+              <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">
+                  <i class="bi bi-calculator"></i> Simulação #${index + 1}
+                </h5>
+              </div>
+              <div class="card-body">
+                <p><strong><i class="bi bi-calendar"></i> Data:</strong> ${new Date(simulacao.data).toLocaleString()}</p>
+                <p><strong><i class="bi bi-currency-dollar"></i> Valor:</strong> R$ ${parseFloat(simulacao.valor).toFixed(2)}</p>
+                <p><strong><i class="bi bi-cash-stack"></i> Entrada:</strong> R$ ${parseFloat(simulacao.entrada).toFixed(2)}</p>
+                <p><strong><i class="bi bi-percent"></i> Juros:</strong> ${parseFloat(simulacao.juros).toFixed(2)}%</p>
+                <p><strong><i class="bi bi-clock-history"></i> Prazo:</strong> ${simulacao.meses} meses</p>
+                <hr>
+                <p class="fw-bold"><i class="bi bi-arrow-up-circle"></i> Valor Financiado: R$ ${parseFloat(simulacao.valor_final).toFixed(2)}</p>
+                <p class="fw-bold"><i class="bi bi-credit-card"></i> Parcela: R$ ${parseFloat(simulacao.parcela).toFixed(2)}</p>
+                <p class="fw-bold"><i class="bi bi-receipt"></i> Total: R$ ${parseFloat(simulacao.total_pago).toFixed(2)}</p>
+              </div>
+              <div class="card-footer bg-light">
+                <button onclick="abrirModalEdicao(${simulacao.id})" class="btn btn-sm btn-warning me-2">
+                  <i class="bi bi-pencil"></i> Editar
+                </button>
+                <button onclick="confirmarExclusao(${simulacao.id})" class="btn btn-sm btn-danger">
+                  <i class="bi bi-trash"></i> Excluir
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      } catch (error) {
+        console.error("Erro:", error);
+        container.innerHTML = `
+          <div class="alert alert-danger">
+            <i class="bi bi-exclamation-triangle"></i> Erro ao carregar histórico. Tente recarregar a página.
+          </div>
+        `;
+      } finally {
+        loading.style.display = "none";
+      }
+    }
+
+    // Função para logout - Limpa localStorage e redireciona
+    function logout() {
+      localStorage.removeItem("usuario_id");
+      window.location.href = "login.html";
+    }
+
+    // Confirma exclusão de simulação
+    async function confirmarExclusao(id) {
+      if (!confirm("Tem certeza que deseja excluir esta simulação?\nEsta ação não pode ser desfeita.")) {
+        return;
+      }
+
+      try {
+        const usuario_id = localStorage.getItem("usuario_id");
+        const response = await fetch("simuladorPHP/excluir_simulacao.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            id: id,
+            usuario_id: usuario_id
+          })
+        });
+
+        const resultado = await response.json();
+
+        if (resultado.status === "ok") {
+          alert("Simulação excluída com sucesso!");
+          await carregarHistorico();
+        } else {
+          throw new Error(resultado.mensagem || "Erro ao excluir");
+        }
+      } catch (error) {
+        console.error("Erro:", error);
+        alert("Falha ao excluir simulação: " + error.message);
+      }
+    }
+
+    // Aplica filtros (implementação básica)
+    function aplicarFiltros() {
+      alert("Filtros serão processados aqui");
+      // Implementar lógica de filtragem se necessário
+    }
+  </script>
+</body>
+</html>
