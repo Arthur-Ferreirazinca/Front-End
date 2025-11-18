@@ -576,15 +576,15 @@ class ShoppingCart {
     const cartIcon = document.querySelector(".cart-icon");
     if (cartIcon) {
       const count = this.getTotalItems();
-      let badge = cartIcon.querySelector(".cart-count");
+      const badge =
+        cartIcon.querySelector(".cart-count") || document.createElement("span");
+      badge.className = "cart-count";
+      badge.textContent = count;
 
-      if (!badge) {
-        badge = document.createElement("span");
-        badge.className = "cart-count";
+      if (!cartIcon.querySelector(".cart-count")) {
         cartIcon.appendChild(badge);
       }
 
-      badge.textContent = count;
       badge.style.display = count > 0 ? "flex" : "none";
     }
   }
@@ -730,6 +730,279 @@ class ShoppingCart {
   }
 }
 
+// ==================== CSS DO CARRINHO ====================
+const cartStyles = `
+/* Carrinho Styles */
+.cart-icon {
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    color: var(--text-primary);
+}
+
+.cart-icon:hover {
+    color: var(--primary-color);
+    background: rgba(220, 38, 38, 0.1);
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+/* Modal do Carrinho */
+.cart-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.cart-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cart-modal-content {
+    background: var(--background-card);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow: hidden;
+    transform: translateY(50px);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+
+.cart-modal.show .cart-modal-content {
+    transform: translateY(0);
+}
+
+.cart-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--background-light);
+}
+
+.cart-header h3 {
+    color: var(--text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.btn-close:hover {
+    color: var(--primary-color);
+    background: rgba(220, 38, 38, 0.1);
+}
+
+.cart-body {
+    padding: 1.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Itens do Carrinho */
+.empty-cart {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.empty-cart i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--border-color);
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cart-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--background);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-info h4 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.cart-item-price {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-quantity, .btn-remove {
+    background: var(--background-light);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-quantity:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-remove:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.quantity {
+    padding: 0 10px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.cart-total {
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+}
+
+.cart-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.cart-actions .btn {
+    flex: 1;
+}
+
+/* Mensagem de Adição */
+.cart-message {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-hover);
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cart-message.show {
+    transform: translateX(0);
+}
+
+/* Header com Carrinho */
+.nav__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.btn-logout {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.8rem;
+}
+
+.btn-logout:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+`;
+
+// Adicionar CSS do carrinho ao documento
+const styleSheet = document.createElement("style");
+styleSheet.textContent = cartStyles;
+document.head.appendChild(styleSheet);
+
 // ==================== ATUALIZAR HEADER COM CARRINHO ====================
 function updateHeaderWithCart() {
   const navActions = document.querySelector(".nav__actions");
@@ -744,9 +1017,9 @@ function updateHeaderWithCart() {
                 <i class="fas fa-user"></i>
                 <span>Olá, ${usuarioNome || "Usuário"}</span>
             </div>
-            <button class="cart-icon" onclick="cart.openCart()">
+            <div class="cart-icon" onclick="cart.openCart()">
                 <i class="fas fa-shopping-cart"></i>
-            </button>
+            </div>
             <button class="btn-logout" onclick="logout()">
                 <i class="fas fa-sign-out-alt"></i> Sair
             </button>
@@ -763,7 +1036,6 @@ function updateHeaderWithCart() {
 function logout() {
   localStorage.removeItem("usuario_id");
   localStorage.removeItem("usuario_nome");
-  localStorage.removeItem("cart");
   window.location.href = "index.html";
 }
 
