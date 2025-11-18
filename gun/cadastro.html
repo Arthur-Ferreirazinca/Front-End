@@ -1,115 +1,653 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - Sport Gun Imports</title>
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro - Sport Gun</title>
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Estilos específicos para a página de cadastro */
+        .cadastro-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--background) 0%, var(--background-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-2xl) var(--spacing-xl);
+            margin-top: 80px;
+        }
+
+        .cadastro-container {
+            background: var(--background-card);
+            padding: var(--spacing-2xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-hover);
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .cadastro-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .cadastro-header .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .cadastro-header .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .cadastro-header .logo-text {
+            color: var(--primary-color);
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .cadastro-header h1 {
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+            font-size: var(--font-size-2xl);
+        }
+
+        .cadastro-header p {
+            color: var(--text-secondary);
+            font-size: var(--font-size-base);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--background);
+            color: var(--text-primary);
+            font-size: var(--font-size-base);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-light);
+        }
+
+        .btn-cadastrar {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-cadastrar:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-cadastrar:active {
+            transform: translateY(0);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: var(--spacing-xl);
+            color: var(--text-secondary);
+            font-size: var(--font-size-base);
+        }
+
+        .login-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .login-link a:hover {
+            color: var(--primary-light);
+            text-decoration: underline;
+        }
+
+        .mensagem {
+            margin-top: 10px;
+            text-align: center;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            border: 1px solid;
+        }
+
+        .mensagem-erro {
+            color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+            border-color: rgba(220, 53, 69, 0.2);
+        }
+
+        .mensagem-sucesso {
+            color: #198754;
+            background: rgba(25, 135, 84, 0.1);
+            border-color: rgba(25, 135, 84, 0.2);
+        }
+
+        .password-strength {
+            margin-top: 8px;
+            font-size: var(--font-size-sm);
+        }
+
+        .strength-weak { color: #dc3545; }
+        .strength-medium { color: #fd7e14; }
+        .strength-strong { color: #198754; }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: var(--text-primary);
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            margin-top: 2px;
+        }
+
+        .checkbox-label a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .cadastro-page {
+                margin-top: 70px;
+                padding: var(--spacing-lg);
+            }
+
+            .cadastro-container {
+                padding: var(--spacing-xl);
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-sm);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cadastro-container {
+                padding: var(--spacing-lg);
+                margin: 10px;
+            }
+
+            .cadastro-page {
+                padding: var(--spacing-md);
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <div class="auth-logo">
-                    <img src="Imagens/Logo.png" alt="Sport Gun Imports">
-                    <span class="auth-logo-text">Sport Gun</span>
-                </div>
-                <h1 class="auth-title">Cadastre-se</h1>
-                <p class="auth-subtitle">Crie sua conta</p>
+    <!-- Header igual ao index.html -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__logo">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: var(--spacing-sm);">
+                    <img src="Imagens/Logo.png" alt="Sport Gun Imports" class="logo">
+                    <span class="logo-text">Sport Gun</span>
+                </a>
             </div>
 
-            <form id="cadastroForm" class="auth-form">
-                <div class="form-group">
-                    <label for="nome">
-                        <i class="fas fa-user"></i> Nome
-                    </label>
-                    <input type="text" id="nome" placeholder="Digite seu nome" required>
+            <!-- Barra de Busca -->
+            <div class="nav__search">
+                <input type="text" id="searchInput" placeholder="Buscar produtos...">
+                <button class="btn btn--search">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <ul class="nav__menu">
+                <li><a href="index.html#home">Menu</a></li>
+                <li><a href="index.html#produtos">Produtos</a></li>
+                <li><a href="index.html#noticias">Notícias</a></li>
+                <li><a href="index.html#servicos">Serviços</a></li>
+                <li><a href="index.html#contato">Contato</a></li>
+            </ul>
+
+            <div class="nav__actions">
+                <!-- Favoritos -->
+                <button class="btn btn--icon" id="favoritesBtn" onclick="window.location.href='index.html'">
+                    <i class="material-icons">favorite_border</i>
+                    <span class="badge" id="favoritesBadge">0</span>
+                </button>
+
+                <!-- Carrinho -->
+                <button class="btn btn--icon" id="cartBtn" onclick="window.location.href='index.html'">
+                    <i class="material-icons">shopping_cart</i>
+                    <span class="badge" id="cartBadge">0</span>
+                </button>
+
+                <!-- Login -->
+                <button class="btn btn--login" onclick="window.location.href='login.html'">Entrar</button>
+                <button class="btn btn--register" onclick="window.location.href='cadastro.html'">Registrar</button>
+            </div>
+
+            <div class="nav__hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Página de Cadastro -->
+    <main class="cadastro-page">
+        <div class="cadastro-container">
+            <div class="cadastro-header">
+                <div class="logo">
+                    <img src="Imagens/Logo.png" alt="Sport Gun">
+                    <span class="logo-text">Sport Gun</span>
+                </div>
+                <h1>Crie sua conta</h1>
+                <p>Junte-se à comunidade Sport Gun e tenha acesso a produtos exclusivos</p>
+            </div>
+
+            <form id="cadastroForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">Nome *</label>
+                        <input type="text" id="nome" placeholder="Digite seu nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sobrenome">Sobrenome *</label>
+                        <input type="text" id="sobrenome" placeholder="Digite seu sobrenome" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="sobrenome">
-                        <i class="fas fa-user-tag"></i> Sobrenome
-                    </label>
-                    <input type="text" id="sobrenome" placeholder="Digite seu sobrenome" required>
+                    <label for="cpf">CPF *</label>
+                    <input type="text" id="cpf" placeholder="000.000.000-00" required 
+                           oninput="formatarCPF(this)">
                 </div>
 
                 <div class="form-group">
-                    <label for="cpf">
-                        <i class="fas fa-id-card"></i> CPF
-                    </label>
-                    <input type="text" id="cpf" placeholder="000.000.000-00" required>
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" placeholder="seu@email.com" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="usuario">
-                        <i class="fas fa-at"></i> Usuário
-                    </label>
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" placeholder="(11) 99999-9999" 
+                           oninput="formatarTelefone(this)">
+                </div>
+
+                <div class="form-group">
+                    <label for="usuario">Usuário *</label>
                     <input type="text" id="usuario" placeholder="Crie seu usuário" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="senha">
-                        <i class="fas fa-lock"></i> Senha
-                    </label>
-                    <input type="password" id="senha" placeholder="Crie sua senha" required>
+                    <label for="senha">Senha *</label>
+                    <input type="password" id="senha" placeholder="Crie sua senha" required 
+                           oninput="verificarForcaSenha(this.value)">
+                    <div id="passwordStrength" class="password-strength"></div>
                 </div>
 
-                <button type="submit" class="btn-auth">
-                    <i class="fas fa-user-plus"></i> Cadastrar
-                </button>
-            </form>
+                <div class="form-group">
+                    <label for="confirmarSenha">Confirmar Senha *</label>
+                    <input type="password" id="confirmarSenha" placeholder="Confirme sua senha" required
+                           oninput="verificarSenhasIguais()">
+                </div>
 
-            <div class="auth-footer">
-                <p>Já tem conta? <a href="login.html">Faça login</a></p>
-                <p><a href="index.html"><i class="fas fa-arrow-left"></i> Voltar para o site</a></p>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="termos" required>
+                        <span>Eu concordo com os <a href="termos.html">Termos de Serviço</a> e <a href="privacidade.html">Política de Privacidade</a> *</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="newsletter">
+                        <span>Desejo receber novidades e promoções por email</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-cadastrar">
+                    <i class="fas fa-user-plus" style="margin-right: 8px;"></i>
+                    Criar Conta
+                </button>
+
+                <div class="login-link">
+                    Já tem uma conta? <a href="login.html">Faça login aqui</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer igual ao index.html -->
+    <footer class="footer">
+        <div class="footer__content">
+            <div class="footer__section">
+                <div class="nav__logo">
+                    <img src="Imagens/Logo.png" alt="Sport Gun" class="logo">
+                    <span class="logo-text">Sport Gun</span>
+                </div>
+                <p>
+                    Sua referência em segurança e precisão. <br />
+                    © 2024 Sport Gun. Todos os direitos reservados.
+                </p>
+            </div>
+            <div class="footer__section">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="index.html#produtos">Produtos</a></li>
+                    <li><a href="index.html#noticias">Notícias</a></li>
+                    <li><a href="index.html#servicos">Serviços</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer__section">
+                <h3>Suporte</h3>
+                <ul>
+                    <li><a href="ajuda.html">Ajuda</a></li>
+                    <li><a href="termos.html">Termos de Uso</a></li>
+                    <li><a href="privacidade.html">Privacidade</a></li>
+                    <li><a href="trocas.html">Trocas e Devoluções</a></li>
+                </ul>
+            </div>
+            <div class="footer__section">
+                <h3>Redes Sociais</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="footer__bottom">
+            <p>&copy; 2024 Sport Gun. Todos os direitos reservados. CNPJ: 12.345.678/0001-90</p>
+        </div>
+    </footer>
 
     <script>
+        // Formatação de CPF
+        function formatarCPF(campo) {
+            let cpf = campo.value.replace(/\D/g, '');
+            cpf = cpf.substring(0, 11);
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            campo.value = cpf;
+        }
+
+        // Formatação de telefone
+        function formatarTelefone(campo) {
+            let telefone = campo.value.replace(/\D/g, '');
+            telefone = telefone.substring(0, 11);
+            
+            if (telefone.length <= 10) {
+                telefone = telefone.replace(/(\d{2})(\d)/, '($1) $2');
+                telefone = telefone.replace(/(\d{4})(\d)/, '$1-$2');
+            } else {
+                telefone = telefone.replace(/(\d{2})(\d)/, '($1) $2');
+                telefone = telefone.replace(/(\d{5})(\d)/, '$1-$2');
+            }
+            
+            campo.value = telefone;
+        }
+
+        // Verificar força da senha
+        function verificarForcaSenha(senha) {
+            const strengthElement = document.getElementById('passwordStrength');
+            let strength = 0;
+            let feedback = '';
+
+            if (senha.length >= 8) strength++;
+            if (senha.match(/[a-z]/) && senha.match(/[A-Z]/)) strength++;
+            if (senha.match(/\d/)) strength++;
+            if (senha.match(/[^a-zA-Z\d]/)) strength++;
+
+            switch(strength) {
+                case 0:
+                case 1:
+                    feedback = '<span class="strength-weak"><i class="fas fa-exclamation-circle"></i> Senha fraca</span>';
+                    break;
+                case 2:
+                case 3:
+                    feedback = '<span class="strength-medium"><i class="fas fa-check-circle"></i> Senha média</span>';
+                    break;
+                case 4:
+                    feedback = '<span class="strength-strong"><i class="fas fa-shield-alt"></i> Senha forte</span>';
+                    break;
+            }
+
+            strengthElement.innerHTML = feedback;
+        }
+
+        // Verificar se as senhas são iguais
+        function verificarSenhasIguais() {
+            const senha = document.getElementById("senha").value;
+            const confirmarSenha = document.getElementById("confirmarSenha").value;
+            const confirmarInput = document.getElementById("confirmarSenha");
+            
+            if (confirmarSenha && senha !== confirmarSenha) {
+                confirmarInput.style.borderColor = '#dc3545';
+            } else if (confirmarSenha && senha === confirmarSenha) {
+                confirmarInput.style.borderColor = '#198754';
+            } else {
+                confirmarInput.style.borderColor = '';
+            }
+        }
+
+        // Validação do formulário
         document.getElementById("cadastroForm").addEventListener("submit", async function(e) {
             e.preventDefault();
 
+            // Remover mensagens antigas
+            const mensagensAntigas = document.querySelectorAll('.mensagem');
+            mensagensAntigas.forEach(msg => msg.remove());
+
+            // Validações básicas
+            const nome = document.getElementById("nome").value.trim();
+            const sobrenome = document.getElementById("sobrenome").value.trim();
+            const cpf = document.getElementById("cpf").value;
+            const email = document.getElementById("email").value.trim();
+            const usuario = document.getElementById("usuario").value.trim();
+            const senha = document.getElementById("senha").value;
+            const confirmarSenha = document.getElementById("confirmarSenha").value;
+            const termos = document.getElementById("termos").checked;
+
+            // Validações
+            if (!nome || !sobrenome) {
+                mostrarMensagem("Por favor, preencha seu nome completo!", "erro");
+                return;
+            }
+
+            if (cpf.replace(/\D/g, '').length !== 11) {
+                mostrarMensagem("CPF inválido!", "erro");
+                return;
+            }
+
+            if (!validarEmail(email)) {
+                mostrarMensagem("Email inválido!", "erro");
+                return;
+            }
+
+            if (usuario.length < 3) {
+                mostrarMensagem("Usuário deve ter pelo menos 3 caracteres!", "erro");
+                return;
+            }
+
+            if (senha.length < 6) {
+                mostrarMensagem("A senha deve ter pelo menos 6 caracteres!", "erro");
+                return;
+            }
+
+            if (senha !== confirmarSenha) {
+                mostrarMensagem("As senhas não coincidem!", "erro");
+                return;
+            }
+
+            if (!termos) {
+                mostrarMensagem("Você deve aceitar os termos de serviço!", "erro");
+                return;
+            }
+
+            // Mostrar loading
+            const botao = document.querySelector('.btn-cadastrar');
+            const textoOriginal = botao.innerHTML;
+            botao.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cadastrando...';
+            botao.disabled = true;
+
             try {
+                // Simular cadastro (substitua pela sua API real)
                 const resposta = await fetch("simuladorPHP/cadastrar.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        nome: document.getElementById("nome").value,
-                        sobrenome: document.getElementById("sobrenome").value,
-                        cpf: document.getElementById("cpf").value,
-                        usuario: document.getElementById("usuario").value,
-                        senha: document.getElementById("senha").value
+                        nome: nome,
+                        sobrenome: sobrenome,
+                        cpf: cpf.replace(/\D/g, ''),
+                        email: email,
+                        telefone: document.getElementById("telefone").value.replace(/\D/g, ''),
+                        usuario: usuario,
+                        senha: senha,
+                        newsletter: document.getElementById("newsletter").checked
                     })
                 });
 
                 const resultado = await resposta.json();
 
                 if (resultado.status === "ok") {
-                    alert("Cadastro realizado com sucesso!");
-                    window.location.href = "login.html";
+                    mostrarMensagem("Cadastro realizado com sucesso! Redirecionando...", "sucesso");
+                    
+                    setTimeout(() => {
+                        window.location.href = "login.html?cadastro=sucesso";
+                    }, 2000);
                 } else {
-                    const mensagemErro = document.createElement("div");
-                    mensagemErro.textContent = resultado.mensagem || "Erro no cadastro";
-                    mensagemErro.classList.add("mensagem-erro");
-                    
-                    const mensagemAntiga = document.querySelector(".mensagem-erro");
-                    if (mensagemAntiga) mensagemAntiga.remove();
-                    
-                    document.getElementById("cadastroForm").appendChild(mensagemErro);
+                    mostrarMensagem(resultado.mensagem || "Erro no cadastro. Tente novamente.", "erro");
                 }
             } catch (error) {
                 console.error("Erro:", error);
-                alert("Erro ao conectar com o servidor");
+                mostrarMensagem("Erro ao conectar com o servidor. Tente novamente.", "erro");
+            } finally {
+                // Restaurar botão
+                botao.innerHTML = textoOriginal;
+                botao.disabled = false;
             }
         });
 
-        // Verificar se já está logado
-        if (localStorage.getItem("usuario_id")) {
-            window.location.href = "index.html";
+        // Função para mostrar mensagens
+        function mostrarMensagem(texto, tipo) {
+            const mensagem = document.createElement("div");
+            mensagem.textContent = texto;
+            mensagem.classList.add("mensagem", `mensagem-${tipo}`);
+            document.getElementById("cadastroForm").insertBefore(mensagem, document.querySelector('.btn-cadastrar'));
         }
+
+        // Validar email
+        function validarEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        // Navegação mobile (sincronizada com index.html)
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.nav__hamburger');
+            const navMenu = document.querySelector('.nav__menu');
+
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+
+            // Fechar menu mobile ao clicar em links
+            document.querySelectorAll('.nav__menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (hamburger) {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                });
+            });
+
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('.header');
+                if (header) {
+                    if (window.scrollY > 100) {
+                        header.style.background = 'rgba(10, 10, 10, 0.98)';
+                        header.style.boxShadow = '0 2px 20px rgba(220, 38, 38, 0.1)';
+                    } else {
+                        header.style.background = 'rgba(10, 10, 10, 0.95)';
+                        header.style.boxShadow = 'none';
+                    }
+                }
+            });
+
+            // Smooth scrolling para âncoras
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>

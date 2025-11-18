@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sport Gun Imports - Venda de Armas</title>
+    <title>Sport Gun - Venda de Armas</title>
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/responsive.css" />
@@ -11,614 +11,496 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"
-    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
-    <!-- Header -->
     <header class="header">
-      <nav class="nav">
-        <div class="nav__logo">
-          <img src="Imagens/Logo.png" alt="Sport Gun Imports" class="logo" />
-          <span class="logo-text">Sport Gun</span>
-        </div>
+        <nav class="nav">
+            <div class="nav__logo">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: var(--spacing-sm);">
+                    <img src="Imagens/Logo.png" alt="Sport Gun Imports" class="logo">
+                    <span class="logo-text">Sport Gun</span>
+                </a>
+            </div>
+            
+            <!-- BARRA DE BUSCA -->
+            <div class="nav__search">
+              <input type="text" id="searchInput" placeholder="Buscar produtos...">
+              <button class="btn btn--search">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
 
-        <ul class="nav__menu">
-          <li><a href="#home">Menu</a></li>
-          <li><a href="#produtos">Produtos</a></li>
-          <li><a href="#noticias">Notícias</a></li>
-          <li><a href="#servicos">Serviços</a></li>
-          <li><a href="#agendamentos">Agendamentos</a></li>
-          <li><a href="#contato">Contato</a></li>
-        </ul>
+            <ul class="nav__menu">
+                <li><a href="#home">Menu</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#noticias">Notícias</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
 
-        <div class="nav__actions">
-          <!-- O conteúdo será atualizado dinamicamente pelo JavaScript -->
-        </div>
+            <div class="nav__actions">
+                <!-- FAVORITOS -->
+                <button class="btn btn--icon" id="favoritesBtn">
+                    <i class="material-icons">favorite_border</i>
+                    <span class="badge" id="favoritesBadge">0</span>
+                </button>
 
-        <div class="nav__hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </nav>
+                <!-- CARRINHO -->
+                <button class="btn btn--icon" id="cartBtn">
+                    <i class="material-icons">shopping_cart</i>
+                    <span class="badge" id="cartBadge">0</span>
+                </button>
+
+                <!-- LOGIN E REGISTRO CORRIGIDOS -->
+                <button class="btn btn--login" id="loginBtn">Entrar</button>
+                <button class="btn btn--register" onclick="window.location.href='cadastro.html'">Registrar</button>
+            </div>
+
+            <div class="nav__hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
     </header>
 
-    <!-- Hero Carousel Section -->
-    <section id="home" class="hero-carousel">
-      <div class="carousel-container">
-        <div class="carousel-slide active">
-          <div class="slide-content">
-            <div class="slide-text">
-              <h1 class="hero__title">
-                Armamento Militar
-                <span class="hero__highlight">de ponta</span>
-              </h1>
-              <p class="hero__description">Armas Importadas.</p>
-              <div class="hero__buttons">
-                <button class="btn btn--primary">Ver Produtos</button>
-                <button class="btn btn--secondary">Catálogo Completo</button>
-              </div>
+    <main>
+      <section id="home" class="hero-carousel">
+        <div class="carousel-container">
+            <div class="carousel-slide active">
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <h1 class="hero__title">
+                            Armamento Militar
+                            <span class="hero__highlight">de ponta</span>
+                        </h1>
+                        <p class="hero__description">
+                            Armas Importadas com qualidade e procedência garantida.
+                        </p>
+                        <div class="hero__buttons">
+                            <button class="btn btn--primary" onclick="window.location.href='#produtos'">Ver Produtos</button>
+                            <button class="btn btn--secondary" onclick="window.location.href='cadastro.html'">Cadastre-se</button>
+                        </div>
+                    </div>
+                    <div class="slide-image">
+                        <img src="Imagens/SIG SAUER P320 M18 COYOTE.png" alt="SIG SAUER P320 M18 COYOTE">
+                        <div class="slide-overlay">
+                            <button class="btn btn--primary btn--large" onclick="window.location.href='cadastro.html'">Cadastrar para Comprar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="slide-image">
-              <img
-                src="Imagens/Sig_Sauer_P320.png"
-                alt="SIG SAUER P320 M18 COYOTE"
-              />
-              <div class="slide-overlay">
-                <button class="btn btn--primary btn--large">
-                  Comprar Agora
-                </button>
-              </div>
+
+            <div class="carousel-slide">
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <h1 class="hero__title">
+                            Pistolas de
+                            <span class="hero__highlight">Alta Performance</span>
+                        </h1>
+                        <p class="hero__description">
+                            As melhores pistolas do mercado com garantia e procedência
+                        </p>
+                        <div class="hero__buttons">
+                            <button class="btn btn--primary" onclick="window.location.href='#produtos'">Ver Pistolas</button>
+                            <button class="btn btn--secondary" onclick="window.location.href='cadastro.html'">Cadastre-se Grátis</button>
+                        </div>
+                    </div>
+                    <div class="slide-image">
+                        <img src="Imagens/SIG SAUER P320 M18 COYOTE.png" alt="Sig Sauer">
+                        <div class="slide-overlay">
+                            <button class="btn btn--primary btn--large" onclick="window.location.href='cadastro.html'">Cadastrar para Comprar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <div class="carousel-slide">
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <h1 class="hero__title">
+                            Rifles e
+                            <span class="hero__highlight">Armas Longas</span>
+                        </h1>
+                        <p class="hero__description">
+                            Para caça e esporte, temos a melhor seleção de rifles
+                        </p>
+                        <div class="hero__buttons">
+                            <button class="btn btn--primary" onclick="window.location.href='#produtos'">Ver Rifles</button>
+                            <button class="btn btn--secondary" onclick="window.location.href='cadastro.html'">Fazer Cadastro</button>
+                        </div>
+                    </div>
+                    <div class="slide-image">
+                        <img src="Imagens/SIG SAUER P320 M18 COYOTE.png" alt="Rifle">
+                        <div class="slide-overlay">
+                            <button class="btn btn--primary btn--large" onclick="window.location.href='cadastro.html'">Cadastrar para Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="carousel-slide">
-          <div class="slide-content">
-            <div class="slide-text">
-              <h1 class="hero__title">
-                Pistolas de
-                <span class="hero__highlight">Alta Performance</span>
-              </h1>
-              <p class="hero__description">
-                As melhores pistolas do mercado com garantia e procedência
-              </p>
-              <div class="hero__buttons">
-                <button class="btn btn--primary">Ver Pistolas</button>
-                <button class="btn btn--secondary">Ver Especificações</button>
-              </div>
-            </div>
-            <div class="slide-image">
-              <img src="Imagens/Smith_Wesson_MP.jpg" alt="Sig Sauer" />
-              <div class="slide-overlay">
-                <button class="btn btn--primary btn--large">
-                  Comprar Agora
-                </button>
-              </div>
-            </div>
-          </div>
+        <button class="carousel-btn carousel-prev">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-btn carousel-next">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="carousel-indicators">
+          <span class="indicator active"></span>
+          <span class="indicator"></span>
+          <span class="indicator"></span>
+        </div>
+      </section>
+
+      <section class="brands">
+        <div class="brands__container">
+          <div class="brand">GLOCK</div>
+          <div class="brand">SMITH & WESSON</div>
+          <div class="brand">COLT</div>
+          <div class="brand">SIG SAUER</div>
+          <div class="brand">BERETTA</div>
+        </div>
+      </section>
+
+      <section id="produtos" class="products">
+        <div class="section__header">
+          <h2>PRODUTOS EM DESTAQUE</h2>
+          <p>Confira nossas armas mais vendidas</p>
         </div>
 
-        <div class="carousel-slide">
-          <div class="slide-content">
-            <div class="slide-text">
-              <h1 class="hero__title">
-                Rifles e
-                <span class="hero__highlight">Armas Longas</span>
-              </h1>
-              <p class="hero__description">
-                Para caça e esporte, temos a melhor seleção de rifles
-              </p>
-              <div class="hero__buttons">
-                <button class="btn btn--primary">Ver Rifles</button>
-                <button class="btn btn--secondary">Consultar Estoque</button>
-              </div>
-            </div>
-            <div class="slide-image">
-              <img src="Imagens/Colt_1911.jpg" alt="Rifle" />
-              <div class="slide-overlay">
-                <button class="btn btn--primary btn--large">
-                  Comprar Agora
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Carousel Controls -->
-      <button class="carousel-btn carousel-prev">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <button class="carousel-btn carousel-next">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-
-      <!-- Carousel Indicators -->
-      <div class="carousel-indicators">
-        <span class="indicator active"></span>
-        <span class="indicator"></span>
-        <span class="indicator"></span>
-      </div>
-    </section>
-
-    <!-- Brands Section -->
-    <section class="brands">
-      <div class="brands__container">
-        <div class="brand">GLOCK</div>
-        <div class="brand">SMITH & WESSON</div>
-        <div class="brand">COLT</div>
-        <div class="brand">SIG SAUER</div>
-        <div class="brand">BERETTA</div>
-        <div class="brand">TAURUS</div>
-        <div class="brand">CBC</div>
-        <div class="brand">CZ</div>
-      </div>
-    </section>
-
-    <!-- Products Section -->
-    <section id="produtos" class="products">
-      <div class="section__header">
-        <h2>PRODUTOS EM DESTAQUE</h2>
-        <p>Confira nossas armas mais vendidas</p>
-      </div>
-
-      <div class="products__grid">
-        <!-- Produto 1 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img src="Imagens/f-9 brigade.jpg" alt="F-9 Brigade" />
-            <div class="product__badge">Popular</div>
-          </div>
-          <div class="product__info">
-            <h4>BM-F-9 Brigade</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <span>4.8 (2.436 Reviews)</span>
-              </div>
-            </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> 9mm</span>
-              <span><i class="fas fa-layer-group"></i> 32+1</span>
-              <span><i class="fas fa-weight"></i> 2580g</span>
-            </div>
-            <div class="product__features">
-              <span>Nova</span>
-              <span>Com garantia</span>
-              <span>Estoque: 6</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 12.200</span>
-            </div>
-          </div>
+        <div class="products__grid">
+          <!-- Produtos serão carregados via JavaScript -->
         </div>
 
-        <!-- Produto 2 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img src="Imagens/fuzil taurus t10.jpg" alt="fuzil taurus t10" />
-            <div class="product__badge product__badge--new">Novo</div>
+        <div class="products__footer">
+          <a href="#" class="see-all">Ver todos os produtos</a>
+        </div>
+      </section>
+
+      <!-- SEÇÃO DE SERVIÇOS -->
+      <section id="servicos" class="services">
+        <div class="section__header">
+          <h2>NOSSOS SERVIÇOS</h2>
+          <p>Serviços especializados para atiradores e colecionadores</p>
+        </div>
+
+        <div class="services__grid">
+          <div class="service__card">
+            <div class="service__icon">
+              <i class="fas fa-file-contract"></i>
+            </div>
+            <h3>Documentação CAC</h3>
+            <p>Assessoria completa para obtenção e renovação de CR junto ao Exército Brasileiro</p>
+            <ul>
+              <li>Primeiro registro</li>
+              <li>Renovação anual</li>
+              <li>Regularização</li>
+            </ul>
+            <button class="btn btn--primary" onclick="window.location.href='cadastro.html'">Solicitar</button>
           </div>
-          <div class="product__info">
-            <h4>fuzil taurus t10</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>5.0 (1.894 Reviews)</span>
+
+          <div class="service__card">
+            <div class="service__icon">
+              <i class="fas fa-tools"></i>
+            </div>
+            <h3>Manutenção</h3>
+            <p>Manutenção preventiva e corretiva em armas de fogo com técnicos especializados</p>
+            <ul>
+              <li>Limpeza profissional</li>
+              <li>Reparos mecânicos</li>
+              <li>Customização</li>
+            </ul>
+            <button class="btn btn--primary" onclick="window.location.href='cadastro.html'">Agendar</button>
+          </div>
+
+          <div class="service__card">
+            <div class="service__icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Segurança</h3>
+            <p>Consultoria em segurança e instalação de cofres para armamento</p>
+            <ul>
+              <li>Cofres certificados</li>
+              <li>Instalação profissional</li>
+              <li>Consultoria</li>
+            </ul>
+            <button class="btn btn--primary" onclick="window.location.href='cadastro.html'">Consultar</button>
+          </div>
+
+          <div class="service__card">
+            <div class="service__icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3>Treinamento</h3>
+            <p>Cursos de tiro defensivo e esportivo com instrutores credenciados</p>
+            <ul>
+              <li>Tiro defensivo</li>
+              <li>Tiro esportivo</li>
+              <li>Reciclagem</li>
+            </ul>
+            <button class="btn btn--primary" onclick="window.location.href='cadastro.html'">Inscrever-se</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="noticias" class="news">
+        <div class="section__header">
+          <h2>NOTÍCIAS EM DESTAQUE</h2>
+          <p>Fique por dentro das últimas novidades do mundo das armas</p>
+        </div>
+
+        <div class="news__grid">
+          <!-- Notícias serão carregadas via JavaScript -->
+        </div>
+
+        <div class="news__footer">
+          <a href="#" class="see-all">Ver todas as notícias</a>
+        </div>
+      </section>
+
+      <!-- SEÇÃO DE CONTATO -->
+      <section id="contato" class="contact">
+        <div class="section__header">
+          <h2>CONTATO</h2>
+          <p>Entre em contato conosco</p>
+        </div>
+
+        <div class="contact__container">
+          <div class="contact__info">
+            <div class="contact__item">
+              <div class="contact__icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="contact__details">
+                <h4>Endereço</h4>
+                <p>Rua das Armas, 123<br>Centro, São Paulo - SP<br>01234-567</p>
               </div>
             </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> 7,62x51mm</span>
-              <span><i class="fas fa-layer-group"></i> 15+1</span>
-              <span><i class="fas fa-weight"></i> 833g</span>
-            </div>
-            <div class="product__features">
-              <span>Direto de Gases</span>
-              <span>Com case</span>
-              <span>Estoque: 8</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 14.500</span>
-            </div>
-          </div>
-        </div>
 
-        <!-- Produto 3 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img
-              src="Imagens/carabina 8 semi-auto.png"
-              alt="carabina 8 semi-auto"
-            />
-          </div>
-          <div class="product__info">
-            <h4>carabina 8 semi-auto</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>4.9 (3.127 Reviews)</span>
+            <div class="contact__item">
+              <div class="contact__icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="contact__details">
+                <h4>Telefone</h4>
+                <p>(11) 9999-9999<br>(11) 8888-8888</p>
               </div>
             </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> 9mm</span>
-              <span><i class="fas fa-layer-group"></i> 17+1</span>
-              <span><i class="fas fa-weight"></i> 694g</span>
-            </div>
-            <div class="product__features">
-              <span>Performance</span>
-              <span>3 magazines</span>
-              <span>Estoque: 12</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 9.800</span>
-            </div>
-          </div>
-        </div>
 
-        <!-- Produto 4 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img
-              src="Imagens/T4 14,5 semi-auto.jpg"
-              alt="T4 14,5 semi-auto.jpg"
-            />
-          </div>
-          <div class="product__info">
-            <h4>T4 14,5 semi-auto</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>4.7 (1.542 Reviews)</span>
+            <div class="contact__item">
+              <div class="contact__icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="contact__details">
+                <h4>Email</h4>
+                <p>contato@sportgun.com.br<br>vendas@sportgun.com.br</p>
               </div>
             </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> 5.56</span>
-              <span><i class="fas fa-layer-group"></i> 7+1</span>
-              <span><i class="fas fa-weight"></i> 1105g</span>
-            </div>
-            <div class="product__features">
-              <span>Clássico</span>
-              <span>Aço inox</span>
-              <span>Estoque: 6</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 9.200</span>
-            </div>
-          </div>
-        </div>
 
-        <!-- Produto 5 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img
-              src="Imagens/pistola 59s 85anos.jpg"
-              alt="pistola 59s 85anos"
-            />
-          </div>
-          <div class="product__info">
-            <h4>pistola 59s 85anos</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <span>4.6 (2.118 Reviews)</span>
+            <div class="contact__item">
+              <div class="contact__icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="contact__details">
+                <h4>Horário de Funcionamento</h4>
+                <p>Segunda a Sexta: 9h às 18h<br>Sábado: 9h às 13h</p>
               </div>
             </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> 9mm</span>
-              <span><i class="fas fa-layer-group"></i> 15+1</span>
-              <span><i class="fas fa-weight"></i> 945g</span>
-            </div>
-            <div class="product__features">
-              <span>Militar</span>
-              <span>Alumínio</span>
-              <span>Estoque: 10</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 6.500</span>
-            </div>
           </div>
-        </div>
 
-        <!-- Produto 6 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img
-              src="Imagens/carabina lever action rossi 20.png"
-              alt="carabina lever action rossi 20'"
-            />
-          </div>
-          <div class="product__info">
-            <h4>Carabina lever action rossi 20'</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>4.8 (1.876 Reviews)</span>
+          <div class="contact__form">
+            <form id="contactForm">
+              <div class="form__group">
+                <input type="text" id="name" name="name" placeholder="Seu nome" required>
               </div>
-            </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> .38SPL</span>
-              <span><i class="fas fa-layer-group"></i> 5 cilindros</span>
-              <span><i class="fas fa-weight"></i> 750g</span>
-            </div>
-            <div class="product__features">
-              <span>Versátil</span>
-              <span>Defesa</span>
-              <span>Estoque: 7</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 7.900</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Produto 7 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img src="Imagens/acessorios.jpg" alt="Acessórios" />
-          </div>
-          <div class="product__info">
-            <h4>Acessórios Premium</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>4.8 (1.876 Reviews)</span>
+              <div class="form__group">
+                <input type="email" id="email" name="email" placeholder="Seu email" required>
               </div>
-            </div>
-            <div class="product__details">
-              <span><i class="fas fa-toolbox"></i> Kit Completo</span>
-              <span><i class="fas fa-weight"></i> 500g</span>
-            </div>
-            <div class="product__features">
-              <span>Versátil</span>
-              <span>Cases e maletas</span>
-              <span>Estoque: 7</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 4.900</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Produto 8 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img src="Imagens/acessorios.jpg" alt="Acessórios" />
-          </div>
-          <div class="product__info">
-            <h4>Mira Laser</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>4.8 (1.876 Reviews)</span>
+              <div class="form__group">
+                <input type="tel" id="phone" name="phone" placeholder="Seu telefone">
               </div>
-            </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> Precisão</span>
-              <span><i class="fas fa-weight"></i> 300g</span>
-            </div>
-            <div class="product__features">
-              <span>Laser Verde</span>
-              <span>À prova d'água</span>
-              <span>Estoque: 15</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 2.900</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Produto 9 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img src="Imagens/acessorios.jpg" alt="Acessórios" />
-          </div>
-          <div class="product__info">
-            <h4>Coldre Tático</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>4.8 (1.876 Reviews)</span>
+              <div class="form__group">
+                <select id="subject" name="subject" required>
+                  <option value="">Selecione o assunto</option>
+                  <option value="vendas">Vendas</option>
+                  <option value="servicos">Serviços</option>
+                  <option value="suporte">Suporte</option>
+                  <option value="outro">Outro</option>
+                </select>
               </div>
-            </div>
-            <div class="product__details">
-              <span><i class="fas fa-vest"></i> Confortável</span>
-              <span><i class="fas fa-weight"></i> 450g</span>
-            </div>
-            <div class="product__features">
-              <span>Couro Legítimo</span>
-              <span>Ajustável</span>
-              <span>Estoque: 12</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 3.200</span>
-            </div>
+              <div class="form__group">
+                <textarea id="message" name="message" placeholder="Sua mensagem" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary btn--full">Enviar Mensagem</button>
+            </form>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="products__footer">
-        <a href="#" class="see-all">Ver todos os produtos</a>
-      </div>
-    </section>
-
-    <!-- News Section -->
-    <section id="noticias" class="news">
-      <div class="section__header">
-        <h2>NOTÍCIAS EM DESTAQUE</h2>
-        <p>Fique por dentro das últimas novidades do mundo das armas</p>
-      </div>
-
-      <div class="news__grid">
-        <!-- As notícias serão carregadas aqui via JavaScript -->
-        <div style="grid-column: 1/-1; text-align: center; padding: 3rem">
-          <p style="color: var(--text-secondary); font-size: 1.2rem">
-            <i class="fas fa-spinner fa-spin"></i> Carregando notícias...
-          </p>
-        </div>
-      </div>
-
-      <div class="news__footer">
-        <a
-          href="https://infoarmas.com.br"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="see-all"
-        >
-          Ver todas as notícias no InfoArmas
-        </a>
-      </div>
-    </section>
-
-    <!-- Seção de Agendamentos -->
-    <section
-      id="agendamentos"
-      class="products"
-      style="background: var(--background)"
-    >
-      <div class="section__header">
-        <h2>MEUS AGENDAMENTOS</h2>
-        <p>Acompanhe seus agendamentos e confirmações</p>
-      </div>
-
-      <div class="agendamentos-list">
-        <!-- Os agendamentos serão carregados aqui via JavaScript -->
-        <div
-          style="
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-secondary);
-          "
-        >
-          <i
-            class="fas fa-calendar-plus"
-            style="font-size: 3rem; margin-bottom: 1rem"
-          ></i>
-          <h3>Nenhum agendamento</h3>
+      <section class="partners">
+        <div class="partners__content">
+          <h2>JUNTE-SE À NOSSA COMUNIDADE</h2>
           <p>
-            Faça seu primeiro agendamento clicando em "Agendar" em qualquer
-            produto!
+            Mais de 5000 proprietários de armas já fazem parte da Sport Gun. 
+            Registre-se hoje e tenha acesso a produtos exclusivos, promoções especiais 
+            e nossa comunidade de atiradores.
           </p>
+          <div class="partners__buttons">
+            <button class="btn btn--primary" onclick="window.location.href='cadastro.html'">Cadastrar Gratuitamente</button>
+            <button class="btn btn--secondary" onclick="window.location.href='login.html'">Já tenho conta</button>
+          </div>
         </div>
-      </div>
+      </section>
+    </main>
 
-      <div class="products__footer">
-        <button class="btn btn--primary btn-agendamento-geral">
-          <i class="fas fa-calendar-plus"></i> Fazer Agendamento Geral
+    <!-- MODAL LOGIN -->
+    <div class="modal" id="loginModal">
+      <div class="modal__content">
+        <button class="modal__close" id="loginCloseBtn">
+          <i class="fas fa-times"></i>
+        </button>
+        <h2>Login</h2>
+        <form id="loginForm">
+          <div class="form__group">
+            <input type="text" id="loginUsuario" placeholder="Usuário ou Email" required>
+          </div>
+          <div class="form__group">
+            <input type="password" id="loginSenha" placeholder="Sua senha" required>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">Entrar</button>
+        </form>
+        <p class="modal__footer">
+          Não tem conta? <a href="cadastro.html" style="color: var(--primary-color);">Cadastre-se</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- PANEL FAVORITOS -->
+    <div class="panel" id="favoritesPanel">
+      <div class="panel__header">
+        <h3>Seus Favoritos</h3>
+        <button class="panel__close" id="favoritesCloseBtn">
+          <i class="fas fa-times"></i>
         </button>
       </div>
-    </section>
-
-    <!-- Partners Section -->
-    <section class="partners">
-      <div class="partners__content">
-        <h2>ACOMPANHE NOSSOS CANAIS</h2>
-        <p>Fique por dentro das novidades, promoções e lançamentos</p>
-        <div class="social-buttons">
-          <!-- Instagram -->
-          <a href="#" class="social-btn social-btn--outline">
-            <i class="fab fa-instagram"></i>
-            <span>Instagram</span>
-          </a>
-          <!-- Facebook -->
-          <a href="#" class="social-btn social-btn--outline">
-            <i class="fab fa-facebook-f"></i>
-            <span>Facebook</span>
-          </a>
-          <!-- WhatsApp -->
-          <a href="#" class="social-btn social-btn--outline">
-            <i class="fab fa-whatsapp"></i>
-            <span>WhatsApp</span>
-          </a>
+      <div class="panel__content">
+        <div class="favorites-list" id="favoritesList">
+          <!-- Itens favoritos serão carregados aqui -->
+        </div>
+        <div class="panel__footer">
+          <button class="btn btn--primary btn--full" onclick="window.location.href='cadastro.html'">
+            Cadastre-se para salvar favoritos
+          </button>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
+    <!-- PANEL CARRINHO -->
+    <div class="panel" id="cartPanel">
+      <div class="panel__header">
+        <h3>Seu Carrinho</h3>
+        <button class="panel__close" id="cartCloseBtn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="panel__content">
+        <div class="cart-items" id="cartItems">
+          <!-- Itens do carrinho serão carregados aqui -->
+        </div>
+        <div class="cart-total">
+          <strong>Total: <span id="cartTotal">R$ 0,00</span></strong>
+        </div>
+        <button class="btn btn--primary btn--full" id="checkoutBtn">Finalizar Compra</button>
+        <div class="panel__footer">
+          <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">
+            <a href="cadastro.html" style="color: var(--primary-color);">Cadastre-se</a> para uma experiência de compra completa
+          </p>
+        </div>
+      </div>
+    </div>
+
     <footer class="footer">
       <div class="footer__content">
         <div class="footer__section">
-          <h2>Sport Gun Imports</h2>
+          <div class="nav__logo">
+            <img src="Imagens/Logo.png" alt="Sport Gun" class="logo">
+            <span class="logo-text">Sport Gun</span>
+          </div>
           <p>
-            Empresa de venda de equipamentos, acessorios e armas nacionais e
-            importadas com marcas famosas como Glock, Sig Sauer, Smith & Wesson,
-            Colt, Beretta...
+            Sua referência em segurança e precisão. <br />
+            © 2024 Sport Gun. Todos os direitos reservados.
           </p>
         </div>
-
         <div class="footer__section">
-          <h3>Armalite</h3>
+          <h3>Links Rápidos</h3>
           <ul>
-            <li><a href="#">Comprar</a></li>
-            <li><a href="#">Mapa do Site</a></li>
-            <li><a href="#">Como funciona</a></li>
+            <li><a href="#produtos">Produtos</a></li>
+            <li><a href="#noticias">Notícias</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#contato">Contato</a></li>
           </ul>
         </div>
-
         <div class="footer__section">
-          <h3>Serviços</h3>
+          <h3>Minha Conta</h3>
           <ul>
-            <li><a href="#">Entrega</a></li>
-            <li><a href="#">Verificação</a></li>
-            <li><a href="#">Garantia</a></li>
+            <li><a href="login.html">Fazer Login</a></li>
+            <li><a href="cadastro.html">Criar Conta</a></li>
+            <li><a href="#">Meus Pedidos</a></li>
+            <li><a href="#">Meus Favoritos</a></li>
           </ul>
         </div>
-
         <div class="footer__section">
-          <h3>Empresa</h3>
-          <ul>
-            <li><a href="#">Sobre nós</a></li>
-            <li><a href="#">Contato</a></li>
-            <li><a href="#">Termos de uso</a></li>
-            <li><a href="#">Política de privacidade</a></li>
-          </ul>
+          <h3>Redes Sociais</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
         </div>
       </div>
-
       <div class="footer__bottom">
-        <p>Sport Gun Imports, 2025 todos os direitos reservados</p>
+        <p>&copy; 2024 Sport Gun. Todos os direitos reservados.</p>
       </div>
     </footer>
 
     <script src="js/script.js"></script>
+    <script>
+      // Adicionar evento de clique para o botão de registro no header
+      document.addEventListener('DOMContentLoaded', function() {
+        // Botão de registro no header já está com onclick
+        // Mas vamos garantir que o modal de login também tenha link para cadastro
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+          loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Simular login bem-sucedido
+            alert('Login realizado com sucesso!');
+            document.getElementById('loginModal').classList.remove('show');
+          });
+        }
+
+        // Adicionar mensagem de incentivo ao cadastro nos produtos
+        const productsGrid = document.querySelector('.products__grid');
+        if (productsGrid) {
+          // Quando os produtos forem carregados, adicionar tooltip de cadastro
+          setTimeout(() => {
+            const productCards = document.querySelectorAll('.product__card');
+            productCards.forEach(card => {
+              card.addEventListener('click', function() {
+                // Se usuário não está logado, sugerir cadastro
+                if (!localStorage.getItem('usuarioLogado')) {
+                  if (confirm('Cadastre-se para ver detalhes completos e preços especiais! Deseja se cadastrar agora?')) {
+                    window.location.href = 'cadastro.html';
+                  }
+                }
+              });
+            });
+          }, 1000);
+        }
+      });
+    </script>
   </body>
 </html>
