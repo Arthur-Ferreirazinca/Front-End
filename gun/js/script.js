@@ -1,1607 +1,2341 @@
-// Mobile Navigation
-const hamburger = document.querySelector(".nav__hamburger");
-const navMenu = document.querySelector(".nav__menu");
+@import "variables.css";
 
-if (hamburger) {
-  hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-  });
+/* Header & Navigation - CORRIGIDO */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(10, 10, 10, 0.98) !important; /* Força o fundo preto */
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-color);
+  transition: var(--transition);
 }
 
-// Close mobile menu when clicking on links
-document.querySelectorAll(".nav__menu a").forEach((link) => {
-  link.addEventListener("click", () => {
-    if (hamburger) {
-      hamburger.classList.remove("active");
-      navMenu.classList.remove("active");
-    }
-  });
-});
+/* Remove ou comenta o JavaScript que muda o fundo do header */
 
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) {
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  });
-});
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-xl);
+  max-width: 1400px;
+  margin: 0 auto;
+}
 
-// Header scroll effect
-window.addEventListener("scroll", () => {
-  const header = document.querySelector(".header");
-  if (header) {
-    if (window.scrollY > 100) {
-      header.style.background = "rgba(10, 10, 10, 0.98)";
-      header.style.boxShadow = "0 2px 20px rgba(220, 38, 38, 0.1)";
-    } else {
-      header.style.background = "rgba(10, 10, 10, 0.95)";
-      header.style.boxShadow = "none";
-    }
+.nav__logo h2 {
+  color: var(--primary-color);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+}
+
+.nav__menu {
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-xl);
+}
+
+.nav__menu a {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav__menu a:hover {
+  color: var(--primary-color);
+}
+
+.nav__menu a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: var(--transition);
+}
+
+.nav__menu a:hover::after {
+  width: 100%;
+}
+
+.nav__actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.nav__hamburger span {
+  width: 25px;
+  height: 3px;
+  background: var(--text-primary);
+  margin: 3px 0;
+  transition: var(--transition);
+}
+
+/* Buttons */
+.btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-base);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn--primary {
+  background: var(--primary-color);
+  color: white;
+  border: 2px solid var(--primary-color);
+}
+
+.btn--primary:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn--secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+}
+
+.btn--secondary:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.btn--login {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn--register {
+  background: var(--primary-color);
+  color: white;
+  border: 1px solid var(--primary-color);
+}
+
+.btn--small {
+  padding: 8px 20px;
+  font-size: var(--font-size-sm);
+}
+
+.btn--search {
+  padding: 14px 32px;
+  align-self: flex-end;
+}
+
+/* Hero Section */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  min-height: 100vh;
+  padding: 100px var(--spacing-xl) var(--spacing-2xl);
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: var(--spacing-2xl);
+  background: linear-gradient(
+    135deg,
+    var(--background) 0%,
+    var(--background-light) 100%
+  );
+}
+
+.hero__title {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: var(--spacing-lg);
+  text-transform: uppercase;
+}
+
+.hero__highlight {
+  color: var(--primary-color);
+  display: block;
+}
+
+.hero__description {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+  max-width: 500px;
+  line-height: 1.8;
+}
+
+.hero__stats {
+  display: flex;
+  gap: var(--spacing-2xl);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.stat h3 {
+  font-size: var(--font-size-3xl);
+  color: var(--primary-color);
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.stat p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero__buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.hero__image {
+  position: relative;
+  text-align: center;
+}
+
+.hero__image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-hover);
+  filter: drop-shadow(0 20px 40px rgba(220, 38, 38, 0.2));
+}
+
+/* Search Section */
+.search {
+  background: var(--background-light);
+  padding: var(--spacing-2xl) 0;
+  margin: var(--spacing-2xl) 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+.search__filters {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-md);
+  background: var(--background-card);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+.filter label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  font-size: var(--font-size-sm);
+  letter-spacing: 1px;
+}
+
+.filter select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  background: var(--background);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+.filter select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* Brands Section */
+.brands {
+  padding: var(--spacing-2xl) 0;
+  background: var(--background);
+}
+
+.brands__container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+}
+
+.brand {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: var(--transition);
+}
+
+.brand:hover {
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+/* Services Section */
+.services {
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  background: var(--background-light);
+}
+
+.section__header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.section__header h2 {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.section__header p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-lg);
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2xl);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.service__category h3 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-lg);
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.weapon__card {
+  background: var(--background-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border: 1px solid var(--border-color);
+  margin-bottom: var(--spacing-lg);
+}
+
+.weapon__card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-color);
+}
+
+.weapon__image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.weapon__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.weapon__card:hover .weapon__image img {
+  transform: scale(1.05);
+}
+
+.weapon__badge {
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  background: var(--primary-color);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.weapon__badge--new {
+  background: var(--accent-color);
+}
+
+.weapon__info {
+  padding: var(--spacing-lg);
+}
+
+.weapon__info h4 {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+}
+
+.weapon__rating {
+  margin-bottom: var(--spacing-sm);
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--primary-color);
+}
+
+.stars span {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin-left: var(--spacing-xs);
+}
+
+.weapon__details {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.weapon__details span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.weapon__location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-light);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.weapon__price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.see-all {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: var(--transition);
+  display: inline-block;
+}
+
+.see-all:hover {
+  color: var(--primary-light);
+  transform: translateX(5px);
+}
+
+/* News Section */
+.news {
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  background: var(--background);
+}
+
+.news__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-xl);
+  max-width: 1400px;
+  margin: 0 auto var(--spacing-2xl);
+}
+
+.news__card {
+  background: var(--background-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border: 1px solid var(--border-color);
+}
+
+.news__card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-color);
+}
+
+.news__image {
+  height: 200px;
+  overflow: hidden;
+}
+
+.news__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.news__card:hover .news__image img {
+  transform: scale(1.05);
+}
+
+.news__content {
+  padding: var(--spacing-lg);
+}
+
+.news__content h3 {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.news__content p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+
+.news__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.news__meta span {
+  font-size: var(--font-size-sm);
+  color: var(--text-light);
+}
+
+.read-more {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: var(--font-size-sm);
+  transition: var(--transition);
+}
+
+.read-more:hover {
+  color: var(--primary-light);
+}
+
+.news__footer {
+  text-align: center;
+}
+
+/* Partners Section */
+.partners {
+  background: var(--background-light);
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.partners__content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.partners__content h2 {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-lg);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.partners__content p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.8;
+}
+
+.partners__buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Footer */
+.footer {
+  background: var(--secondary-color);
+  color: white;
+  padding: var(--spacing-2xl) 0 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer__content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-2xl);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl) var(--spacing-2xl);
+}
+
+.footer__section h2 {
+  color: var(--primary-color);
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.footer__section h3 {
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer__section p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--spacing-md);
+}
+
+.footer__section ul {
+  list-style: none;
+}
+
+.footer__section ul li {
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer__section a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer__section a:hover {
+  color: var(--primary-color);
+}
+
+.footer__bottom {
+  border-top: 1px solid var(--border-color);
+  padding: var(--spacing-lg) 0;
+  text-align: center;
+  color: var(--text-light);
+  font-size: var(--font-size-sm);
+}
+/* Logo Styles */
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.logo {
+  height: 40px; /* Ajuste conforme necessário */
+  width: auto;
+  transition: var(--transition);
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-text {
+  color: var(--primary-color);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Se quiser apenas a imagem, sem texto */
+.nav__logo h2 {
+  display: none; /* Esconde o texto se estiver usando apenas imagem */
+}
+
+/* Hero Carousel */
+.hero-carousel {
+  position: relative;
+  height: 80vh;
+  min-height: 600px;
+  overflow: hidden;
+  margin-top: 80px;
+  background: var(--background);
+}
+
+.carousel-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.slide-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--spacing-2xl);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+  height: 100%;
+}
+
+.slide-text {
+  padding-right: var(--spacing-xl);
+}
+
+.slide-image {
+  position: relative;
+  height: 400px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-hover);
+}
+
+.slide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide-overlay {
+  position: absolute;
+  bottom: var(--spacing-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.btn--large {
+  padding: 15px 40px;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+/* Carousel Controls */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(220, 38, 38, 0.8);
+  border: none;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  z-index: 10;
+}
+
+.carousel-btn:hover {
+  background: var(--primary-color);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-prev {
+  left: var(--spacing-xl);
+}
+
+.carousel-next {
+  right: var(--spacing-xl);
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+  position: absolute;
+  bottom: var(--spacing-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--spacing-sm);
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.indicator.active {
+  background: var(--primary-color);
+  transform: scale(1.2);
+}
+
+/* Products Section - Cards Menores */
+.products {
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  background: var(--background-light);
+}
+
+.products__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.product__card {
+  background: var(--background-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border: 1px solid var(--border-color);
+  height: fit-content;
+}
+
+.product__card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-color);
+}
+
+.product__image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.product__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.product__card:hover .product__image img {
+  transform: scale(1.05);
+}
+
+.product__badge {
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  background: var(--primary-color);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.product__badge--new {
+  background: var(--accent-color);
+}
+
+.product__info {
+  padding: var(--spacing-md);
+}
+
+.product__info h4 {
+  font-size: var(--font-size-base);
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.product__rating {
+  margin-bottom: var(--spacing-sm);
+}
+
+.product__details {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.product__details span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+  background: var(--background-light);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.product__features {
+  display: flex;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.product__features span {
+  background: rgba(220, 38, 38, 0.1);
+  color: var(--primary-light);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.product__price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.products__footer {
+  text-align: center;
+  margin-top: var(--spacing-2xl);
+}
+/* Hero Carousel - VERSÃO CORRIGIDA */
+.hero-carousel {
+  position: relative;
+  height: 80vh;
+  min-height: 600px;
+  overflow: hidden;
+  margin-top: 80px;
+  background: var(--background);
+}
+
+.carousel-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+/* Slides - Sistema simplificado */
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.slide-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--spacing-2xl);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+  height: 100%;
+  width: 100%;
+}
+
+.slide-text {
+  padding-right: var(--spacing-xl);
+  animation: slideInLeft 0.8s ease;
+}
+
+.slide-image {
+  position: relative;
+  height: 400px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-hover);
+  animation: slideInRight 0.8s ease;
+}
+
+.slide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide-overlay {
+  position: absolute;
+  bottom: var(--spacing-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.3s forwards;
+}
+
+/* Animações */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
   }
-});
-
-/// ==================== ATUALIZAR HEADER COM CARRINHO ====================
-function updateHeaderWithCart() {
-  const navActions = document.querySelector(".nav__actions");
-  const loginMenuLink = document.querySelector("#loginMenuLink");
-
-  if (!navActions) return;
-
-  const usuarioId = localStorage.getItem("usuario_id");
-  const usuarioNome = localStorage.getItem("usuario_nome");
-
-  if (usuarioId) {
-    navActions.innerHTML = `
-            <div class="user-info">
-                <i class="fas fa-user"></i>
-                <span>Olá, ${usuarioNome || "Usuário"}</span>
-            </div>
-            <button class="cart-icon" onclick="cart.openCart()">
-                <i class="fas fa-shopping-cart"></i>
-            </button>
-            <button class="btn-logout" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i> Sair
-            </button>
-        `;
-
-    // Atualizar link do menu para perfil
-    if (loginMenuLink) {
-      loginMenuLink.innerHTML =
-        '<i class="fas fa-user-circle"></i> Minha Conta';
-      loginMenuLink.href = "#agendamentos";
-    }
-  } else {
-    navActions.innerHTML = `
-            <a href="login.html" class="btn btn--login">
-                <i class="fas fa-sign-in-alt"></i> Entrar
-            </a>
-            <a href="cadastro.html" class="btn btn--register">
-                <i class="fas fa-user-plus"></i> Registrar
-            </a>
-        `;
-
-    // Restaurar link original do menu
-    if (loginMenuLink) {
-      loginMenuLink.innerHTML = "Login/Cadastro";
-      loginMenuLink.href = "#login-cadastro";
-    }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-// ==================== FUNÇÕES GLOBAIS ====================
-function logout() {
-  localStorage.removeItem("usuario_id");
-  localStorage.removeItem("usuario_nome");
-  localStorage.removeItem("cart");
-  window.location.href = "index.html";
-}
-
-// ==================== SHOPPING CART ATUALIZADO ====================
-class ShoppingCart {
-  constructor() {
-    this.cart = JSON.parse(localStorage.getItem("cart")) || [];
-    this.init();
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
   }
-
-  init() {
-    this.updateCartIcon();
-    this.setupCartListeners();
-  }
-
-  setupCartListeners() {
-    // Adicionar produtos ao carrinho
-    document.addEventListener("click", (e) => {
-      if (
-        e.target.closest(".btn--primary") &&
-        e.target.textContent === "Comprar"
-      ) {
-        const productCard = e.target.closest(".product__card");
-        if (productCard) {
-          this.addToCart(productCard);
-        }
-      }
-    });
-  }
-
-  addToCart(productCard) {
-    // Verificar se usuário está logado
-    if (!localStorage.getItem("usuario_id")) {
-      alert("Por favor, faça login para adicionar produtos ao carrinho!");
-      window.location.href = "login.html";
-      return;
-    }
-
-    const product = {
-      id: this.generateProductId(productCard),
-      name: productCard.querySelector("h4").textContent,
-      price: this.parsePrice(productCard.querySelector(".price").textContent),
-      image: productCard.querySelector("img").src,
-      quantity: 1,
-    };
-
-    const existingItem = this.cart.find((item) => item.id === product.id);
-
-    if (existingItem) {
-      existingItem.quantity += 1;
-    } else {
-      this.cart.push(product);
-    }
-
-    this.saveCart();
-    this.updateCartIcon();
-    this.showAddToCartMessage(product.name);
-  }
-
-  generateProductId(productCard) {
-    return btoa(productCard.querySelector("h4").textContent).substring(0, 10);
-  }
-
-  parsePrice(priceText) {
-    return parseFloat(
-      priceText.replace("R$ ", "").replace(".", "").replace(",", ".")
-    );
-  }
-
-  removeFromCart(productId) {
-    this.cart = this.cart.filter((item) => item.id !== productId);
-    this.saveCart();
-    this.updateCartIcon();
-  }
-
-  updateQuantity(productId, quantity) {
-    const item = this.cart.find((item) => item.id === productId);
-    if (item) {
-      item.quantity = quantity;
-      if (item.quantity <= 0) {
-        this.removeFromCart(productId);
-      } else {
-        this.saveCart();
-        this.updateCartIcon();
-      }
-    }
-  }
-
-  getTotalItems() {
-    return this.cart.reduce((total, item) => total + item.quantity, 0);
-  }
-
-  getTotalPrice() {
-    return this.cart.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
-  }
-
-  saveCart() {
-    localStorage.setItem("cart", JSON.stringify(this.cart));
-  }
-
-  updateCartIcon() {
-    const cartIcon = document.querySelector(".cart-icon");
-    if (cartIcon) {
-      const count = this.getTotalItems();
-      let badge = cartIcon.querySelector(".cart-count");
-
-      if (!badge) {
-        badge = document.createElement("span");
-        badge.className = "cart-count";
-        cartIcon.appendChild(badge);
-      }
-
-      badge.textContent = count;
-      badge.style.display = count > 0 ? "flex" : "none";
-    }
-  }
-
-  showAddToCartMessage(productName) {
-    // Criar mensagem flutuante
-    const message = document.createElement("div");
-    message.className = "cart-message";
-    message.innerHTML = `
-            <i class="fas fa-check-circle"></i>
-            ${productName} adicionado ao carrinho!
-        `;
-
-    document.body.appendChild(message);
-
-    setTimeout(() => {
-      message.classList.add("show");
-    }, 100);
-
-    setTimeout(() => {
-      message.classList.remove("show");
-      setTimeout(() => {
-        if (message.parentNode) {
-          message.parentNode.removeChild(message);
-        }
-      }, 300);
-    }, 3000);
-  }
-
-  // Renderizar carrinho
-  renderCart() {
-    if (this.cart.length === 0) {
-      return `
-                <div class="empty-cart">
-                    <i class="fas fa-shopping-cart"></i>
-                    <h3>Seu carrinho está vazio</h3>
-                    <p>Adicione alguns produtos incríveis!</p>
-                </div>
-            `;
-    }
-
-    return `
-            <div class="cart-items">
-                ${this.cart
-                  .map(
-                    (item) => `
-                    <div class="cart-item" data-id="${item.id}">
-                        <img src="${item.image}" alt="${item.name}">
-                        <div class="cart-item-info">
-                            <h4>${item.name}</h4>
-                            <p class="cart-item-price">R$ ${item.price.toFixed(
-                              2
-                            )}</p>
-                            <div class="cart-item-controls">
-                                <button class="btn-quantity" onclick="cart.updateQuantity('${
-                                  item.id
-                                }', ${item.quantity - 1})">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <span class="quantity">${item.quantity}</span>
-                                <button class="btn-quantity" onclick="cart.updateQuantity('${
-                                  item.id
-                                }', ${item.quantity + 1})">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                                <button class="btn-remove" onclick="cart.removeFromCart('${
-                                  item.id
-                                }')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `
-                  )
-                  .join("")}
-            </div>
-            <div class="cart-total">
-                <strong>Total: R$ ${this.getTotalPrice().toFixed(2)}</strong>
-            </div>
-            <div class="cart-actions">
-                <button class="btn btn--secondary" onclick="cart.closeCart()">Continuar Comprando</button>
-                <button class="btn btn--primary" onclick="cart.checkout()">Finalizar Compra</button>
-            </div>
-        `;
-  }
-
-  openCart() {
-    // Criar modal do carrinho
-    const modal = document.createElement("div");
-    modal.className = "cart-modal";
-    modal.innerHTML = `
-            <div class="cart-modal-content">
-                <div class="cart-header">
-                    <h3><i class="fas fa-shopping-cart"></i> Meu Carrinho</h3>
-                    <button class="btn-close" onclick="cart.closeCart()">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="cart-body">
-                    ${this.renderCart()}
-                </div>
-            </div>
-        `;
-
-    document.body.appendChild(modal);
-
-    setTimeout(() => {
-      modal.classList.add("show");
-    }, 100);
-
-    // Fechar ao clicar fora
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        this.closeCart();
-      }
-    });
-  }
-
-  closeCart() {
-    const modal = document.querySelector(".cart-modal");
-    if (modal) {
-      modal.classList.remove("show");
-      setTimeout(() => {
-        if (modal.parentNode) {
-          modal.parentNode.removeChild(modal);
-        }
-      }, 300);
-    }
-  }
-
-  checkout() {
-    if (this.cart.length === 0) {
-      alert("Seu carrinho está vazio!");
-      return;
-    }
-
-    // Verificar se usuário está logado
-    if (!localStorage.getItem("usuario_id")) {
-      alert("Por favor, faça login para finalizar a compra!");
-      window.location.href = "login.html";
-      return;
-    }
-
-    // Criar mensagem para WhatsApp
-    const usuarioNome = localStorage.getItem("usuario_nome") || "Cliente";
-    const total = this.getTotalPrice().toFixed(2);
-
-    let mensagem = `🛒 *PEDIDO DE COMPRA - Sport Gun Imports*\n\n`;
-    mensagem += `👤 *Cliente:* ${usuarioNome}\n`;
-    mensagem += `📞 *Telefone:* [Cliente informará]\n\n`;
-    mensagem += `*ITENS DO PEDIDO:*\n`;
-
-    this.cart.forEach((item, index) => {
-      mensagem += `${index + 1}. ${item.name}\n`;
-      mensagem += `   Quantidade: ${item.quantity}\n`;
-      mensagem += `   Preço: R$ ${item.price.toFixed(2)}\n\n`;
-    });
-
-    mensagem += `💰 *TOTAL: R$ ${total}*\n\n`;
-    mensagem += `💳 *FORMA DE PAGAMENTO:*\n`;
-    mensagem += `[Cliente escolherá no WhatsApp]\n\n`;
-    mensagem += `📍 *ENTREGA:*\n`;
-    mensagem += `[Cliente informará endereço]\n\n`;
-    mensagem += `_Pedido gerado via site em ${new Date().toLocaleDateString(
-      "pt-BR"
-    )}_`;
-
-    // Codificar mensagem para URL
-    const mensagemCodificada = encodeURIComponent(mensagem);
-    const urlWhatsApp = `https://wa.me/5511999999999?text=${mensagemCodificada}`;
-
-    // Abrir WhatsApp
-    window.open(urlWhatsApp, "_blank");
-
-    // Mostrar confirmação
-    this.mostrarNotificacao(
-      "Pedido Encaminhado!",
-      "Seu pedido foi enviado para nosso WhatsApp. Aguarde nosso retorno para confirmar.",
-      "success"
-    );
-
-    // Limpar carrinho após envio
-    this.cart = [];
-    this.saveCart();
-    this.updateCartIcon();
-    this.closeCart();
-  }
-
-  mostrarNotificacao(titulo, mensagem, tipo = "success") {
-    const notificacao = document.createElement("div");
-    notificacao.className = `notificacao ${tipo}`;
-    notificacao.innerHTML = `
-            <div class="notificacao-icon">
-                ${
-                  tipo === "success"
-                    ? '<i class="fas fa-check-circle"></i>'
-                    : tipo === "error"
-                    ? '<i class="fas fa-exclamation-circle"></i>'
-                    : '<i class="fas fa-exclamation-triangle"></i>'
-                }
-            </div>
-            <div class="notificacao-content">
-                <h4>${titulo}</h4>
-                <p>${mensagem}</p>
-            </div>
-            <button class="btn-fechar-notificacao" onclick="this.parentElement.remove()">
-                <i class="fas fa-times"></i>
-            </button>
-        `;
-
-    document.body.appendChild(notificacao);
-
-    setTimeout(() => {
-      notificacao.classList.add("show");
-    }, 100);
-
-    // Auto-remover após 5 segundos
-    setTimeout(() => {
-      if (notificacao.parentNode) {
-        notificacao.classList.remove("show");
-        setTimeout(() => {
-          if (notificacao.parentNode) {
-            notificacao.parentNode.removeChild(notificacao);
-          }
-        }, 300);
-      }
-    }, 5000);
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-// ==================== ATUALIZAR BOTÕES DOS PRODUTOS ====================
-function atualizarBotoesProdutos() {
-  document.querySelectorAll(".product__card").forEach((card) => {
-    const priceContainer = card.querySelector(".product__price");
-    if (priceContainer && !priceContainer.querySelector(".btn-agendar")) {
-      const agendarBtn = document.createElement("button");
-      agendarBtn.className = "btn-agendar";
-      agendarBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Agendar';
-
-      const actionsDiv = document.createElement("div");
-      actionsDiv.className = "product__actions";
-
-      // Mover botão comprar para actions
-      const comprarBtn = priceContainer.querySelector(".btn--primary");
-      if (comprarBtn) {
-        priceContainer.removeChild(comprarBtn);
-        actionsDiv.appendChild(comprarBtn);
-      }
-
-      actionsDiv.appendChild(agendarBtn);
-      card.querySelector(".product__info").appendChild(actionsDiv);
-    }
-  });
-}
-
-// ==================== INICIALIZAÇÃO ====================
-let cart;
-let whatsApp;
-
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("🚀 Página carregada! Inicializando componentes...");
-
-  // Inicializar carrinho
-  cart = new ShoppingCart();
-  console.log("✅ Carrinho inicializado");
-
-  // Inicializar WhatsApp
-  whatsApp = new WhatsAppIntegration();
-  console.log("✅ WhatsApp integration inicializada");
-
-  // Atualizar header
-  updateHeaderWithCart();
-
-  // Atualizar botões dos produtos
-  atualizarBotoesProdutos();
-
-  // Inicializar carrossel
-  const carousel = new Carousel();
-  console.log("✅ Carrossel inicializado");
-
-  // Carregar notícias
-  loadNews();
-
-  console.log("✅ Todos os componentes inicializados!");
-});
-// ==================== CARRINHO DE COMPRAS ====================
-class ShoppingCart {
-  constructor() {
-    this.cart = JSON.parse(localStorage.getItem("cart")) || [];
-    this.init();
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
   }
-
-  init() {
-    this.updateCartIcon();
-    this.setupCartListeners();
-  }
-
-  setupCartListeners() {
-    // Adicionar produtos ao carrinho
-    document.addEventListener("click", (e) => {
-      if (
-        e.target.closest(".btn--primary") &&
-        e.target.textContent === "Comprar"
-      ) {
-        const productCard = e.target.closest(".product__card");
-        if (productCard) {
-          this.addToCart(productCard);
-        }
-      }
-    });
-  }
-
-  addToCart(productCard) {
-    // Verificar se usuário está logado
-    if (!localStorage.getItem("usuario_id")) {
-      alert("Por favor, faça login para adicionar produtos ao carrinho!");
-      window.location.href = "login.html";
-      return;
-    }
-
-    const product = {
-      id: this.generateProductId(productCard),
-      name: productCard.querySelector("h4").textContent,
-      price: this.parsePrice(productCard.querySelector(".price").textContent),
-      image: productCard.querySelector("img").src,
-      quantity: 1,
-    };
-
-    const existingItem = this.cart.find((item) => item.id === product.id);
-
-    if (existingItem) {
-      existingItem.quantity += 1;
-    } else {
-      this.cart.push(product);
-    }
-
-    this.saveCart();
-    this.updateCartIcon();
-    this.showAddToCartMessage(product.name);
-  }
-
-  generateProductId(productCard) {
-    return btoa(productCard.querySelector("h4").textContent).substring(0, 10);
-  }
-
-  parsePrice(priceText) {
-    return parseFloat(
-      priceText.replace("R$ ", "").replace(".", "").replace(",", ".")
-    );
-  }
-
-  removeFromCart(productId) {
-    this.cart = this.cart.filter((item) => item.id !== productId);
-    this.saveCart();
-    this.updateCartIcon();
-  }
-
-  updateQuantity(productId, quantity) {
-    const item = this.cart.find((item) => item.id === productId);
-    if (item) {
-      item.quantity = quantity;
-      if (item.quantity <= 0) {
-        this.removeFromCart(productId);
-      } else {
-        this.saveCart();
-        this.updateCartIcon();
-      }
-    }
-  }
-
-  getTotalItems() {
-    return this.cart.reduce((total, item) => total + item.quantity, 0);
-  }
-
-  getTotalPrice() {
-    return this.cart.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
-  }
-
-  saveCart() {
-    localStorage.setItem("cart", JSON.stringify(this.cart));
-  }
-
-  updateCartIcon() {
-    const cartIcon = document.querySelector(".cart-icon");
-    if (cartIcon) {
-      const count = this.getTotalItems();
-      const badge =
-        cartIcon.querySelector(".cart-count") || document.createElement("span");
-      badge.className = "cart-count";
-      badge.textContent = count;
-
-      if (!cartIcon.querySelector(".cart-count")) {
-        cartIcon.appendChild(badge);
-      }
-
-      badge.style.display = count > 0 ? "flex" : "none";
-    }
-  }
-
-  showAddToCartMessage(productName) {
-    // Criar mensagem flutuante
-    const message = document.createElement("div");
-    message.className = "cart-message";
-    message.innerHTML = `
-            <i class="fas fa-check-circle"></i>
-            ${productName} adicionado ao carrinho!
-        `;
-
-    document.body.appendChild(message);
-
-    setTimeout(() => {
-      message.classList.add("show");
-    }, 100);
-
-    setTimeout(() => {
-      message.classList.remove("show");
-      setTimeout(() => {
-        if (message.parentNode) {
-          message.parentNode.removeChild(message);
-        }
-      }, 300);
-    }, 3000);
-  }
-
-  // Renderizar carrinho
-  renderCart() {
-    if (this.cart.length === 0) {
-      return `
-                <div class="empty-cart">
-                    <i class="fas fa-shopping-cart"></i>
-                    <h3>Seu carrinho está vazio</h3>
-                    <p>Adicione alguns produtos incríveis!</p>
-                </div>
-            `;
-    }
-
-    return `
-            <div class="cart-items">
-                ${this.cart
-                  .map(
-                    (item) => `
-                    <div class="cart-item" data-id="${item.id}">
-                        <img src="${item.image}" alt="${item.name}">
-                        <div class="cart-item-info">
-                            <h4>${item.name}</h4>
-                            <p class="cart-item-price">R$ ${item.price.toFixed(
-                              2
-                            )}</p>
-                            <div class="cart-item-controls">
-                                <button class="btn-quantity" onclick="cart.updateQuantity('${
-                                  item.id
-                                }', ${item.quantity - 1})">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <span class="quantity">${item.quantity}</span>
-                                <button class="btn-quantity" onclick="cart.updateQuantity('${
-                                  item.id
-                                }', ${item.quantity + 1})">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                                <button class="btn-remove" onclick="cart.removeFromCart('${
-                                  item.id
-                                }')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `
-                  )
-                  .join("")}
-            </div>
-            <div class="cart-total">
-                <strong>Total: R$ ${this.getTotalPrice().toFixed(2)}</strong>
-            </div>
-            <div class="cart-actions">
-                <button class="btn btn--secondary" onclick="cart.closeCart()">Continuar Comprando</button>
-                <button class="btn btn--primary" onclick="cart.checkout()">Finalizar Compra</button>
-            </div>
-        `;
-  }
-
-  openCart() {
-    // Criar modal do carrinho
-    const modal = document.createElement("div");
-    modal.className = "cart-modal";
-    modal.innerHTML = `
-            <div class="cart-modal-content">
-                <div class="cart-header">
-                    <h3><i class="fas fa-shopping-cart"></i> Meu Carrinho</h3>
-                    <button class="btn-close" onclick="cart.closeCart()">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="cart-body">
-                    ${this.renderCart()}
-                </div>
-            </div>
-        `;
-
-    document.body.appendChild(modal);
-
-    setTimeout(() => {
-      modal.classList.add("show");
-    }, 100);
-
-    // Fechar ao clicar fora
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        this.closeCart();
-      }
-    });
-  }
-
-  closeCart() {
-    const modal = document.querySelector(".cart-modal");
-    if (modal) {
-      modal.classList.remove("show");
-      setTimeout(() => {
-        if (modal.parentNode) {
-          modal.parentNode.removeChild(modal);
-        }
-      }, 300);
-    }
-  }
-
-  checkout() {
-    if (this.cart.length === 0) {
-      alert("Seu carrinho está vazio!");
-      return;
-    }
-
-    alert(`Compra finalizada! Total: R$ ${this.getTotalPrice().toFixed(2)}`);
-    this.cart = [];
-    this.saveCart();
-    this.updateCartIcon();
-    this.closeCart();
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
   }
 }
 
-// ==================== CSS DO CARRINHO ====================
-const cartStyles = `
-/* Carrinho Styles */
+/* Carousel Controls */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(220, 38, 38, 0.8);
+  border: none;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.carousel-btn:hover {
+  background: var(--primary-color);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
+}
+
+.carousel-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carousel-prev {
+  left: var(--spacing-xl);
+}
+
+.carousel-next {
+  right: var(--spacing-xl);
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+  position: absolute;
+  bottom: var(--spacing-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--spacing-sm);
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: var(--transition);
+  border: 2px solid transparent;
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.1);
+}
+
+.indicator.active {
+  background: var(--primary-color);
+  transform: scale(1.3);
+  border-color: white;
+}
+
+/* Responsivo para Carrossel */
+@media (max-width: 768px) {
+  .hero-carousel {
+    height: auto;
+    min-height: 500px;
+    margin-top: 70px;
+  }
+
+  .slide-content {
+    grid-template-columns: 1fr;
+    padding: var(--spacing-lg);
+  }
+
+  .slide-text {
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .slide-image {
+    height: 300px;
+  }
+
+  .carousel-btn {
+    width: 45px;
+    height: 45px;
+    font-size: var(--font-size-lg);
+  }
+
+  .carousel-prev {
+    left: var(--spacing-sm);
+  }
+
+  .carousel-next {
+    right: var(--spacing-sm);
+  }
+
+  .carousel-indicators {
+    bottom: var(--spacing-md);
+  }
+
+  .hero__title {
+    font-size: var(--font-size-3xl);
+  }
+}
+
+/* Melhorias visuais para botões no hero */
+.btn--large {
+  padding: 15px 40px;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+}
+
+.btn--large:hover {
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5);
+}
+
+/* Loading state para notícias */
+.news__grid .loading {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 3rem;
+}
+
+.news__grid .loading i {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+/* Estilo para link externo nas notícias */
+.read-more i {
+  font-size: 0.8em;
+  margin-left: 4px;
+  transition: var(--transition);
+}
+
+.read-more:hover i {
+  transform: translateX(3px);
+}
+/* ==================== SOCIAL MEDIA BUTTONS ==================== */
+
+/* Container dos botões sociais */
+.social-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+/* Botão individual */
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ícone dentro do botão */
+.social-btn i {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+/* Texto do botão */
+.social-btn span {
+  font-weight: 700;
+}
+
+/* Efeito hover geral */
+.social-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.social-btn:hover i {
+  transform: scale(1.2);
+}
+
+/* ==================== ESTILOS POR REDE SOCIAL ==================== */
+
+/* Instagram - Gradiente roxo/rosa */
+.social-btn--instagram {
+  background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #f77737 100%);
+  color: white;
+}
+
+.social-btn--instagram:hover {
+  background: linear-gradient(135deg, #9b59b6 0%, #e74c3c 50%, #f39c12 100%);
+  box-shadow: 0 10px 25px rgba(131, 58, 180, 0.5);
+}
+
+/* Facebook - Azul */
+.social-btn--facebook {
+  background: #1877f2;
+  color: white;
+}
+
+.social-btn--facebook:hover {
+  background: #0d6efd;
+  box-shadow: 0 10px 25px rgba(24, 119, 242, 0.5);
+}
+
+/* WhatsApp - Verde */
+.social-btn--whatsapp {
+  background: #25d366;
+  color: white;
+}
+
+.social-btn--whatsapp:hover {
+  background: #1ebe57;
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
+}
+
+/* YouTube - Vermelho */
+.social-btn--youtube {
+  background: #ff0000;
+  color: white;
+}
+
+.social-btn--youtube:hover {
+  background: #cc0000;
+  box-shadow: 0 10px 25px rgba(255, 0, 0, 0.5);
+}
+
+/* Twitter/X - Preto */
+.social-btn--twitter {
+  background: #000000;
+  color: white;
+  border: 2px solid #ffffff;
+}
+
+.social-btn--twitter:hover {
+  background: #1a1a1a;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+}
+
+/* Telegram - Azul claro */
+.social-btn--telegram {
+  background: #0088cc;
+  color: white;
+}
+
+.social-btn--telegram:hover {
+  background: #0077b5;
+  box-shadow: 0 10px 25px rgba(0, 136, 204, 0.5);
+}
+
+/* ==================== VERSÃO ALTERNATIVA: BOTÕES OUTLINE ==================== */
+
+.social-btn--outline {
+  background: transparent;
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.social-btn--outline:hover {
+  background: var(--background-light);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* ==================== VERSÃO COMPACTA (APENAS ÍCONES) ==================== */
+
+.social-buttons--compact .social-btn {
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border-radius: 50%;
+  justify-content: center;
+}
+
+.social-buttons--compact .social-btn span {
+  display: none;
+}
+
+.social-buttons--compact .social-btn i {
+  font-size: 1.75rem;
+}
+
+/* ==================== RESPONSIVO ==================== */
+
+@media (max-width: 768px) {
+  .social-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .social-btn {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+}
+
+/* ==================== ANIMAÇÃO PULSE (OPCIONAL) ==================== */
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(220, 38, 38, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+  }
+}
+
+.social-btn--pulse {
+  animation: pulse 2s infinite;
+}
+
+/* ==================== EFEITO SHINE (BRILHO) ==================== */
+
+.social-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.social-btn:hover::before {
+  left: 100%;
+}
+
+/* Botões Sociais - Adicionar ao seu style.css */
+
+.social-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--spacing-xl);
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+  font-size: var(--font-size-base);
+}
+
+.social-btn--outline {
+  background: transparent;
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.social-btn--outline:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(220, 38, 38, 0.2);
+}
+
+.social-btn i {
+  font-size: var(--font-size-lg);
+}
+
+/* Cores específicas para cada rede social */
+.social-btn:nth-child(1):hover {
+  /* Instagram */
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  border-color: #bc1888;
+  color: white;
+}
+
+.social-btn:nth-child(2):hover {
+  /* Facebook */
+  background: #1877f2;
+  border-color: #1877f2;
+  color: white;
+}
+
+.social-btn:nth-child(3):hover {
+  /* WhatsApp */
+  background: #25d366;
+  border-color: #25d366;
+  color: white;
+}
+
+/* Responsivo para botões sociais */
+@media (max-width: 768px) {
+  .social-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: var(--spacing-xl) auto 0;
+  }
+
+  .social-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+/* ==================== LOGIN & CADASTRO STYLES ==================== */
+
+.auth-container {
+  min-height: 100vh;
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.auth-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(220, 38, 38, 0.1) 0%,
+    rgba(10, 10, 10, 0.9) 100%
+  );
+  z-index: 1;
+}
+
+.auth-card {
+  background: var(--background-card);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  box-shadow: var(--shadow-hover);
+  border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  z-index: 2;
+  animation: slideUp 0.6s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.auth-logo img {
+  height: 50px;
+  width: auto;
+}
+
+.auth-logo-text {
+  color: var(--primary-color);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.auth-title {
+  color: var(--text-primary);
+  font-size: var(--font-size-2xl);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.auth-subtitle {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.auth-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  transition: var(--transition);
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.auth-form input::placeholder {
+  color: var(--text-light);
+}
+
+.btn-auth {
+  width: 100%;
+  padding: 14px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 1.5rem;
+}
+
+.btn-auth:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.auth-footer {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.auth-footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.auth-footer a:hover {
+  color: var(--primary-light);
+}
+
+.mensagem-erro {
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-light);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  margin-top: 1rem;
+  text-align: center;
+  font-size: var(--font-size-sm);
+}
+
+/* Loading state */
+.carregando {
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .auth-container {
+    padding: 1rem;
+  }
+
+  .auth-card {
+    padding: 2rem;
+  }
+}
+
+/* ==================== CARRINHO DE COMPRAS STYLES ==================== */
+
 .cart-icon {
-    position: relative;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: var(--radius-md);
-    transition: var(--transition);
-    color: var(--text-primary);
+  position: relative;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
 }
 
 .cart-icon:hover {
-    color: var(--primary-color);
-    background: rgba(220, 38, 38, 0.1);
+  color: var(--primary-color);
+  background: rgba(220, 38, 38, 0.1);
 }
 
 .cart-count {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    font-size: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
 }
 
 /* Modal do Carrinho */
 .cart-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
 }
 
 .cart-modal.show {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 .cart-modal-content {
-    background: var(--background-card);
-    border-radius: var(--radius-lg);
-    width: 90%;
-    max-width: 500px;
-    max-height: 80vh;
-    overflow: hidden;
-    transform: translateY(50px);
-    transition: var(--transition);
-    border: 1px solid var(--border-color);
+  background: var(--background-card);
+  border-radius: var(--radius-lg);
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  transform: translateY(50px);
+  transition: var(--transition);
+  border: 1px solid var(--border-color);
 }
 
 .cart-modal.show .cart-modal-content {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .cart-header {
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--background-light);
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--background-light);
 }
 
 .cart-header h3 {
-    color: var(--text-primary);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .btn-close {
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    padding: 5px;
-    border-radius: var(--radius-sm);
-    transition: var(--transition);
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 5px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  font-size: 1.2rem;
 }
 
 .btn-close:hover {
-    color: var(--primary-color);
-    background: rgba(220, 38, 38, 0.1);
+  color: var(--primary-color);
+  background: rgba(220, 38, 38, 0.1);
 }
 
 .cart-body {
-    padding: 1.5rem;
-    max-height: 400px;
-    overflow-y: auto;
+  padding: 1.5rem;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 /* Itens do Carrinho */
 .empty-cart {
-    text-align: center;
-    padding: 2rem;
-    color: var(--text-secondary);
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
 }
 
 .empty-cart i {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: var(--border-color);
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--border-color);
 }
 
 .cart-items {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .cart-item {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem;
-    background: var(--background);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--background);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
 }
 
 .cart-item img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: var(--radius-sm);
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
 }
 
 .cart-item-info {
-    flex: 1;
+  flex: 1;
 }
 
 .cart-item-info h4 {
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
 
 .cart-item-price {
-    color: var(--primary-color);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 .cart-item-controls {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.btn-quantity, .btn-remove {
-    background: var(--background-light);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    width: 30px;
-    height: 30px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.btn-quantity,
+.btn-remove {
+  background: var(--background-light);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-quantity:hover {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .btn-remove:hover {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-    color: white;
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
 }
 
 .quantity {
-    padding: 0 10px;
-    font-weight: 600;
-    color: var(--text-primary);
+  padding: 0 10px;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 .cart-total {
-    padding: 1.5rem 0;
-    border-top: 1px solid var(--border-color);
-    text-align: center;
-    font-size: 1.2rem;
-    color: var(--text-primary);
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-primary);
 }
 
 .cart-actions {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .cart-actions .btn {
-    flex: 1;
+  flex: 1;
 }
 
 /* Mensagem de Adição */
 .cart-message {
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    background: var(--primary-color);
-    color: white;
-    padding: 1rem 1.5rem;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-hover);
-    transform: translateX(400px);
-    transition: transform 0.3s ease;
-    z-index: 10001;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: var(--primary-color);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-hover);
+  transform: translateX(400px);
+  transition: transform 0.3s ease;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .cart-message.show {
-    transform: translateX(0);
+  transform: translateX(0);
 }
 
 /* Header com Carrinho */
-.nav__actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
 .user-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--text-primary);
-    font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
 }
 
 .btn-logout {
-    background: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    padding: 8px 16px;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: var(--transition);
-    font-size: 0.8rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.8rem;
 }
 
 .btn-logout:hover {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
 }
-`;
+/* ==================== WHATSAPP INTEGRATION STYLES ==================== */
 
-// Adicionar CSS do carrinho ao documento
-const styleSheet = document.createElement("style");
-styleSheet.textContent = cartStyles;
-document.head.appendChild(styleSheet);
-
-// ==================== ATUALIZAR HEADER COM CARRINHO ====================
-function updateHeaderWithCart() {
-  const navActions = document.querySelector(".nav__actions");
-  if (!navActions) return;
-
-  const usuarioId = localStorage.getItem("usuario_id");
-  const usuarioNome = localStorage.getItem("usuario_nome");
-
-  if (usuarioId) {
-    navActions.innerHTML = `
-            <div class="user-info">
-                <i class="fas fa-user"></i>
-                <span>Olá, ${usuarioNome || "Usuário"}</span>
-            </div>
-            <div class="cart-icon" onclick="cart.openCart()">
-                <i class="fas fa-shopping-cart"></i>
-            </div>
-            <button class="btn-logout" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i> Sair
-            </button>
-        `;
-  } else {
-    navActions.innerHTML = `
-            <a href="login.html" class="btn btn--login">Entrar</a>
-            <a href="cadastro.html" class="btn btn--register">Registrar</a>
-        `;
-  }
+.whatsapp-floating {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
 }
 
-// ==================== FUNÇÕES GLOBAIS ====================
-function logout() {
-  localStorage.removeItem("usuario_id");
-  localStorage.removeItem("usuario_nome");
-  window.location.href = "index.html";
+.whatsapp-btn {
+  background: #25d366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  animation: pulse-whatsapp 2s infinite;
 }
 
-// ==================== INICIALIZAÇÃO ====================
-let cart;
-
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("🚀 Página carregada! Inicializando componentes...");
-
-  // Inicializar carrinho
-  cart = new ShoppingCart();
-  console.log("✅ Carrinho inicializado");
-
-  // Atualizar header
-  updateHeaderWithCart();
-
-  // Inicializar carrossel
-  const carousel = new Carousel();
-  console.log("✅ Carrossel inicializado");
-
-  // Carregar notícias
-  loadNews();
-
-  console.log("✅ Todos os componentes inicializados!");
-});
-// ==================== WHATSAPP INTEGRATION ====================
-class WhatsAppIntegration {
-  constructor() {
-    this.phoneNumber = "5511999999999"; // Substitua pelo seu número
-    this.businessName = "Sport Gun Imports";
-    this.agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
-    this.init();
+@keyframes pulse-whatsapp {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
   }
-
-  init() {
-    this.createFloatingButton();
-    this.setupAgendamentoListeners();
-    this.renderAgendamentosList();
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
   }
-
-  createFloatingButton() {
-    const floatingBtn = document.createElement("div");
-    floatingBtn.className = "whatsapp-floating";
-    floatingBtn.innerHTML = `
-            <a href="https://wa.me/${this.phoneNumber}" target="_blank" class="whatsapp-btn">
-                <i class="fab fa-whatsapp"></i>
-                <span class="whatsapp-tooltip">Fale conosco no WhatsApp</span>
-            </a>
-        `;
-    document.body.appendChild(floatingBtn);
-  }
-
-  setupAgendamentoListeners() {
-    // Adicionar botão de agendamento nos produtos
-    document.addEventListener("click", (e) => {
-      if (
-        e.target.classList.contains("btn-agendar") ||
-        e.target.closest(".btn-agendar")
-      ) {
-        const productCard = e.target.closest(".product__card");
-        if (productCard) {
-          this.openAgendamentoModal(productCard);
-        }
-      }
-    });
-
-    // Botão de agendamento geral
-    const agendarBtn = document.querySelector(".btn-agendamento-geral");
-    if (agendarBtn) {
-      agendarBtn.addEventListener("click", () => this.openAgendamentoModal());
-    }
-  }
-
-  openAgendamentoModal(productCard = null) {
-    const productName = productCard
-      ? productCard.querySelector("h4").textContent
-      : "Produto/Serviço";
-    const productPrice = productCard
-      ? productCard.querySelector(".price").textContent
-      : "";
-
-    const modal = document.createElement("div");
-    modal.className = "agendamento-modal";
-    modal.innerHTML = `
-            <div class="agendamento-modal-content">
-                <div class="agendamento-header">
-                    <h3><i class="fas fa-calendar-plus"></i> Agendar Atendimento</h3>
-                    <button class="btn-close" onclick="whatsApp.closeAgendamentoModal()">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="agendamento-body">
-                    <form id="agendamentoForm" class="agendamento-form">
-                        <div class="form-group">
-                            <label for="clienteNome"><i class="fas fa-user"></i> Nome Completo</label>
-                            <input type="text" id="clienteNome" required 
-                                   value="${
-                                     localStorage.getItem("usuario_nome") || ""
-                                   }">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="clienteTelefone"><i class="fas fa-phone"></i> Telefone/WhatsApp</label>
-                            <input type="tel" id="clienteTelefone" required 
-                                   placeholder="(11) 99999-9999">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="produtoServico"><i class="fas fa-gun"></i> Produto/Serviço</label>
-                            <input type="text" id="produtoServico" required 
-                                   value="${productName}">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="dataAgendamento"><i class="fas fa-calendar-day"></i> Data Preferencial</label>
-                            <input type="date" id="dataAgendamento" required 
-                                   min="${
-                                     new Date().toISOString().split("T")[0]
-                                   }">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="horarioAgendamento"><i class="fas fa-clock"></i> Horário Preferencial</label>
-                            <select id="horarioAgendamento" required>
-                                <option value="">Selecione um horário</option>
-                                <option value="08:00">08:00</option>
-                                <option value="09:00">09:00</option>
-                                <option value="10:00">10:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="15:00">15:00</option>
-                                <option value="16:00">16:00</option>
-                                <option value="17:00">17:00</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="observacoes"><i class="fas fa-sticky-note"></i> Observações</label>
-                            <textarea id="observacoes" placeholder="Alguma informação adicional..."></textarea>
-                        </div>
-                        
-                        <div class="agendamento-actions">
-                            <button type="button" class="btn btn--secondary" onclick="whatsApp.closeAgendamentoModal()">
-                                Cancelar
-                            </button>
-                            <button type="submit" class="btn btn--primary">
-                                <i class="fab fa-whatsapp"></i> Agendar via WhatsApp
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        `;
-
-    document.body.appendChild(modal);
-
-    setTimeout(() => {
-      modal.classList.add("show");
-    }, 100);
-
-    // Fechar ao clicar fora
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        this.closeAgendamentoModal();
-      }
-    });
-
-    // Submeter formulário
-    const form = modal.querySelector("#agendamentoForm");
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      this.enviarAgendamentoWhatsApp();
-    });
-  }
-
-  closeAgendamentoModal() {
-    const modal = document.querySelector(".agendamento-modal");
-    if (modal) {
-      modal.classList.remove("show");
-      setTimeout(() => {
-        if (modal.parentNode) {
-          modal.parentNode.removeChild(modal);
-        }
-      }, 300);
-    }
-  }
-
-  enviarAgendamentoWhatsApp() {
-    const formData = {
-      nome: document.getElementById("clienteNome").value,
-      telefone: document.getElementById("clienteTelefone").value,
-      produto: document.getElementById("produtoServico").value,
-      data: document.getElementById("dataAgendamento").value,
-      horario: document.getElementById("horarioAgendamento").value,
-      observacoes: document.getElementById("observacoes").value,
-    };
-
-    // Validar dados
-    if (!this.validarAgendamento(formData)) {
-      return;
-    }
-
-    // Criar agendamento
-    const agendamento = {
-      id: this.generateAgendamentoId(),
-      ...formData,
-      status: "pendente",
-      dataCriacao: new Date().toISOString(),
-    };
-
-    // Salvar agendamento
-    this.agendamentos.push(agendamento);
-    this.salvarAgendamentos();
-
-    // Criar mensagem para WhatsApp
-    const mensagem = this.criarMensagemWhatsApp(agendamento);
-    const urlWhatsApp = `https://wa.me/${
-      this.phoneNumber
-    }?text=${encodeURIComponent(mensagem)}`;
-
-    // Abrir WhatsApp
-    window.open(urlWhatsApp, "_blank");
-
-    // Fechar modal e mostrar confirmação
-    this.closeAgendamentoModal();
-    this.mostrarNotificacao(
-      "Agendamento Criado!",
-      "Enviamos os detalhes para seu WhatsApp. Aguarde nossa confirmação.",
-      "success"
-    );
-
-    // Enviar notificação automática (simulação)
-    this.enviarNotificacaoAutomatica(agendamento);
-  }
-
-  validarAgendamento(formData) {
-    if (
-      !formData.nome ||
-      !formData.telefone ||
-      !formData.produto ||
-      !formData.data ||
-      !formData.horario
-    ) {
-      this.mostrarNotificacao(
-        "Erro",
-        "Preencha todos os campos obrigatórios.",
-        "error"
-      );
-      return false;
-    }
-
-    // Validar telefone
-    const telefoneRegex = /^\(?\d{2}\)?[\s-]?\d{4,5}[\s-]?\d{4}$/;
-    if (!telefoneRegex.test(formData.telefone.replace(/\s/g, ""))) {
-      this.mostrarNotificacao("Erro", "Digite um telefone válido.", "error");
-      return false;
-    }
-
-    // Validar data
-    const dataAgendamento = new Date(formData.data);
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
-
-    if (dataAgendamento < hoje) {
-      this.mostrarNotificacao("Erro", "A data deve ser futura.", "error");
-      return false;
-    }
-
-    return true;
-  }
-
-  criarMensagemWhatsApp(agendamento) {
-    const dataFormatada = new Date(agendamento.data).toLocaleDateString(
-      "pt-BR"
-    );
-
-    return `🛒 *NOVO AGENDAMENTO - ${this.businessName}*
-
-👤 *Cliente:* ${agendamento.nome}
-📞 *Telefone:* ${agendamento.telefone}
-🔫 *Produto/Serviço:* ${agendamento.produto}
-📅 *Data:* ${dataFormatada}
-⏰ *Horário:* ${agendamento.horario}
-📝 *Observações:* ${agendamento.observacoes || "Nenhuma"}
-
-_Agendamento criado via site em ${new Date().toLocaleDateString("pt-BR")}_
-
-Por favor, confirme este agendamento respondendo:
-✅ *CONFIRMAR* - Para confirmar o agendamento
-❌ *CANCELAR* - Para cancelar o agendamento`;
-  }
-
-  generateAgendamentoId() {
-    return "agd_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9);
-  }
-
-  salvarAgendamentos() {
-    localStorage.setItem("agendamentos", JSON.stringify(this.agendamentos));
-  }
-
-  mostrarNotificacao(titulo, mensagem, tipo = "success") {
-    const notificacao = document.createElement("div");
-    notificacao.className = `notificacao ${tipo}`;
-    notificacao.innerHTML = `
-            <div class="notificacao-icon">
-                ${
-                  tipo === "success"
-                    ? '<i class="fas fa-check-circle"></i>'
-                    : tipo === "error"
-                    ? '<i class="fas fa-exclamation-circle"></i>'
-                    : '<i class="fas fa-exclamation-triangle"></i>'
-                }
-            </div>
-            <div class="notificacao-content">
-                <h4>${titulo}</h4>
-                <p>${mensagem}</p>
-            </div>
-            <button class="btn-fechar-notificacao" onclick="this.parentElement.remove()">
-                <i class="fas fa-times"></i>
-            </button>
-        `;
-
-    document.body.appendChild(notificacao);
-
-    setTimeout(() => {
-      notificacao.classList.add("show");
-    }, 100);
-
-    // Auto-remover após 5 segundos
-    setTimeout(() => {
-      if (notificacao.parentNode) {
-        notificacao.classList.remove("show");
-        setTimeout(() => {
-          if (notificacao.parentNode) {
-            notificacao.parentNode.removeChild(notificacao);
-          }
-        }, 300);
-      }
-    }, 5000);
-  }
-
-  enviarNotificacaoAutomatica(agendamento) {
-    // Simulação de notificação automática após 1 minuto
-    setTimeout(() => {
-      this.mostrarNotificacao(
-        "Lembrete de Agendamento",
-        `Não se esqueça do seu agendamento para ${
-          agendamento.produto
-        } no dia ${new Date(agendamento.data).toLocaleDateString("pt-BR")} às ${
-          agendamento.horario
-        }.`,
-        "warning"
-      );
-    }, 60000); // 1 minuto
-
-    // Simulação de confirmação automática após 2 minutos
-    setTimeout(() => {
-      this.simularConfirmacaoAgendamento(agendamento.id);
-    }, 120000); // 2 minutos
-  }
-
-  simularConfirmacaoAgendamento(agendamentoId) {
-    const agendamento = this.agendamentos.find((a) => a.id === agendamentoId);
-    if (agendamento && agendamento.status === "pendente") {
-      agendamento.status = "confirmado";
-      agendamento.dataConfirmacao = new Date().toISOString();
-      this.salvarAgendamentos();
-      this.renderAgendamentosList();
-
-      this.mostrarNotificacao(
-        "Agendamento Confirmado!",
-        `Seu agendamento para ${agendamento.produto} foi confirmado. Te esperamos!`,
-        "success"
-      );
-    }
-  }
-
-  renderAgendamentosList() {
-    const agendamentosContainer = document.querySelector(".agendamentos-list");
-    if (!agendamentosContainer) return;
-
-    if (this.agendamentos.length === 0) {
-      agendamentosContainer.innerHTML = `
-                <div class="empty-cart">
-                    <i class="fas fa-calendar-times"></i>
-                    <h3>Nenhum agendamento encontrado</h3>
-                    <p>Faça seu primeiro agendamento!</p>
-                </div>
-            `;
-      return;
-    }
-
-    agendamentosContainer.innerHTML = this.agendamentos
-      .map(
-        (agendamento) => `
-            <div class="agendamento-item">
-                <div class="agendamento-info">
-                    <div class="agendamento-details">
-                        <h4>${agendamento.produto}</h4>
-                        <p><i class="fas fa-user"></i> ${agendamento.nome}</p>
-                        <p><i class="fas fa-calendar"></i> ${new Date(
-                          agendamento.data
-                        ).toLocaleDateString("pt-BR")} às ${
-          agendamento.horario
-        }</p>
-                        <p><i class="fas fa-phone"></i> ${
-                          agendamento.telefone
-                        }</p>
-                    </div>
-                    <div class="agendamento-status">
-                        <span class="status-${agendamento.status}">
-                            <i class="fas fa-circle"></i>
-                            ${
-                              agendamento.status === "pendente"
-                                ? "Pendente"
-                                : agendamento.status === "confirmado"
-                                ? "Confirmado"
-                                : "Cancelado"
-                            }
-                        </span>
-                    </div>
-                </div>
-                ${
-                  agendamento.observacoes
-                    ? `
-                    <div class="agendamento-observacoes">
-                        <p><strong>Observações:</strong> ${agendamento.observacoes}</p>
-                    </div>
-                `
-                    : ""
-                }
-                ${
-                  agendamento.status === "pendente"
-                    ? `
-                    <div class="agendamento-actions-small">
-                        <button class="btn-confirmar" onclick="whatsApp.confirmarAgendamento('${agendamento.id}')">
-                            <i class="fas fa-check"></i> Confirmar
-                        </button>
-                        <button class="btn-cancelar" onclick="whatsApp.cancelarAgendamento('${agendamento.id}')">
-                            <i class="fas fa-times"></i> Cancelar
-                        </button>
-                    </div>
-                `
-                    : ""
-                }
-            </div>
-        `
-      )
-      .join("");
-  }
-
-  confirmarAgendamento(agendamentoId) {
-    const agendamento = this.agendamentos.find((a) => a.id === agendamentoId);
-    if (agendamento) {
-      agendamento.status = "confirmado";
-      agendamento.dataConfirmacao = new Date().toISOString();
-      this.salvarAgendamentos();
-      this.renderAgendamentosList();
-
-      this.mostrarNotificacao(
-        "Agendamento Confirmado!",
-        "Agendamento confirmado com sucesso.",
-        "success"
-      );
-
-      // Enviar mensagem de confirmação para WhatsApp
-      this.enviarMensagemConfirmacao(agendamento);
-    }
-  }
-
-  cancelarAgendamento(agendamentoId) {
-    const agendamento = this.agendamentos.find((a) => a.id === agendamentoId);
-    if (agendamento) {
-      agendamento.status = "cancelado";
-      agendamento.dataCancelamento = new Date().toISOString();
-      this.salvarAgendamentos();
-      this.renderAgendamentosList();
-
-      this.mostrarNotificacao(
-        "Agendamento Cancelado",
-        "Agendamento cancelado com sucesso.",
-        "error"
-      );
-    }
-  }
-
-  enviarMensagemConfirmacao(agendamento) {
-    const mensagem = `✅ *AGENDAMENTO CONFIRMADO - ${this.businessName}*
-
-Olá ${agendamento.nome}! 
-
-Seu agendamento foi *CONFIRMADO*:
-
-🔫 *Produto/Serviço:* ${agendamento.produto}
-📅 *Data:* ${new Date(agendamento.data).toLocaleDateString("pt-BR")}
-⏰ *Horário:* ${agendamento.horario}
-
-📍 *Local:* [Endereço da Loja]
-📞 *Telefone:* [Telefone da Loja]
-
-*IMPORTANTE:*
-- Chegue com 15 minutos de antecedência
-- Traga documentação necessária
-- Em caso de impedimento, avise com antecedência
-
-Agradecemos pela preferência! 🎯`;
-
-    const urlWhatsApp = `https://wa.me/${agendamento.telefone.replace(
-      /\D/g,
-      ""
-    )}?text=${encodeURIComponent(mensagem)}`;
-    window.open(urlWhatsApp, "_blank");
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
   }
 }
 
-// ==================== ATUALIZAR BOTÕES DOS PRODUTOS ====================
-function atualizarBotoesProdutos() {
-  document.querySelectorAll(".product__card").forEach((card) => {
-    const priceContainer = card.querySelector(".product__price");
-    if (priceContainer && !priceContainer.querySelector(".btn-agendar")) {
-      const agendarBtn = document.createElement("button");
-      agendarBtn.className = "btn-agendar";
-      agendarBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Agendar';
-
-      const actionsDiv = document.createElement("div");
-      actionsDiv.className = "product__actions";
-
-      // Mover botão comprar para actions
-      const comprarBtn = priceContainer.querySelector(".btn--primary");
-      if (comprarBtn) {
-        priceContainer.removeChild(comprarBtn);
-        actionsDiv.appendChild(comprarBtn);
-      }
-
-      actionsDiv.appendChild(agendarBtn);
-      card.querySelector(".product__info").appendChild(actionsDiv);
-    }
-  });
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+  background: #128c7e;
 }
+
+.whatsapp-btn i {
+  font-size: 28px;
+}
+
+.whatsapp-tooltip {
+  position: absolute;
+  right: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--background-card);
+  color: var(--text-primary);
+  padding: 10px 15px;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.whatsapp-btn:hover .whatsapp-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal de Agendamento */
+.agendamento-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.agendamento-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.agendamento-modal-content {
+  background: var(--background-card);
+  border-radius: var(--radius-lg);
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(50px);
+  transition: var(--transition);
+  border: 1px solid var(--border-color);
+}
+
+.agendamento-modal.show .agendamento-modal-content {
+  transform: translateY(0);
+}
+
+.agendamento-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--background-light);
+}
+
+.agendamento-header h3 {
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.agendamento-body {
+  padding: 1.5rem;
+}
+
+.agendamento-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.agendamento-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+}
+
+.agendamento-form input,
+.agendamento-form select,
+.agendamento-form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  transition: var(--transition);
+}
+
+.agendamento-form input:focus,
+.agendamento-form select:focus,
+.agendamento-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.agendamento-form textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+.agendamento-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.agendamento-actions .btn {
+  flex: 1;
+}
+
+/* Lista de Agendamentos */
+.agendamentos-list {
+  margin-top: 2rem;
+}
+
+.agendamento-item {
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: var(--transition);
+}
+
+.agendamento-item:hover {
+  border-color: var(--primary-color);
+}
+
+.agendamento-info {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.agendamento-details h4 {
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.agendamento-details p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: 0.25rem;
+}
+
+.agendamento-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.status-pendente {
+  color: #f59e0b;
+}
+
+.status-confirmado {
+  color: #10b981;
+}
+
+.status-cancelado {
+  color: #ef4444;
+}
+
+.agendamento-actions-small {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.btn-confirmar,
+.btn-cancelar {
+  padding: 6px 12px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-confirmar {
+  background: #10b981;
+  color: white;
+}
+
+.btn-confirmar:hover {
+  background: #059669;
+}
+
+.btn-cancelar {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-cancelar:hover {
+  background: #dc2626;
+}
+
+/* Notificações */
+.notificacao {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--background-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem;
+  box-shadow: var(--shadow-hover);
+  z-index: 10001;
+  transform: translateX(400px);
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 400px;
+}
+
+.notificacao.show {
+  transform: translateX(0);
+}
+
+.notificacao.success {
+  border-left: 4px solid #10b981;
+}
+
+.notificacao.error {
+  border-left: 4px solid #ef4444;
+}
+
+.notificacao.warning {
+  border-left: 4px solid #f59e0b;
+}
+
+.notificacao-icon {
+  font-size: 1.5rem;
+}
+
+.notificacao.success .notificacao-icon {
+  color: #10b981;
+}
+
+.notificacao.error .notificacao-icon {
+  color: #ef4444;
+}
+
+.notificacao.warning .notificacao-icon {
+  color: #f59e0b;
+}
+
+.notificacao-content {
+  flex: 1;
+}
+
+.notificacao-content h4 {
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+  font-size: var(--font-size-base);
+}
+
+.notificacao-content p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin: 0;
+}
+
+.btn-fechar-notificacao {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 5px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.btn-fechar-notificacao:hover {
+  color: var(--primary-color);
+  background: rgba(220, 38, 38, 0.1);
+}
+
+/* Botão de Agendamento nos Produtos */
+.btn-agendar {
+  background: #25d366;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--font-size-sm);
+}
+
+.btn-agendar:hover {
+  background: #128c7e;
+  transform: translateY(-2px);
+}
+
+.product__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.product__actions .btn {
+  flex: 1;
+  justify-content: center;
+}
+
