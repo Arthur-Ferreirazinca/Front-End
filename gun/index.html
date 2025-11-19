@@ -1,1040 +1,917 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sport Gun Imports - Venda de Armas</title>
-    <link rel="stylesheet" href="css/variables.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"
-    />
-  </head>
-  <body>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
+</head>
+<body>
+    <!-- Age Verification Modal -->
+    <div id="ageVerification" class="age-verification-modal">
+        <div class="age-verification-content">
+            <div class="age-verification-header">
+                <img src="Imagens/Logo.png" alt="Sport Gun Imports" class="age-verification-logo">
+                <h1>SEJA BEM-VINDO À SPORT GUN IMPORTS</h1>
+            </div>
+            
+            <div class="age-verification-body">
+                <h2>VOCÊ TEM MAIS DE 18 ANOS DE IDADE?</h2>
+                <div class="age-verification-buttons">
+                    <button id="ageYes" class="btn btn--primary btn--large">
+                        <i class="fas fa-check"></i> SIM
+                    </button>
+                    <button id="ageNo" class="btn btn--secondary btn--large">
+                        <i class="fas fa-times"></i> NÃO
+                    </button>
+                </div>
+            </div>
+            
+            <div class="age-verification-footer">
+                <p>O CONTEÚDO DESTE SITE NÃO PODE SER EXIBIDO ATÉ VOCÊ COMPLETAR 18 ANOS DE IDADE.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Required Modal -->
+    <div id="loginRequired" class="login-required-modal">
+        <div class="login-required-content">
+            <div class="login-required-header">
+                <img src="Imagens/Logo.png" alt="Sport Gun Imports" class="login-required-logo">
+                <h1>ACESSO RESTRITO</h1>
+            </div>
+            
+            <div class="login-required-body">
+                <div class="login-required-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h2>LOGIN OBRIGATÓRIO</h2>
+                <p>Para acessar nosso catálogo de produtos e serviços, é necessário fazer login ou criar uma conta.</p>
+                
+                <div class="login-required-buttons">
+                    <a href="login.html" class="btn btn--primary btn--large">
+                        <i class="fas fa-sign-in-alt"></i> Fazer Login
+                    </a>
+                    <a href="cadastro.html" class="btn btn--secondary btn--large">
+                        <i class="fas fa-user-plus"></i> Criar Conta
+                    </a>
+                </div>
+            </div>
+            
+            <div class="login-required-footer">
+                <p>Acesso exclusivo para maiores de 18 anos com cadastro verificado.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
-    <header class="header">
-      <nav class="nav">
-        <div class="nav__logo">
-          <img src="Imagens/Logo.png" alt="Sport Gun Imports" class="logo" />
-          <span class="logo-text">Sport Gun</span>
-        </div>
+    <header class="header" style="display: none;">
+        <nav class="nav">
+            <div class="nav__logo">
+                <img src="Imagens/Logo.png" alt="Sport Gun Imports" class="logo">
+                <span class="logo-text">Sport Gun</span>
+            </div>
+            
+            <ul class="nav__menu">
+                <li><a href="#home">Menu</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#agendamentos">Agendamentos</a></li>
+                <li><a href="#contato">Contato</a></li>
+                <li><a href="#login-cadastro" id="loginMenuLink">Login/Cadastro</a></li>
+            </ul>
 
-        <ul class="nav__menu">
-          <li><a href="#home">Menu</a></li>
-          <li><a href="#produtos">Produtos</a></li>
-          <li><a href="#servicos">Serviços</a></li>
-          <li><a href="#agendamentos">Agendamentos</a></li>
-          <li><a href="#contato">Contato</a></li>
-          <li>
-            <a href="#login-cadastro" id="loginMenuLink">Login/Cadastro</a>
-          </li>
-        </ul>
+            <div class="nav__actions">
+                <!-- O conteúdo será atualizado dinamicamente pelo JavaScript -->
+            </div>
 
-        <div class="nav__actions">
-          <!-- O conteúdo será atualizado dinamicamente pelo JavaScript -->
-        </div>
-
-        <div class="nav__hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </nav>
+            <div class="nav__hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
     </header>
 
     <!-- Hero Carousel Section -->
     <section id="home" class="hero-carousel">
-      <div class="carousel-container">
-        <div class="carousel-slide active">
-          <div class="slide-content">
-            <div class="slide-text">
-              <h1 class="hero__title">
-                Armamento Militar
-                <span class="hero__highlight">de ponta</span>
-              </h1>
-              <p class="hero__description">Armas Importadas.</p>
-              <div class="hero__buttons">
-                <button class="btn btn--primary">Ver Produtos</button>
-                <button class="btn btn--secondary">Catálogo Completo</button>
-              </div>
+        <div class="carousel-container">
+            <div class="carousel-slide active">
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <h1 class="hero__title">
+                            Armamento Militar
+                            <span class="hero__highlight">de ponta</span>
+                        </h1>
+                        <p class="hero__description">
+                            Armas Importadas.
+                        </p>
+                        <div class="hero__buttons">
+                            <button class="btn btn--primary">Ver Produtos</button>
+                            <button class="btn btn--secondary">Catálogo Completo</button>
+                        </div>
+                    </div>
+                    <div class="slide-image">
+                        <img src="Imagens/Sig_Sauer_P320.png" alt="SIG SAUER P320 M18 COYOTE">
+                        <div class="slide-overlay">
+                            <button class="btn btn--primary btn--large">Comprar Agora</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="slide-image">
-              <img
-                src="Imagens/Sig_Sauer_P320.png"
-                alt="SIG SAUER P320 M18 COYOTE"
-              />
-              <div class="slide-overlay">
-                <button class="btn btn--primary btn--large">
-                  Comprar Agora
-                </button>
-              </div>
+
+            <div class="carousel-slide">
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <h1 class="hero__title">
+                            Pistolas de
+                            <span class="hero__highlight">Alta Performance</span>
+                        </h1>
+                        <p class="hero__description">
+                            As melhores pistolas do mercado com garantia e procedência
+                        </p>
+                        <div class="hero__buttons">
+                            <button class="btn btn--primary">Ver Pistolas</button>
+                            <button class="btn btn--secondary">Ver Especificações</button>
+                        </div>
+                    </div>
+                    <div class="slide-image">
+                        <img src="Imagens/Smith_Wesson_MP.jpg" alt="Sig Sauer">
+                        <div class="slide-overlay">
+                            <button class="btn btn--primary btn--large">Comprar Agora</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <div class="carousel-slide">
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <h1 class="hero__title">
+                            Rifles e
+                            <span class="hero__highlight">Armas Longas</span>
+                        </h1>
+                        <p class="hero__description">
+                            Para caça e esporte, temos a melhor seleção de rifles
+                        </p>
+                        <div class="hero__buttons">
+                            <button class="btn btn--primary">Ver Rifles</button>
+                            <button class="btn btn--secondary">Consultar Estoque</button>
+                        </div>
+                    </div>
+                    <div class="slide-image">
+                        <img src="Imagens/Colt_1911.jpg" alt="Rifle">
+                        <div class="slide-overlay">
+                            <button class="btn btn--primary btn--large">Comprar Agora</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="carousel-slide">
-          <div class="slide-content">
-            <div class="slide-text">
-              <h1 class="hero__title">
-                Pistolas de
-                <span class="hero__highlight">Alta Performance</span>
-              </h1>
-              <p class="hero__description">
-                As melhores pistolas do mercado com garantia e procedência
-              </p>
-              <div class="hero__buttons">
-                <button class="btn btn--primary">Ver Pistolas</button>
-                <button class="btn btn--secondary">Ver Especificações</button>
-              </div>
-            </div>
-            <div class="slide-image">
-              <img src="Imagens/Smith_Wesson_MP.jpg" alt="Sig Sauer" />
-              <div class="slide-overlay">
-                <button class="btn btn--primary btn--large">
-                  Comprar Agora
-                </button>
-              </div>
-            </div>
-          </div>
+        <!-- Carousel Controls -->
+        <button class="carousel-btn carousel-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-btn carousel-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators">
+            <span class="indicator active"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
         </div>
-
-        <div class="carousel-slide">
-          <div class="slide-content">
-            <div class="slide-text">
-              <h1 class="hero__title">
-                Rifles e
-                <span class="hero__highlight">Armas Longas</span>
-              </h1>
-              <p class="hero__description">
-                Para caça e esporte, temos a melhor seleção de rifles
-              </p>
-              <div class="hero__buttons">
-                <button class="btn btn--primary">Ver Rifles</button>
-                <button class="btn btn--secondary">Consultar Estoque</button>
-              </div>
-            </div>
-            <div class="slide-image">
-              <img src="Imagens/Colt_1911.jpg" alt="Rifle" />
-              <div class="slide-overlay">
-                <button class="btn btn--primary btn--large">
-                  Comprar Agora
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Carousel Controls -->
-      <button class="carousel-btn carousel-prev">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <button class="carousel-btn carousel-next">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-
-      <!-- Carousel Indicators -->
-      <div class="carousel-indicators">
-        <span class="indicator active"></span>
-        <span class="indicator"></span>
-        <span class="indicator"></span>
-      </div>
     </section>
 
     <!-- Brands Section -->
     <section class="brands">
-      <div class="brands__container">
-        <div class="brand">GLOCK</div>
-        <div class="brand">SMITH & WESSON</div>
-        <div class="brand">COLT</div>
-        <div class="brand">SIG SAUER</div>
-        <div class="brand">BERETTA</div>
-        <div class="brand">TAURUS</div>
-        <div class="brand">CBC</div>
-        <div class="brand">CZ</div>
-      </div>
+        <div class="brands__container">
+            <div class="brand">GLOCK</div>
+            <div class="brand">SMITH & WESSON</div>
+            <div class="brand">COLT</div>
+            <div class="brand">SIG SAUER</div>
+            <div class="brand">BERETTA</div>
+            <div class="brand">TAURUS</div>
+            <div class="brand">CBC</div>
+            <div class="brand">CZ</div>
+        </div>
     </section>
 
     <!-- Login/Cadastro Section -->
-    <section
-      id="login-cadastro"
-      class="products"
-      style="background: var(--background-light)"
-    >
-      <div class="section__header">
-        <h2>ACESSO DO CLIENTE</h2>
-        <p>Faça login ou cadastre-se para comprar e agendar</p>
-      </div>
-
-      <div
-        class="auth-options"
-        style="max-width: 400px; margin: 0 auto; text-align: center"
-      >
-        <div
-          class="auth-buttons"
-          style="
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-          "
-        >
-          <a href="login.html" class="btn btn--primary" style="flex: 1">
-            <i class="fas fa-sign-in-alt"></i> Fazer Login
-          </a>
-          <a href="cadastro.html" class="btn btn--secondary" style="flex: 1">
-            <i class="fas fa-user-plus"></i> Cadastrar
-          </a>
+    <section id="login-cadastro" class="products" style="background: var(--background-light);">
+        <div class="section__header">
+            <h2>ACESSO DO CLIENTE</h2>
+            <p>Faça login ou cadastre-se para comprar e agendar</p>
         </div>
-
-        <div
-          class="auth-benefits"
-          style="
-            background: var(--background-card);
-            padding: 2rem;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-          "
-        >
-          <h4 style="color: var(--primary-color); margin-bottom: 1rem">
-            Vantagens de ter uma conta:
-          </h4>
-          <ul
-            style="
-              text-align: left;
-              color: var(--text-secondary);
-              line-height: 2;
-            "
-          >
-            <li>
-              <i class="fas fa-check" style="color: var(--primary-color)"></i>
-              Comprar produtos
-            </li>
-            <li>
-              <i class="fas fa-check" style="color: var(--primary-color)"></i>
-              Agendar atendimento
-            </li>
-            <li>
-              <i class="fas fa-check" style="color: var(--primary-color)"></i>
-              Acompanhar pedidos
-            </li>
-            <li>
-              <i class="fas fa-check" style="color: var(--primary-color)"></i>
-              Receber ofertas exclusivas
-            </li>
-          </ul>
+        
+        <div class="auth-options" style="max-width: 400px; margin: 0 auto; text-align: center;">
+            <div class="auth-buttons" style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+                <a href="login.html" class="btn btn--primary" style="flex: 1;">
+                    <i class="fas fa-sign-in-alt"></i> Fazer Login
+                </a>
+                <a href="cadastro.html" class="btn btn--secondary" style="flex: 1;">
+                    <i class="fas fa-user-plus"></i> Cadastrar
+                </a>
+            </div>
+            
+            <div class="auth-benefits" style="background: var(--background-card); padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+                <h4 style="color: var(--primary-color); margin-bottom: 1rem;">Vantagens de ter uma conta:</h4>
+                <ul style="text-align: left; color: var(--text-secondary); line-height: 2;">
+                    <li><i class="fas fa-check" style="color: var(--primary-color);"></i> Comprar produtos</li>
+                    <li><i class="fas fa-check" style="color: var(--primary-color);"></i> Agendar atendimento</li>
+                    <li><i class="fas fa-check" style="color: var(--primary-color);"></i> Acompanhar pedidos</li>
+                    <li><i class="fas fa-check" style="color: var(--primary-color);"></i> Receber ofertas exclusivas</li>
+                </ul>
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- Products Section -->
     <section id="produtos" class="products">
-      <div class="section__header">
-        <h2>PRODUTOS EM DESTAQUE</h2>
-        <p>Confira nossas armas mais vendidas</p>
-      </div>
+        <div class="section__header">
+            <h2>PRODUTOS EM DESTAQUE</h2>
+            <p>Confira nossas armas mais vendidas</p>
+        </div>
+        
+        <div class="products__grid">
+            <!-- Produto 1 -->
+            <div class="product__card">
+                <div class="product__image">
+                    <img src="Imagens/f-9 brigade.jpg" alt="F-9 Brigade">
+                    <div class="product__badge">Popular</div>
+                </div>
+                <div class="product__info">
+                    <h4>BM-F-9 Brigade</h4>
+                    <div class="product__rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.8 (2.436 Reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product__details">
+                        <span><i class="fas fa-bullseye"></i> 9mm</span>
+                        <span><i class="fas fa-layer-group"></i> 32+1</span>
+                        <span><i class="fas fa-weight"></i> 2580g</span>
+                    </div>
+                    <div class="product__features">
+                        <span>Nova</span>
+                        <span>Com garantia</span>
+                        <span>Estoque: 6</span>
+                    </div>
+                    <div class="product__price">
+                        <span class="price">R$ 12.200</span>
+                    </div>
+                    <div class="product__actions">
+                        <button class="btn btn--primary">Comprar</button>
+                        <button class="btn-agendar">
+                            <i class="fab fa-whatsapp"></i> Agendar
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-      <div class="products__grid">
-        <!-- Produto 1 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img src="Imagens/f-9 brigade.jpg" alt="F-9 Brigade" />
-            <div class="product__badge">Popular</div>
-          </div>
-          <div class="product__info">
-            <h4>BM-F-9 Brigade</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <span>4.8 (2.436 Reviews)</span>
-              </div>
+            <!-- Produto 2 -->
+            <div class="product__card">
+                <div class="product__image">
+                    <img src="Imagens/fuzil taurus t10.jpg" alt="fuzil taurus t10">
+                    <div class="product__badge product__badge--new">Novo</div>
+                </div>
+                <div class="product__info">
+                    <h4>fuzil taurus t10</h4>
+                    <div class="product__rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0 (1.894 Reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product__details">
+                        <span><i class="fas fa-bullseye"></i> 7,62x51mm</span>
+                        <span><i class="fas fa-layer-group"></i> 15+1</span>
+                        <span><i class="fas fa-weight"></i> 833g</span>
+                    </div>
+                    <div class="product__features">
+                        <span>Direto de Gases</span>
+                        <span>Com case</span>
+                        <span>Estoque: 8</span>
+                    </div>
+                    <div class="product__price">
+                        <span class="price">R$ 14.500</span>
+                    </div>
+                    <div class="product__actions">
+                        <button class="btn btn--primary">Comprar</button>
+                        <button class="btn-agendar">
+                            <i class="fab fa-whatsapp"></i> Agendar
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> 9mm</span>
-              <span><i class="fas fa-layer-group"></i> 32+1</span>
-              <span><i class="fas fa-weight"></i> 2580g</span>
+
+            <!-- Produto 3 -->
+            <div class="product__card">
+                <div class="product__image">
+                    <img src="Imagens/carabina 8 semi-auto.png" alt="carabina 8 semi-auto">
+                </div>
+                <div class="product__info">
+                    <h4>carabina 8 semi-auto</h4>
+                    <div class="product__rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.9 (3.127 Reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product__details">
+                        <span><i class="fas fa-bullseye"></i> 9mm</span>
+                        <span><i class="fas fa-layer-group"></i> 17+1</span>
+                        <span><i class="fas fa-weight"></i> 694g</span>
+                    </div>
+                    <div class="product__features">
+                        <span>Performance</span>
+                        <span>3 magazines</span>
+                        <span>Estoque: 12</span>
+                    </div>
+                    <div class="product__price">
+                        <span class="price">R$ 9.800</span>
+                    </div>
+                    <div class="product__actions">
+                        <button class="btn btn--primary">Comprar</button>
+                        <button class="btn-agendar">
+                            <i class="fab fa-whatsapp"></i> Agendar
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="product__features">
-              <span>Nova</span>
-              <span>Com garantia</span>
-              <span>Estoque: 6</span>
+
+            <!-- Produto 4 -->
+            <div class="product__card">
+                <div class="product__image">
+                    <img src="Imagens/T4 14,5 semi-auto.jpg" alt="T4 14,5 semi-auto.jpg">
+                </div>
+                <div class="product__info">
+                    <h4>T4 14,5 semi-auto</h4>
+                    <div class="product__rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.7 (1.542 Reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product__details">
+                        <span><i class="fas fa-bullseye"></i> 5.56</span>
+                        <span><i class="fas fa-layer-group"></i> 7+1</span>
+                        <span><i class="fas fa-weight"></i> 1105g</span>
+                    </div>
+                    <div class="product__features">
+                        <span>Clássico</span>
+                        <span>Aço inox</span>
+                        <span>Estoque: 6</span>
+                    </div>
+                    <div class="product__price">
+                        <span class="price">R$ 9.200</span>
+                    </div>
+                    <div class="product__actions">
+                        <button class="btn btn--primary">Comprar</button>
+                        <button class="btn-agendar">
+                            <i class="fab fa-whatsapp"></i> Agendar
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="product__price">
-              <span class="price">R$ 12.200</span>
+
+            <!-- Produto 5 -->
+            <div class="product__card">
+                <div class="product__image">
+                    <img src="Imagens/pistola 59s 85anos.jpg" alt="pistola 59s 85anos">
+                </div>
+                <div class="product__info">
+                    <h4>pistola 59s 85anos</h4>
+                    <div class="product__rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.6 (2.118 Reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product__details">
+                        <span><i class="fas fa-bullseye"></i> 9mm</span>
+                        <span><i class="fas fa-layer-group"></i> 15+1</span>
+                        <span><i class="fas fa-weight"></i> 945g</span>
+                    </div>
+                    <div class="product__features">
+                        <span>Militar</span>
+                        <span>Alumínio</span>
+                        <span>Estoque: 10</span>
+                    </div>
+                    <div class="product__price">
+                        <span class="price">R$ 6.500</span>
+                    </div>
+                    <div class="product__actions">
+                        <button class="btn btn--primary">Comprar</button>
+                        <button class="btn-agendar">
+                            <i class="fab fa-whatsapp"></i> Agendar
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="product__actions">
-              <button class="btn btn--primary">Comprar</button>
-              <button class="btn-agendar">
-                <i class="fab fa-whatsapp"></i> Agendar
-              </button>
+
+            <!-- Produto 6 -->
+            <div class="product__card">
+                <div class="product__image">
+                    <img src="Imagens/carabina lever action rossi 20.png" alt="carabina lever action rossi 20'">
+                </div>
+                <div class="product__info">
+                    <h4>Carabina lever action rossi 20'</h4>
+                    <div class="product__rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (1.876 Reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product__details">
+                        <span><i class="fas fa-bullseye"></i> .38SPL</span>
+                        <span><i class="fas fa-layer-group"></i> 5 cilindros</span>
+                        <span><i class="fas fa-weight"></i> 750g</span>
+                    </div>
+                    <div class="product__features">
+                        <span>Versátil</span>
+                        <span>Defesa</span>
+                        <span>Estoque: 7</span>
+                    </div>
+                    <div class="product__price">
+                        <span class="price">R$ 7.900</span>
+                    </div>
+                    <div class="product__actions">
+                        <button class="btn btn--primary">Comprar</button>
+                        <button class="btn-agendar">
+                            <i class="fab fa-whatsapp"></i> Agendar
+                        </button>
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <!-- Produto 7 -->
+            <div class="product__card">
+                <div class="product__image">
+                    <img src="Imagens/acessorios.jpg" alt="Acessórios">
+                </div>
+                <div class="product__info">
+                    <h4>Acessórios Premium</h4>
+                    <div class="product__rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (1.876 Reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product__details">
+                        <span><i class="fas fa-toolbox"></i> Kit Completo</span>
+                        <span><i class="fas fa-weight"></i> 500g</span>
+                    </div>
+                    <div class="product__features">
+                        <span>Versátil</span>
+                        <span>Cases e maletas</span>
+                        <span>Estoque: 7</span>
+                    </div>
+                    <div class="product__price">
+                        <span class="price">R$ 4.900</span>
+                    </div>
+                    <div class="product__actions">
+                        <button class="btn btn--primary">Comprar</button>
+                        <button class="btn-agendar">
+                            <i class="fab fa-whatsapp"></i> Agendar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 8 -->
+            <div class="product__card">
+                <div class="product__image">
+                    <img src="Imagens/acessorios.jpg" alt="Acessórios">
+                </div>
+                <div class="product__info">
+                    <h4>Mira Laser</h4>
+                    <div class="product__rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (1.876 Reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product__details">
+                        <span><i class="fas fa-bullseye"></i> Precisão</span>
+                        <span><i class="fas fa-weight"></i> 300g</span>
+                    </div>
+                    <div class="product__features">
+                        <span>Laser Verde</span>
+                        <span>À prova d'água</span>
+                        <span>Estoque: 15</span>
+                    </div>
+                    <div class="product__price">
+                        <span class="price">R$ 2.900</span>
+                    </div>
+                    <div class="product__actions">
+                        <button class="btn btn--primary">Comprar</button>
+                        <button class="btn-agendar">
+                            <i class="fab fa-whatsapp"></i> Agendar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 9 -->
+            <div class="product__card">
+                <div class="product__image">
+                    <img src="Imagens/acessorios.jpg" alt="Acessórios">
+                </div>
+                <div class="product__info">
+                    <h4>Coldre Tático</h4>
+                    <div class="product__rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (1.876 Reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product__details">
+                        <span><i class="fas fa-vest"></i> Confortável</span>
+                        <span><i class="fas fa-weight"></i> 450g</span>
+                    </div>
+                    <div class="product__features">
+                        <span>Couro Legítimo</span>
+                        <span>Ajustável</span>
+                        <span>Estoque: 12</span>
+                    </div>
+                    <div class="product__price">
+                        <span class="price">R$ 3.200</span>
+                    </div>
+                    <div class="product__actions">
+                        <button class="btn btn--primary">Comprar</button>
+                        <button class="btn-agendar">
+                            <i class="fab fa-whatsapp"></i> Agendar
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Produto 2 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img src="Imagens/fuzil taurus t10.jpg" alt="fuzil taurus t10" />
-            <div class="product__badge product__badge--new">Novo</div>
-          </div>
-          <div class="product__info">
-            <h4>fuzil taurus t10</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>5.0 (1.894 Reviews)</span>
-              </div>
-            </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> 7,62x51mm</span>
-              <span><i class="fas fa-layer-group"></i> 15+1</span>
-              <span><i class="fas fa-weight"></i> 833g</span>
-            </div>
-            <div class="product__features">
-              <span>Direto de Gases</span>
-              <span>Com case</span>
-              <span>Estoque: 8</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 14.500</span>
-            </div>
-            <div class="product__actions">
-              <button class="btn btn--primary">Comprar</button>
-              <button class="btn-agendar">
-                <i class="fab fa-whatsapp"></i> Agendar
-              </button>
-            </div>
-          </div>
+        <div class="products__footer">
+            <a href="#" class="see-all">Ver todos os produtos</a>
         </div>
-
-        <!-- Produto 3 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img
-              src="Imagens/carabina 8 semi-auto.png"
-              alt="carabina 8 semi-auto"
-            />
-          </div>
-          <div class="product__info">
-            <h4>carabina 8 semi-auto</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>4.9 (3.127 Reviews)</span>
-              </div>
-            </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> 9mm</span>
-              <span><i class="fas fa-layer-group"></i> 17+1</span>
-              <span><i class="fas fa-weight"></i> 694g</span>
-            </div>
-            <div class="product__features">
-              <span>Performance</span>
-              <span>3 magazines</span>
-              <span>Estoque: 12</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 9.800</span>
-            </div>
-            <div class="product__actions">
-              <button class="btn btn--primary">Comprar</button>
-              <button class="btn-agendar">
-                <i class="fab fa-whatsapp"></i> Agendar
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Produto 4 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img
-              src="Imagens/T4 14,5 semi-auto.jpg"
-              alt="T4 14,5 semi-auto.jpg"
-            />
-          </div>
-          <div class="product__info">
-            <h4>T4 14,5 semi-auto</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>4.7 (1.542 Reviews)</span>
-              </div>
-            </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> 5.56</span>
-              <span><i class="fas fa-layer-group"></i> 7+1</span>
-              <span><i class="fas fa-weight"></i> 1105g</span>
-            </div>
-            <div class="product__features">
-              <span>Clássico</span>
-              <span>Aço inox</span>
-              <span>Estoque: 6</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 9.200</span>
-            </div>
-            <div class="product__actions">
-              <button class="btn btn--primary">Comprar</button>
-              <button class="btn-agendar">
-                <i class="fab fa-whatsapp"></i> Agendar
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Produto 5 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img
-              src="Imagens/pistola 59s 85anos.jpg"
-              alt="pistola 59s 85anos"
-            />
-          </div>
-          <div class="product__info">
-            <h4>pistola 59s 85anos</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <span>4.6 (2.118 Reviews)</span>
-              </div>
-            </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> 9mm</span>
-              <span><i class="fas fa-layer-group"></i> 15+1</span>
-              <span><i class="fas fa-weight"></i> 945g</span>
-            </div>
-            <div class="product__features">
-              <span>Militar</span>
-              <span>Alumínio</span>
-              <span>Estoque: 10</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 6.500</span>
-            </div>
-            <div class="product__actions">
-              <button class="btn btn--primary">Comprar</button>
-              <button class="btn-agendar">
-                <i class="fab fa-whatsapp"></i> Agendar
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Produto 6 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img
-              src="Imagens/carabina lever action rossi 20.png"
-              alt="carabina lever action rossi 20'"
-            />
-          </div>
-          <div class="product__info">
-            <h4>Carabina lever action rossi 20'</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>4.8 (1.876 Reviews)</span>
-              </div>
-            </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> .38SPL</span>
-              <span><i class="fas fa-layer-group"></i> 5 cilindros</span>
-              <span><i class="fas fa-weight"></i> 750g</span>
-            </div>
-            <div class="product__features">
-              <span>Versátil</span>
-              <span>Defesa</span>
-              <span>Estoque: 7</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 7.900</span>
-            </div>
-            <div class="product__actions">
-              <button class="btn btn--primary">Comprar</button>
-              <button class="btn-agendar">
-                <i class="fab fa-whatsapp"></i> Agendar
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Produto 7 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img src="Imagens/acessorios.jpg" alt="Acessórios" />
-          </div>
-          <div class="product__info">
-            <h4>Acessórios Premium</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>4.8 (1.876 Reviews)</span>
-              </div>
-            </div>
-            <div class="product__details">
-              <span><i class="fas fa-toolbox"></i> Kit Completo</span>
-              <span><i class="fas fa-weight"></i> 500g</span>
-            </div>
-            <div class="product__features">
-              <span>Versátil</span>
-              <span>Cases e maletas</span>
-              <span>Estoque: 7</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 4.900</span>
-            </div>
-            <div class="product__actions">
-              <button class="btn btn--primary">Comprar</button>
-              <button class="btn-agendar">
-                <i class="fab fa-whatsapp"></i> Agendar
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Produto 8 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img src="Imagens/acessorios.jpg" alt="Acessórios" />
-          </div>
-          <div class="product__info">
-            <h4>Mira Laser</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>4.8 (1.876 Reviews)</span>
-              </div>
-            </div>
-            <div class="product__details">
-              <span><i class="fas fa-bullseye"></i> Precisão</span>
-              <span><i class="fas fa-weight"></i> 300g</span>
-            </div>
-            <div class="product__features">
-              <span>Laser Verde</span>
-              <span>À prova d'água</span>
-              <span>Estoque: 15</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 2.900</span>
-            </div>
-            <div class="product__actions">
-              <button class="btn btn--primary">Comprar</button>
-              <button class="btn-agendar">
-                <i class="fab fa-whatsapp"></i> Agendar
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Produto 9 -->
-        <div class="product__card">
-          <div class="product__image">
-            <img src="Imagens/acessorios.jpg" alt="Acessórios" />
-          </div>
-          <div class="product__info">
-            <h4>Coldre Tático</h4>
-            <div class="product__rating">
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>4.8 (1.876 Reviews)</span>
-              </div>
-            </div>
-            <div class="product__details">
-              <span><i class="fas fa-vest"></i> Confortável</span>
-              <span><i class="fas fa-weight"></i> 450g</span>
-            </div>
-            <div class="product__features">
-              <span>Couro Legítimo</span>
-              <span>Ajustável</span>
-              <span>Estoque: 12</span>
-            </div>
-            <div class="product__price">
-              <span class="price">R$ 3.200</span>
-            </div>
-            <div class="product__actions">
-              <button class="btn btn--primary">Comprar</button>
-              <button class="btn-agendar">
-                <i class="fab fa-whatsapp"></i> Agendar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="products__footer">
-        <a href="#" class="see-all">Ver todos os produtos</a>
-      </div>
     </section>
 
     <!-- Services Section -->
     <section id="servicos" class="services">
-      <div class="section__header">
-        <h2>NOSSOS SERVIÇOS</h2>
-        <p>Serviços especializados para atiradores e colecionadores</p>
-      </div>
-
-      <div class="services__grid">
-        <div class="service__category">
-          <h3>Venda de Armas</h3>
-          <div class="weapon__card">
-            <div class="weapon__image">
-              <img src="Imagens/Sig_Sauer_P320.png" alt="Venda de Armas" />
-            </div>
-            <div class="weapon__info">
-              <h4>Armas Novas e Usadas</h4>
-              <div class="weapon__rating">
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <span>5.0 (2.156 Reviews)</span>
-                </div>
-              </div>
-              <div class="weapon__details">
-                <span
-                  ><i class="fas fa-shield-alt"></i> Procedência Garantida</span
-                >
-                <span><i class="fas fa-file-contract"></i> Documentação</span>
-              </div>
-              <div class="weapon__location">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Todos os modelos disponíveis</span>
-              </div>
-              <div class="weapon__price">
-                <span class="price">Consulte valores</span>
-                <button class="btn btn--primary btn-agendar">
-                  <i class="fab fa-whatsapp"></i> Consultar
-                </button>
-              </div>
-            </div>
-          </div>
+        <div class="section__header">
+            <h2>NOSSOS SERVIÇOS</h2>
+            <p>Serviços especializados para atiradores e colecionadores</p>
         </div>
 
-        <div class="service__category">
-          <h3>Assessoria CAC</h3>
-          <div class="weapon__card">
-            <div class="weapon__image">
-              <img src="Imagens/acessorios.jpg" alt="Assessoria CAC" />
-            </div>
-            <div class="weapon__info">
-              <h4>Regularização e Documentação</h4>
-              <div class="weapon__rating">
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star-half-alt"></i>
-                  <span>4.8 (1.543 Reviews)</span>
+        <div class="services__grid">
+            <div class="service__category">
+                <h3>Venda de Armas</h3>
+                <div class="weapon__card">
+                    <div class="weapon__image">
+                        <img src="Imagens/Sig_Sauer_P320.png" alt="Venda de Armas">
+                    </div>
+                    <div class="weapon__info">
+                        <h4>Armas Novas e Usadas</h4>
+                        <div class="weapon__rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0 (2.156 Reviews)</span>
+                            </div>
+                        </div>
+                        <div class="weapon__details">
+                            <span><i class="fas fa-shield-alt"></i> Procedência Garantida</span>
+                            <span><i class="fas fa-file-contract"></i> Documentação</span>
+                        </div>
+                        <div class="weapon__location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Todos os modelos disponíveis</span>
+                        </div>
+                        <div class="weapon__price">
+                            <span class="price">Consulte valores</span>
+                            <button class="btn btn--primary btn-agendar">
+                                <i class="fab fa-whatsapp"></i> Consultar
+                            </button>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="weapon__details">
-                <span><i class="fas fa-passport"></i> CR e POS</span>
-                <span><i class="fas fa-sync-alt"></i> Renovações</span>
-              </div>
-              <div class="weapon__location">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Todo o Brasil</span>
-              </div>
-              <div class="weapon__price">
-                <span class="price">A partir de R$ 300</span>
-                <button class="btn btn--primary btn-agendar">
-                  <i class="fab fa-whatsapp"></i> Agendar
-                </button>
-              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="service__category">
-          <h3>Manutenção</h3>
-          <div class="weapon__card">
-            <div class="weapon__image">
-              <img src="Imagens/manutencao.jpg" alt="Manutenção" />
-            </div>
-            <div class="weapon__info">
-              <h4>Manutenção e Reparos</h4>
-              <div class="weapon__rating">
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <span>4.9 (892 Reviews)</span>
+            <div class="service__category">
+                <h3>Assessoria CAC</h3>
+                <div class="weapon__card">
+                    <div class="weapon__image">
+                        <img src="Imagens/acessorios.jpg" alt="Assessoria CAC">
+                    </div>
+                    <div class="weapon__info">
+                        <h4>Regularização e Documentação</h4>
+                        <div class="weapon__rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.8 (1.543 Reviews)</span>
+                            </div>
+                        </div>
+                        <div class="weapon__details">
+                            <span><i class="fas fa-passport"></i> CR e POS</span>
+                            <span><i class="fas fa-sync-alt"></i> Renovações</span>
+                        </div>
+                        <div class="weapon__location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Todo o Brasil</span>
+                        </div>
+                        <div class="weapon__price">
+                            <span class="price">A partir de R$ 300</span>
+                            <button class="btn btn--primary btn-agendar">
+                                <i class="fab fa-whatsapp"></i> Agendar
+                            </button>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="weapon__details">
-                <span><i class="fas fa-tools"></i> Limpeza</span>
-                <span><i class="fas fa-cogs"></i> Ajustes</span>
-              </div>
-              <div class="weapon__location">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Oficina especializada</span>
-              </div>
-              <div class="weapon__price">
-                <span class="price">A partir de R$ 150</span>
-                <button class="btn btn--primary btn-agendar">
-                  <i class="fab fa-whatsapp"></i> Orçamento
-                </button>
-              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="service__category">
-          <h3>Transporte</h3>
-          <div class="weapon__card">
-            <div class="weapon__image">
-              <img src="Imagens/transporte.jpg" alt="Transporte" />
-            </div>
-            <div class="weapon__info">
-              <h4>Transporte Seguro</h4>
-              <div class="weapon__rating">
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <span>5.0 (734 Reviews)</span>
+            <div class="service__category">
+                <h3>Manutenção</h3>
+                <div class="weapon__card">
+                    <div class="weapon__image">
+                        <img src="Imagens/manutencao.jpg" alt="Manutenção">
+                    </div>
+                    <div class="weapon__info">
+                        <h4>Manutenção e Reparos</h4>
+                        <div class="weapon__rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>4.9 (892 Reviews)</span>
+                            </div>
+                        </div>
+                        <div class="weapon__details">
+                            <span><i class="fas fa-tools"></i> Limpeza</span>
+                            <span><i class="fas fa-cogs"></i> Ajustes</span>
+                        </div>
+                        <div class="weapon__location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Oficina especializada</span>
+                        </div>
+                        <div class="weapon__price">
+                            <span class="price">A partir de R$ 150</span>
+                            <button class="btn btn--primary btn-agendar">
+                                <i class="fab fa-whatsapp"></i> Orçamento
+                            </button>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="weapon__details">
-                <span><i class="fas fa-truck"></i> Entrega</span>
-                <span><i class="fas fa-shield-alt"></i> Seguro</span>
-              </div>
-              <div class="weapon__location">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Nacional</span>
-              </div>
-              <div class="weapon__price">
-                <span class="price">Consulte frete</span>
-                <button class="btn btn--primary btn-agendar">
-                  <i class="fab fa-whatsapp"></i> Consultar
-                </button>
-              </div>
             </div>
-          </div>
+
+            <div class="service__category">
+                <h3>Transporte</h3>
+                <div class="weapon__card">
+                    <div class="weapon__image">
+                        <img src="Imagens/transporte.jpg" alt="Transporte">
+                    </div>
+                    <div class="weapon__info">
+                        <h4>Transporte Seguro</h4>
+                        <div class="weapon__rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0 (734 Reviews)</span>
+                            </div>
+                        </div>
+                        <div class="weapon__details">
+                            <span><i class="fas fa-truck"></i> Entrega</span>
+                            <span><i class="fas fa-shield-alt"></i> Seguro</span>
+                        </div>
+                        <div class="weapon__location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Nacional</span>
+                        </div>
+                        <div class="weapon__price">
+                            <span class="price">Consulte frete</span>
+                            <button class="btn btn--primary btn-agendar">
+                                <i class="fab fa-whatsapp"></i> Consultar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- News Section -->
-    <section id="noticias" class="news">
-      <div class="section__header">
+     <!-- News Section -->
+   <section id="noticias" class="news">
+    <div class="section__header">
         <h2>NOTÍCIAS EM DESTAQUE</h2>
         <p>Fique por dentro das últimas novidades do mundo das armas</p>
-      </div>
+    </div>
 
-      <div class="news__grid">
+    <div class="news__grid">
         <!-- As notícias serão carregadas aqui via JavaScript -->
-        <div style="grid-column: 1/-1; text-align: center; padding: 3rem">
-          <p style="color: var(--text-secondary); font-size: 1.2rem">
-            <i class="fas fa-spinner fa-spin"></i> Carregando notícias...
-          </p>
+        <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+            <p style="color: var(--text-secondary); font-size: 1.2rem;">
+                <i class="fas fa-spinner fa-spin"></i> Carregando notícias...
+            </p>
         </div>
-      </div>
+    </div>
 
-      <div class="news__footer">
-        <a
-          href="https://infoarmas.com.br"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="see-all"
-        >
-          Ver todas as notícias no InfoArmas
+    <div class="news__footer">
+        <a href="https://infoarmas.com.br" target="_blank" rel="noopener noreferrer" class="see-all">
+            Ver todas as notícias no InfoArmas
         </a>
-      </div>
-    </section>
+    </div>
+</section>
 
     <!-- Seção de Agendamentos -->
-    <section
-      id="agendamentos"
-      class="products"
-      style="background: var(--background)"
-    >
-      <div class="section__header">
-        <h2>MEUS AGENDAMENTOS</h2>
-        <p>Acompanhe seus agendamentos e confirmações</p>
-      </div>
-
-      <div class="agendamentos-list">
-        <!-- Os agendamentos serão carregados aqui via JavaScript -->
-        <div
-          style="
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-secondary);
-          "
-        >
-          <i
-            class="fas fa-calendar-plus"
-            style="font-size: 3rem; margin-bottom: 1rem"
-          ></i>
-          <h3>Nenhum agendamento</h3>
-          <p>
-            Faça seu primeiro agendamento clicando em "Agendar" em qualquer
-            produto!
-          </p>
+    <section id="agendamentos" class="products" style="background: var(--background);">
+        <div class="section__header">
+            <h2>MEUS AGENDAMENTOS</h2>
+            <p>Acompanhe seus agendamentos e confirmações</p>
         </div>
-      </div>
-
-      <div class="products__footer">
-        <button class="btn btn--primary btn-agendamento-geral">
-          <i class="fas fa-calendar-plus"></i> Fazer Agendamento Geral
-        </button>
-      </div>
+        
+        <div class="agendamentos-list">
+            <!-- Os agendamentos serão carregados aqui via JavaScript -->
+            <div style="text-align: center; padding: 3rem; color: var(--text-secondary);">
+                <i class="fas fa-calendar-plus" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                <h3>Nenhum agendamento</h3>
+                <p>Faça seu primeiro agendamento clicando em "Agendar" em qualquer produto!</p>
+            </div>
+        </div>
+        
+        <div class="products__footer">
+            <button class="btn btn--primary btn-agendamento-geral">
+                <i class="fas fa-calendar-plus"></i> Fazer Agendamento Geral
+            </button>
+        </div>
     </section>
 
     <!-- Contact Section -->
-    <section
-      id="contato"
-      class="partners"
-      style="background: var(--background)"
-    >
-      <div class="partners__content">
-        <h2>ENTRE EM CONTATO</h2>
-        <p>Estamos aqui para atender você</p>
+    <section id="contato" class="partners" style="background: var(--background);">
+        <div class="partners__content">
+            <h2>ENTRE EM CONTATO</h2>
+            <p>Estamos aqui para atender você</p>
+            
+            <div class="contact-info" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 3rem 0;">
+                <div class="contact-item" style="text-align: center; padding: 2rem; background: var(--background-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+                    <i class="fas fa-phone-alt" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Telefone</h4>
+                    <p style="color: var(--text-secondary);">(11) 99999-9999</p>
+                </div>
+                
+                <div class="contact-item" style="text-align: center; padding: 2rem; background: var(--background-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+                    <i class="fab fa-whatsapp" style="font-size: 2rem; color: #25D366; margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">WhatsApp</h4>
+                    <p style="color: var(--text-secondary);">(11) 99999-9999</p>
+                </div>
+                
+                <div class="contact-item" style="text-align: center; padding: 2rem; background: var(--background-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+                    <i class="fas fa-envelope" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Email</h4>
+                    <p style="color: var(--text-secondary);">contato@sportgun.com.br</p>
+                </div>
+                
+                <div class="contact-item" style="text-align: center; padding: 2rem; background: var(--background-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+                    <i class="fas fa-map-marker-alt" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Endereço</h4>
+                    <p style="color: var(--text-secondary);">São Paulo - SP</p>
+                </div>
+            </div>
 
-        <div
-          class="contact-info"
-          style="
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-          "
-        >
-          <div
-            class="contact-item"
-            style="
-              text-align: center;
-              padding: 2rem;
-              background: var(--background-card);
-              border-radius: var(--radius-lg);
-              border: 1px solid var(--border-color);
-            "
-          >
-            <i
-              class="fas fa-phone-alt"
-              style="
-                font-size: 2rem;
-                color: var(--primary-color);
-                margin-bottom: 1rem;
-              "
-            ></i>
-            <h4 style="color: var(--text-primary); margin-bottom: 0.5rem">
-              Telefone
-            </h4>
-            <p style="color: var(--text-secondary)">(11) 99999-9999</p>
-          </div>
-
-          <div
-            class="contact-item"
-            style="
-              text-align: center;
-              padding: 2rem;
-              background: var(--background-card);
-              border-radius: var(--radius-lg);
-              border: 1px solid var(--border-color);
-            "
-          >
-            <i
-              class="fab fa-whatsapp"
-              style="font-size: 2rem; color: #25d366; margin-bottom: 1rem"
-            ></i>
-            <h4 style="color: var(--text-primary); margin-bottom: 0.5rem">
-              WhatsApp
-            </h4>
-            <p style="color: var(--text-secondary)">(11) 99999-9999</p>
-          </div>
-
-          <div
-            class="contact-item"
-            style="
-              text-align: center;
-              padding: 2rem;
-              background: var(--background-card);
-              border-radius: var(--radius-lg);
-              border: 1px solid var(--border-color);
-            "
-          >
-            <i
-              class="fas fa-envelope"
-              style="
-                font-size: 2rem;
-                color: var(--primary-color);
-                margin-bottom: 1rem;
-              "
-            ></i>
-            <h4 style="color: var(--text-primary); margin-bottom: 0.5rem">
-              Email
-            </h4>
-            <p style="color: var(--text-secondary)">contato@sportgun.com.br</p>
-          </div>
-
-          <div
-            class="contact-item"
-            style="
-              text-align: center;
-              padding: 2rem;
-              background: var(--background-card);
-              border-radius: var(--radius-lg);
-              border: 1px solid var(--border-color);
-            "
-          >
-            <i
-              class="fas fa-map-marker-alt"
-              style="
-                font-size: 2rem;
-                color: var(--primary-color);
-                margin-bottom: 1rem;
-              "
-            ></i>
-            <h4 style="color: var(--text-primary); margin-bottom: 0.5rem">
-              Endereço
-            </h4>
-            <p style="color: var(--text-secondary)">São Paulo - SP</p>
-          </div>
+            <div class="social-buttons">
+                <a href="https://wa.me/5511999999999" class="social-btn social-btn--whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="#" class="social-btn social-btn--instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="#" class="social-btn social-btn--facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    <span>Facebook</span>
+                </a>
+            </div>
         </div>
-
-        <div class="social-buttons">
-          <a
-            href="https://wa.me/5511999999999"
-            class="social-btn social-btn--whatsapp"
-          >
-            <i class="fab fa-whatsapp"></i>
-            <span>WhatsApp</span>
-          </a>
-          <a href="#" class="social-btn social-btn--instagram">
-            <i class="fab fa-instagram"></i>
-            <span>Instagram</span>
-          </a>
-          <a href="#" class="social-btn social-btn--facebook">
-            <i class="fab fa-facebook-f"></i>
-            <span>Facebook</span>
-          </a>
-        </div>
-      </div>
     </section>
 
     <!-- Partners Section -->
-    <section class="partners">
-      <div class="partners__content">
+<section class="partners">
+    <div class="partners__content">
         <h2>ACOMPANHE NOSSOS CANAIS</h2>
         <p>Fique por dentro das novidades, promoções e lançamentos</p>
-        <div class="social-buttons">
-          <!-- Instagram -->
-          <a href="#" class="social-btn social-btn--outline">
-            <i class="fab fa-instagram"></i>
-            <span>Instagram</span>
-          </a>
-          <!-- Facebook -->
-          <a href="#" class="social-btn social-btn--outline">
-            <i class="fab fa-facebook-f"></i>
-            <span>Facebook</span>
-          </a>
-          <!-- WhatsApp -->
-          <a href="#" class="social-btn social-btn--outline">
-            <i class="fab fa-whatsapp"></i>
-            <span>WhatsApp</span>
-          </a>
+           <div class="social-buttons">
+            <!-- Instagram -->
+            <a href="#"  class="social-btn social-btn--outline">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+            <!-- Facebook -->
+            <a href="#"  class="social-btn social-btn--outline">
+                <i class="fab fa-facebook-f"></i>
+                <span>Facebook</span>
+            </a>
+            <!-- WhatsApp -->
+            <a href="#" class="social-btn social-btn--outline">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="footer__content">
-        <div class="footer__section">
-          <h2>Sport Gun Imports</h2>
-          <p>
-            Empresa de venda de equipamentos, acessorios e armas nacionais e
-            importadas com marcas famosas como Glock, Sig Sauer, Smith & Wesson,
-            Colt, Beretta...
-          </p>
-        </div>
+        <div class="footer__content">
+            <div class="footer__section">
+                <h2>Sport Gun Imports</h2>
+                <p>Empresa de venda de equipamentos, acessorios e armas nacionais e importadas com marcas famosas como Glock, Sig Sauer, Smith & Wesson, Colt, Beretta...</p>
+            </div>
+            
+            <div class="footer__section">
+                <h3>Armalite</h3>
+                <ul>
+                    <li><a href="#">Comprar</a></li>
+                    <li><a href="#">Mapa do Site</a></li>
+                    <li><a href="#">Como funciona</a></li>
+                </ul>
+            </div>
 
-        <div class="footer__section">
-          <h3>Armalite</h3>
-          <ul>
-            <li><a href="#">Comprar</a></li>
-            <li><a href="#">Mapa do Site</a></li>
-            <li><a href="#">Como funciona</a></li>
-          </ul>
-        </div>
+            <div class="footer__section">
+                <h3>Serviços</h3>
+                <ul>
+                    <li><a href="#">Entrega</a></li>
+                    <li><a href="#">Verificação</a></li>
+                    <li><a href="#">Garantia</a></li>
+                </ul>
+            </div>
 
-        <div class="footer__section">
-          <h3>Serviços</h3>
-          <ul>
-            <li><a href="#">Entrega</a></li>
-            <li><a href="#">Verificação</a></li>
-            <li><a href="#">Garantia</a></li>
-          </ul>
+            <div class="footer__section">
+                <h3>Empresa</h3>
+                <ul>
+                    <li><a href="#">Sobre nós</a></li>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="#">Termos de uso</a></li>
+                    <li><a href="#">Política de privacidade</a></li>
+                </ul>
+            </div>
         </div>
-
-        <div class="footer__section">
-          <h3>Empresa</h3>
-          <ul>
-            <li><a href="#">Sobre nós</a></li>
-            <li><a href="#">Contato</a></li>
-            <li><a href="#">Termos de uso</a></li>
-            <li><a href="#">Política de privacidade</a></li>
-          </ul>
+        
+        <div class="footer__bottom">
+            <p>Sport Gun Imports, 2025 todos os direitos reservados</p>
         </div>
-      </div>
-
-      <div class="footer__bottom">
-        <p>Sport Gun Imports, 2025 todos os direitos reservados</p>
-      </div>
     </footer>
 
     <script src="js/script.js"></script>
-  </body>
+</body>
 </html>

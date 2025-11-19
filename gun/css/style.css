@@ -2339,4 +2339,379 @@
   flex: 1;
   justify-content: center;
 }
+/* ==================== AGE VERIFICATION MODAL ==================== */
+.age-verification-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--background) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(10px);
+}
+
+.age-verification-content {
+    background: var(--background-card);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: var(--shadow-hover);
+    border: 2px solid var(--primary-color);
+    animation: slideUp 0.6s ease;
+}
+
+.age-verification-header {
+    margin-bottom: var(--spacing-xl);
+}
+
+.age-verification-logo {
+    height: 80px;
+    width: auto;
+    margin-bottom: var(--spacing-lg);
+}
+
+.age-verification-header h1 {
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.age-verification-body h2 {
+    color: var(--text-primary);
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-xl);
+    font-weight: 600;
+}
+
+.age-verification-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.age-verification-footer p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--spacing-lg);
+}
+
+/* ==================== LOGIN REQUIRED MODAL ==================== */
+.login-required-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--background) 100%);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+}
+
+.login-required-content {
+    background: var(--background-card);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: var(--shadow-hover);
+    border: 2px solid var(--primary-color);
+    animation: slideUp 0.6s ease;
+}
+
+.login-required-header {
+    margin-bottom: var(--spacing-xl);
+}
+
+.login-required-logo {
+    height: 60px;
+    width: auto;
+    margin-bottom: var(--spacing-lg);
+}
+
+.login-required-header h1 {
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.login-required-icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-lg);
+    animation: pulse 2s infinite;
+}
+
+.login-required-body h2 {
+    color: var(--text-primary);
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-lg);
+    font-weight: 600;
+}
+
+.login-required-body p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.6;
+}
+
+.login-required-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.login-required-footer p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--spacing-lg);
+}
+
+/* ==================== ANIMAÇÕES ==================== */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ==================== NOVAS SEÇÕES ==================== */
+
+/* Seção Login/Cadastro */
+.auth-options {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.auth-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.auth-benefits {
+    background: var(--background-card);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+}
+
+.auth-benefits h4 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.auth-benefits ul {
+    text-align: left;
+    color: var(--text-secondary);
+    line-height: 2;
+}
+
+.auth-benefits li {
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+/* Seção Contato */
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-2xl) 0;
+}
+
+.contact-item {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: var(--background-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.contact-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.contact-item i {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.contact-item h4 {
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Botões Sociais Coloridos */
+.social-btn--whatsapp {
+    background: #25D366;
+    color: white;
+}
+
+.social-btn--whatsapp:hover {
+    background: #128C7E;
+    transform: translateY(-2px);
+}
+
+.social-btn--instagram {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: white;
+}
+
+.social-btn--instagram:hover {
+    transform: translateY(-2px);
+}
+
+.social-btn--facebook {
+    background: #1877F2;
+    color: white;
+}
+
+.social-btn--facebook:hover {
+    background: #0d6efd;
+    transform: translateY(-2px);
+}
+
+/* Botões de Ação nos Produtos */
+.product__actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.product__actions .btn--primary {
+    flex: 2;
+}
+
+.product__actions .btn-agendar {
+    flex: 1;
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+}
+
+.product__actions .btn-agendar:hover {
+    background: #128C7E;
+    transform: translateY(-2px);
+}
+
+/* Serviços - Botões de Agendamento */
+.weapon__card .btn-agendar {
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+}
+
+.weapon__card .btn-agendar:hover {
+    background: #128C7E;
+    transform: translateY(-2px);
+}
+
+/* ==================== RESPONSIVO ==================== */
+@media (max-width: 768px) {
+    .auth-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .services__grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .product__actions {
+        flex-direction: column;
+    }
+    
+    .auth-benefits ul {
+        text-align: center;
+    }
+    
+    .auth-benefits li {
+        justify-content: center;
+    }
+    
+    .age-verification-content,
+    .login-required-content {
+        padding: var(--spacing-xl);
+        margin: var(--spacing-lg);
+    }
+    
+    .age-verification-buttons,
+    .login-required-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .age-verification-header h1,
+    .login-required-header h1 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .age-verification-body h2,
+    .login-required-body h2 {
+        font-size: var(--font-size-lg);
+    }
+}
 
